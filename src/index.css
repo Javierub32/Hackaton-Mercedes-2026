@@ -1,0 +1,5 @@
+@import "tailwindcss"; /* 👈 Esta es la nueva sintaxis de la versión 4 */
+
+body {
+  background-color: #f3f4f6;
+}
