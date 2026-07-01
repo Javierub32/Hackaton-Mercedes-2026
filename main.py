@@ -14,7 +14,7 @@ import litellm
 # ==========================================
 litellm.drop_params = True 
 
-# 🔥 TABLA DE PRECIOS CORREGIDA (Alta -> Media -> Baja)
+# TABLA DE PRECIOS CORREGIDA (Alta -> Media -> Baja)
 PRECIOS_FINOPS = {
     "gemini/gemini-2.5-flash": {"input": 0.30, "output": 0.60, "provider": "Google (Cloud)"}, # Nivel 0 (Caro)
     "groq/llama-3.1-8b-instant": {"input": 0.15, "output": 0.15, "provider": "Groq (Cloud)"}, # Nivel 1 (Medio)
