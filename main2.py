@@ -104,7 +104,7 @@ Analiza el prompt del usuario y responde estrictamente en formato JSON según el
         if "ollama" in modelo_final:
             completion_kwargs["api_base"] = API_BASES[modelo_final]
         else:
-            completion_kwargs["api_key"] = os.getenv("GROQ_API_KEY", "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") # <-- PON TU CLAVE AQUÍ
+            completion_kwargs["api_key"] = os.getenv("GROQ_API_KEY", "API_KEY") # <-- PON TU CLAVE AQUÍ
 
         # --- PASO 3: EJECUCIÓN FINAL ---
         print(f"-> Ejecutando en modelo: {modelo_final}")
