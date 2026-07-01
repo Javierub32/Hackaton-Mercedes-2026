@@ -13,26 +13,16 @@ import litellm
 # ==========================================
 litellm.drop_params = True 
 
-# TABLA DE PRECIOS SEGÚN LA DOCUMENTACIÓN
+# 🔥 TABLA DE PRECIOS CORREGIDA (Alta -> Media -> Baja)
 PRECIOS_FINOPS = {
-    "ollama/llama3.2:3b": {"input": 0.06, "output": 0.06, "provider": "Ollama A (Local)"},
-    "ollama/mistral:7b": {"input": 0.24, "output": 0.24, "provider": "Ollama B (Local)"},
-    "groq/llama-3.1-8b-instant": {"input": 0.05, "output": 0.08, "provider": "Groq (Cloud)"}
+    "groq/llama-3.3-70b-versatile": {"input": 0.59, "output": 0.79, "provider": "Groq (Cloud)"}, # Nivel 0 (Caro/Complejo)
+    "gemini/gemini-2.5-flash": {"input": 0.30, "output": 0.60, "provider": "Google (Cloud)"}, # Nivel 0 (Caro)
+    "groq/llama-3.1-8b-instant": {"input": 0.15, "output": 0.15, "provider": "Groq (Cloud)"}, # Nivel 1 (Medio)
+    "ollama/llama3.2:3b": {"input": 0.05, "output": 0.05, "provider": "Ollama A (Local)"}     # Nivel 2 (Barato)
 }
 
-try:
-    groq_info = litellm.get_model_info("groq/llama-3.1-8b-instant")
-    PRECIOS_FINOPS["groq/llama-3.1-8b-instant"] = {
-        "input": groq_info["input_cost_per_token"] * 1_000_000,
-        "output": groq_info["output_cost_per_token"] * 1_000_000,
-        "provider": "Groq (Cloud - Tarifa dinámica LiteLLM)"
-    }
-except Exception as e:
-    print("Aviso: No se pudo cargar el precio dinámico de Groq, usando fallback.")
-
 API_BASES = {
-    "ollama/llama3.2:3b": "http://localhost:11434", 
-    "ollama/mistral:7b": "http://localhost:11435"   
+    "ollama/llama3.2:3b": "http://localhost:11434"
 }
 
 # ==========================================
@@ -225,12 +215,20 @@ Analiza el prompt del usuario y responde estrictamente en formato JSON según el
             "marketing": 0.005,
             "produccion": 0.0001,      
         }
-        # Limite de gasto por departamento (Por defecto 0.0001 USD)
+        # Limite de gasto DIARIO por departamento
         limite_gasto_usd = presupuestos_por_equipo.get(tipo_consumidor_db, 0.0001)
 
+        # OBTENER EL GASTO ACUMULADO HOY DESDE LA BD
+        hoy_str = date.today().isoformat()
+        with sqlite3.connect(DB_FILE) as conn:
+            cursor = conn.cursor()
+            cursor.execute('SELECT SUM(coste_peticion) FROM peticiones WHERE usuario_id = ? AND dia = ?', (peticion.usuario_id, hoy_str))
+            resultado_suma = cursor.fetchone()
+            coste_acumulado_hoy = resultado_suma[0] if resultado_suma[0] is not None else 0.0
+
         jerarquia_modelos = [
-            "groq/llama-3.1-8b-instant",  # Nivel 0: Alta
-            "ollama/mistral:7b",          # Nivel 1: Media
+            "groq/llama-3.3-70b-versatile",    # Nivel 0: Alta
+            "groq/llama-3.1-8b-instant",  # Nivel 1: Media
             "ollama/llama3.2:3b"          # Nivel 2: Baja
         ]
 
@@ -249,17 +247,18 @@ Analiza el prompt del usuario y responde estrictamente en formato JSON según el
             modelo_candidato = jerarquia_modelos[idx]
             coste_candidato = (tokens_estimados / 1_000_000) * PRECIOS_FINOPS[modelo_candidato]["input"]
             
-            if coste_candidato <= limite_gasto_usd:
+            # Comprueba Coste Acumulado + Coste Estimado vs Presupuesto Diario
+            if (coste_acumulado_hoy + coste_candidato) <= limite_gasto_usd:
                 modelo_final = modelo_candidato
                 coste_estimado = coste_candidato
                 if idx > idx_deseado:
-                    razon_sobreescritura = f"Downgrade a {modelo_final}. El modelo ideal superaba el límite de {limite_gasto_usd}$ de {tipo_consumidor_db}."
+                    razon_sobreescritura = f"Downgrade a {modelo_final}. El gasto de hoy ({coste_acumulado_hoy:.5f}$) + esta petición superaba el límite diario de {limite_gasto_usd}$."
             idx += 1
         
         if modelo_final is None:
             modelo_final = jerarquia_modelos[-1]
             coste_estimado = (tokens_estimados / 1_000_000) * PRECIOS_FINOPS[modelo_final]["input"]
-            razon_sobreescritura = f"ALERTA CRÍTICA: Presupuesto excedido. Forzando modelo económico ({modelo_final})."
+            razon_sobreescritura = f"ALERTA CRÍTICA: Límite diario superado (Gasto previo: {coste_acumulado_hoy:.5f}$ / Límite: {limite_gasto_usd}$). Forzando modelo económico ({modelo_final})."
 
         # --- PASO 3: EJECUCIÓN FINAL ---
         completion_kwargs = {
@@ -269,6 +268,8 @@ Analiza el prompt del usuario y responde estrictamente en formato JSON según el
         
         if "ollama" in modelo_final:
             completion_kwargs["api_base"] = API_BASES[modelo_final]
+        elif "gemini" in modelo_final:
+            completion_kwargs["api_key"] = os.getenv("GEMINI_API_KEY", "TU_API_KEY_DE_GEMINI_AQUI")
         else:
             completion_kwargs["api_key"] = os.getenv("GROQ_API_KEY", "TU_API_KEY_AQUI")
 
@@ -313,7 +314,8 @@ Analiza el prompt del usuario y responde estrictamente en formato JSON según el
             "finops_metadata": {
                 "usuario": {
                     "id": peticion.usuario_id,
-                    "departamento": tipo_consumidor_db
+                    "departamento": tipo_consumidor_db,
+                    "gasto_diario_acumulado_previo_usd": round(coste_acumulado_hoy, 8)
                 },
                 "estado_registro_db": estado_db,
                 "limite_presupuesto_aplicado": limite_gasto_usd,
