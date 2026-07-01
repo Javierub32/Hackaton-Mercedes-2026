@@ -40,7 +40,7 @@ export default function Historial() {
           <select 
             value={usuarioSeleccionado} 
             onChange={(e) => setUsuarioSeleccionado(e.target.value)}
-            className="rounded-md border border-neutral-700 bg-neutral-950 py-2 pl-3 pr-9 text-md text-neutral-100 outline-none"
+            className="rounded-md border border-neutral-700 bg-neutral-950 pl-3 pr-9 text-md text-neutral-100 outline-none"
           >
             <option value="">Selecciona usuario...</option>
             {usuarios.usuarios.map((u) => (
