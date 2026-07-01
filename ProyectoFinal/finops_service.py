@@ -1,4 +1,3 @@
-# finops_service.py
 import os
 import json
 import litellm
@@ -109,12 +108,11 @@ def seleccionar_modelo(
 
     return modelo_final, coste_estimado, tokens_input_estimados, tokens_output_estimados, tokens_totales_estimados, razon_sobreescritura
 
-def ejecutar_peticion(modelo: str, prompt: str, max_tokens: int):
+def ejecutar_peticion(modelo: str, prompt: str):
     mensajes_para_api = [{"role": "user", "content": prompt}]
     completion_kwargs = {
         "model": modelo,
         "messages": mensajes_para_api,
-        "max_tokens": max_tokens
     }
     
     if "ollama" in modelo:

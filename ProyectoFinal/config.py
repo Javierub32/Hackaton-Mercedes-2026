@@ -1,5 +1,3 @@
-# config.py
-
 PRECIOS_FINOPS = {
     "groq/llama-3.3-70b-versatile": {"input": 0.59, "output": 0.79, "provider": "Groq (Cloud)"}, # Nivel 0 (Caro/Complejo)
     "groq/llama-3.1-8b-instant": {"input": 0.15, "output": 0.15, "provider": "Groq (Cloud)"},    # Nivel 1 (Medio)

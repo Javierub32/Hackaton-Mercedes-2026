@@ -1,4 +1,3 @@
-# main.py
 import calendar
 from datetime import date
 from fastapi import FastAPI, HTTPException
@@ -132,7 +131,7 @@ def generar_respuesta(peticion: PeticionUsuario):
 
         # --- PASO 3: EJECUCIÓN FINAL ---
         print(f"-> Ejecutando en modelo: {modelo_final}")
-        response_final = ejecutar_peticion(modelo_final, peticion.prompt, max_tokens=tokens_output_est)
+        response_final = ejecutar_peticion(modelo_final, peticion.prompt)
 
         # --- PASO 4: CÁLCULO MATEMÁTICO FINOPS ---
         tokens_input = response_final.usage.prompt_tokens
