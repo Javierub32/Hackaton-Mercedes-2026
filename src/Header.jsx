@@ -16,22 +16,22 @@ function TabButton({ active, onClick, children }) {
 
 export default function Header({ vista, setVista }) {
   return (
-    <header className="flex items-center justify-between pb-8 px-10 border-b border-neutral-800 mb-8">
+    <header className="flex items-center justify-between pb-8 px-10 border-b border-neutral-800 mb-2">
       <div className="flex items-center gap-3">
         {/* Logo */}
-        <div className="w-16 h-16 rounded-full bg-teal-500/20 flex items-center justify-center border border-teal-500/30">
-          <div className="w-9 h-9 rounded-full bg-teal-400" />
+        <div className="w-12 h-12 rounded-full bg-teal-500/20 flex items-center justify-center border border-teal-500/30">
+          <div className="w-6 h-6 rounded-full bg-teal-400" />
         </div>
-        <h1 className="text-6xl font-bold text-white tracking-tight">AI FinOps Proxy</h1>
+        <h1 className="text-4xl font-bold text-white tracking-tight">AI FinOps Proxy</h1>
       </div>
 
       {/* Navegación */}
       <div className="flex gap-2 bg-neutral-900 p-1 rounded-full border border-neutral-800">
         <TabButton active={vista === 'analizador'} onClick={() => setVista('analizador')}>
-          <p className="text-neutral-100 text-xl">Analizador</p>
+          <p className="text-neutral-100 text-md">Analizador</p>
         </TabButton>
         <TabButton active={vista === 'historial'} onClick={() => setVista('historial')}>
-          <p className="text-neutral-100 text-xl">Historial</p>
+          <p className="text-neutral-100 text-md">Historial</p>
         </TabButton>
       </div>
     </header>

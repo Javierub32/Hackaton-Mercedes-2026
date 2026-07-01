@@ -24,7 +24,7 @@ export default function Historial() {
   return (
     <div className="space-y-6 px-30">
       <div className="space-y-2">
-        <h1 className="text-5xl font-semibold text-white">Historial de Usuario</h1>
+        <h1 className="text-4xl font-semibold text-white">Historial de Usuario</h1>
         <p className="text-xl text-neutral-400">Revisa el historial de peticiones de cada uno de los usuarios</p>
       </div>
 
@@ -33,29 +33,29 @@ export default function Historial() {
         
         <div className="flex flex-col gap-4 border-b border-neutral-800 px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-1">
-            <h2 className="text-2xl font-semibold uppercase tracking-[0.15em] text-neutral-100">Registro de peticiones</h2>
-            <p className="text-xl text-neutral-500">{datos.total_peticiones} petición(es)</p>
+            <h2 className="text-md font-semibold uppercase tracking-[0.15em] text-neutral-100">Registro de peticiones</h2>
+            <p className="text-md text-neutral-500">{datos.total_peticiones} petición(es)</p>
           </div>
           
           <select 
             value={usuarioSeleccionado} 
             onChange={(e) => setUsuarioSeleccionado(e.target.value)}
-            className="rounded-md border border-neutral-700 bg-neutral-950 py-2 pl-3 pr-9 text-xl text-neutral-100 outline-none"
+            className="rounded-md border border-neutral-700 bg-neutral-950 py-2 pl-3 pr-9 text-md text-neutral-100 outline-none"
           >
             <option value="">Selecciona usuario...</option>
             {usuarios.usuarios.map((u) => (
-              <option className="text-xl" key={u.id} value={u.id}>{u.tipo_consumidor} (ID: {u.id})</option>
+              <option className="text-md" key={u.id} value={u.id}>{u.tipo_consumidor} (ID: {u.id})</option>
             ))}
           </select>
         </div>
 
-        <table className="w-full text-left text-xl">
+        <table className="w-full text-left text-md">
           <thead>
             <tr className="border-b border-neutral-800 bg-neutral-950/60 text-[11px] uppercase tracking-[0.12em] text-neutral-500">
-              <th className="text-lg px-6 py-3 font-semibold">ID Petición</th>
-              <th className="text-lg px-6 py-3 font-semibold">Fecha</th>
-              <th className="text-lg px-6 py-3 font-semibold">Tokens</th>
-              <th className="text-lg px-6 py-3 text-right font-semibold">Coste (USD)</th>
+              <th className="text-md px-6 py-3 font-semibold">ID Petición</th>
+              <th className="text-md px-6 py-3 font-semibold">Fecha</th>
+              <th className="text-md px-6 py-3 font-semibold">Tokens</th>
+              <th className="text-md px-6 py-3 text-right font-semibold">Coste (USD)</th>
             </tr>
           </thead>
           <tbody>
