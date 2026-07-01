@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 export default function Historial() {
   const [datos, setDatos] = useState({ historial: [], total_peticiones: 0 });
-  const [usuarios, setUsuarios] = useState({ usuarios: [], total_usuarios: 0 }); // Este es tu estado correcto
+  const [usuarios, setUsuarios] = useState({ usuarios: [], total_usuarios: 0 });
   const [usuarioSeleccionado, setUsuarioSeleccionado] = useState('');
 
   useEffect(() => {
@@ -22,45 +22,49 @@ export default function Historial() {
   }, [usuarioSeleccionado]);
 
   return (
-    <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 mt-8">
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-bold">Historial de Usuario</h2>
-        
-        <div className="flex items-center gap-2">
-            <label className="text-sm text-gray-600">Seleccionar usuario:</label>
-            <select 
-              value={usuarioSeleccionado} 
-              onChange={(e) => setUsuarioSeleccionado(e.target.value)}
-              className="p-2 border rounded-lg bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none"
-            >
-              <option value="">Selecciona un usuario...</option>
-              {usuarios.usuarios.map((u) => (
-                <option key={u.id} value={u.id}>
-                  {u.tipo_consumidor} (ID: {u.id})
-                </option>
-              ))}
-            </select>
-        </div>
+    <div className="space-y-6 px-30">
+      <div className="space-y-2">
+        <h1 className="text-5xl font-semibold text-white">Historial de Usuario</h1>
+        <p className="text-xl text-neutral-400">Revisa el historial de peticiones de cada uno de los usuarios</p>
       </div>
 
-      <div className="overflow-x-auto">
-        <table className="w-full text-left">
+      <div className="overflow-hidden rounded-md border border-neutral-800 bg-neutral-900 shadow-sm">
+        <div className="h-1 w-full bg-gradient-to-r from-sky-400 via-teal-400 to-emerald-400" />
+        
+        <div className="flex flex-col gap-4 border-b border-neutral-800 px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
+          <div className="space-y-1">
+            <h2 className="text-2xl font-semibold uppercase tracking-[0.15em] text-neutral-100">Registro de peticiones</h2>
+            <p className="text-xl text-neutral-500">{datos.total_peticiones} petición(es)</p>
+          </div>
+          
+          <select 
+            value={usuarioSeleccionado} 
+            onChange={(e) => setUsuarioSeleccionado(e.target.value)}
+            className="rounded-md border border-neutral-700 bg-neutral-950 py-2 pl-3 pr-9 text-xl text-neutral-100 outline-none"
+          >
+            <option value="">Selecciona usuario...</option>
+            {usuarios.usuarios.map((u) => (
+              <option className="text-xl" key={u.id} value={u.id}>{u.tipo_consumidor} (ID: {u.id})</option>
+            ))}
+          </select>
+        </div>
+
+        <table className="w-full text-left text-xl">
           <thead>
-            <tr className="border-b text-gray-500 text-sm">
-              <th className="p-3">ID Petición</th>
-              <th className="p-3">Fecha</th>
-              <th className="p-3">Tokens</th>
-              <th className="p-3 text-right">Coste (USD)</th>
+            <tr className="border-b border-neutral-800 bg-neutral-950/60 text-[11px] uppercase tracking-[0.12em] text-neutral-500">
+              <th className="text-lg px-6 py-3 font-semibold">ID Petición</th>
+              <th className="text-lg px-6 py-3 font-semibold">Fecha</th>
+              <th className="text-lg px-6 py-3 font-semibold">Tokens</th>
+              <th className="text-lg px-6 py-3 text-right font-semibold">Coste (USD)</th>
             </tr>
           </thead>
           <tbody>
-            {/* Validamos que datos.historial exista antes de mapear */}
-            {datos.historial && datos.historial.map((p, index) => (
-              <tr key={index} className="border-b hover:bg-gray-50 transition-colors">
-                <td className="p-3 font-medium">{p.identificador}</td>
-                <td className="p-3 text-gray-600">{p.dia}</td>
-                <td className="p-3">{p.tokens}</td>
-                <td className="p-3 text-right font-mono">${p.coste_usd.toFixed(8)}</td>
+            {datos.historial.map((p, index) => (
+              <tr key={index} className="border-b border-neutral-800 hover:bg-neutral-800/50">
+                <td className="px-6 py-3 text-neutral-100">{p.identificador}</td>
+                <td className="px-6 py-3 text-neutral-400">{p.dia}</td>
+                <td className="px-6 py-3 text-neutral-200">{p.tokens}</td>
+                <td className="px-6 py-3 text-right font-mono text-teal-300">${p.coste_usd.toFixed(8)}</td>
               </tr>
             ))}
           </tbody>
