@@ -1,0 +1,3710 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+.gitignore
+eslint.config.js
+finops_mercedes.db
+index.html
+main.py
+main5.py
+package.json
+ProyectoFinal/config.py
+ProyectoFinal/database.py
+ProyectoFinal/finops_mercedes.db
+ProyectoFinal/finops_service.py
+ProyectoFinal/helpers.py
+ProyectoFinal/main.py
+ProyectoFinal/repomix-output.xml
+ProyectoFinal/schemas.py
+public/favicon.svg
+public/icons.svg
+README.md
+src/App.jsx
+src/assets/hero.png
+src/assets/react.svg
+src/assets/vite.svg
+src/Grafica.jsx
+src/Header.jsx
+src/Historial.jsx
+src/index.css
+src/main.jsx
+src/Peticion.jsx
+src/repomix-output.xml
+vite.config.js
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path="src/repomix-output.xml">
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+App.jsx
+assets/hero.png
+assets/react.svg
+assets/vite.svg
+Grafica.jsx
+Header.jsx
+Historial.jsx
+index.css
+main.jsx
+Peticion.jsx
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path="App.jsx">
+import { useState } from 'react';
+import Header from './Header';
+import Historial from './Historial';
+import Peticion from './Peticion';
+// IMPORTANTE: Lo importamos de tu archivo Grafica.jsx
+import Gastos from './Grafica'; 
+
+function App() {
+  const [vista, setVista] = useState('analizador');
+
+  return (
+    <div className="min-h-screen w-full font-sans text-neutral-100 bg-neutral-950 p-6 md:p-8">
+      <div className="flex flex-col h-full w-full gap-8">
+        
+        {/* Header controlado */}
+        <Header vista={vista} setVista={setVista} />
+        
+        {/* Main con triple condición estricta */}
+        <main className="flex-1 w-full">
+          {vista === 'analizador' && <Peticion />}
+          {vista === 'historial' && <Historial />}
+          {/* Cambiado a 'grafica' para que coincida con el botón de tu Header */}
+          {vista === 'grafica' && <Gastos />}
+        </main>
+        
+      </div>
+    </div>
+  );
+}
+
+export default App;
+</file>
+
+<file path="assets/react.svg">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--logos" width="35.93" height="32" preserveAspectRatio="xMidYMid meet" viewBox="0 0 256 228"><path fill="#00D8FF" d="M210.483 73.824a171.49 171.49 0 0 0-8.24-2.597c.465-1.9.893-3.777 1.273-5.621c6.238-30.281 2.16-54.676-11.769-62.708c-13.355-7.7-35.196.329-57.254 19.526a171.23 171.23 0 0 0-6.375 5.848a155.866 155.866 0 0 0-4.241-3.917C100.759 3.829 77.587-4.822 63.673 3.233C50.33 10.957 46.379 33.89 51.995 62.588a170.974 170.974 0 0 0 1.892 8.48c-3.28.932-6.445 1.924-9.474 2.98C17.309 83.498 0 98.307 0 113.668c0 15.865 18.582 31.778 46.812 41.427a145.52 145.52 0 0 0 6.921 2.165a167.467 167.467 0 0 0-2.01 9.138c-5.354 28.2-1.173 50.591 12.134 58.266c13.744 7.926 36.812-.22 59.273-19.855a145.567 145.567 0 0 0 5.342-4.923a168.064 168.064 0 0 0 6.92 6.314c21.758 18.722 43.246 26.282 56.54 18.586c13.731-7.949 18.194-32.003 12.4-61.268a145.016 145.016 0 0 0-1.535-6.842c1.62-.48 3.21-.974 4.76-1.488c29.348-9.723 48.443-25.443 48.443-41.52c0-15.417-17.868-30.326-45.517-39.844Zm-6.365 70.984c-1.4.463-2.836.91-4.3 1.345c-3.24-10.257-7.612-21.163-12.963-32.432c5.106-11 9.31-21.767 12.459-31.957c2.619.758 5.16 1.557 7.61 2.4c23.69 8.156 38.14 20.213 38.14 29.504c0 9.896-15.606 22.743-40.946 31.14Zm-10.514 20.834c2.562 12.94 2.927 24.64 1.23 33.787c-1.524 8.219-4.59 13.698-8.382 15.893c-8.067 4.67-25.32-1.4-43.927-17.412a156.726 156.726 0 0 1-6.437-5.87c7.214-7.889 14.423-17.06 21.459-27.246c12.376-1.098 24.068-2.894 34.671-5.345a134.17 134.17 0 0 1 1.386 6.193ZM87.276 214.515c-7.882 2.783-14.16 2.863-17.955.675c-8.075-4.657-11.432-22.636-6.853-46.752a156.923 156.923 0 0 1 1.869-8.499c10.486 2.32 22.093 3.988 34.498 4.994c7.084 9.967 14.501 19.128 21.976 27.15a134.668 134.668 0 0 1-4.877 4.492c-9.933 8.682-19.886 14.842-28.658 17.94ZM50.35 144.747c-12.483-4.267-22.792-9.812-29.858-15.863c-6.35-5.437-9.555-10.836-9.555-15.216c0-9.322 13.897-21.212 37.076-29.293c2.813-.98 5.757-1.905 8.812-2.773c3.204 10.42 7.406 21.315 12.477 32.332c-5.137 11.18-9.399 22.249-12.634 32.792a134.718 134.718 0 0 1-6.318-1.979Zm12.378-84.26c-4.811-24.587-1.616-43.134 6.425-47.789c8.564-4.958 27.502 2.111 47.463 19.835a144.318 144.318 0 0 1 3.841 3.545c-7.438 7.987-14.787 17.08-21.808 26.988c-12.04 1.116-23.565 2.908-34.161 5.309a160.342 160.342 0 0 1-1.76-7.887Zm110.427 27.268a347.8 347.8 0 0 0-7.785-12.803c8.168 1.033 15.994 2.404 23.343 4.08c-2.206 7.072-4.956 14.465-8.193 22.045a381.151 381.151 0 0 0-7.365-13.322Zm-45.032-43.861c5.044 5.465 10.096 11.566 15.065 18.186a322.04 322.04 0 0 0-30.257-.006c4.974-6.559 10.069-12.652 15.192-18.18ZM82.802 87.83a323.167 323.167 0 0 0-7.227 13.238c-3.184-7.553-5.909-14.98-8.134-22.152c7.304-1.634 15.093-2.97 23.209-3.984a321.524 321.524 0 0 0-7.848 12.897Zm8.081 65.352c-8.385-.936-16.291-2.203-23.593-3.793c2.26-7.3 5.045-14.885 8.298-22.6a321.187 321.187 0 0 0 7.257 13.246c2.594 4.48 5.28 8.868 8.038 13.147Zm37.542 31.03c-5.184-5.592-10.354-11.779-15.403-18.433c4.902.192 9.899.29 14.978.29c5.218 0 10.376-.117 15.453-.343c-4.985 6.774-10.018 12.97-15.028 18.486Zm52.198-57.817c3.422 7.8 6.306 15.345 8.596 22.52c-7.422 1.694-15.436 3.058-23.88 4.071a382.417 382.417 0 0 0 7.859-13.026a347.403 347.403 0 0 0 7.425-13.565Zm-16.898 8.101a358.557 358.557 0 0 1-12.281 19.815a329.4 329.4 0 0 1-23.444.823c-7.967 0-15.716-.248-23.178-.732a310.202 310.202 0 0 1-12.513-19.846h.001a307.41 307.41 0 0 1-10.923-20.627a310.278 310.278 0 0 1 10.89-20.637l-.001.001a307.318 307.318 0 0 1 12.413-19.761c7.613-.576 15.42-.876 23.31-.876H128c7.926 0 15.743.303 23.354.883a329.357 329.357 0 0 1 12.335 19.695a358.489 358.489 0 0 1 11.036 20.54a329.472 329.472 0 0 1-11 20.722Zm22.56-122.124c8.572 4.944 11.906 24.881 6.52 51.026c-.344 1.668-.73 3.367-1.15 5.09c-10.622-2.452-22.155-4.275-34.23-5.408c-7.034-10.017-14.323-19.124-21.64-27.008a160.789 160.789 0 0 1 5.888-5.4c18.9-16.447 36.564-22.941 44.612-18.3ZM128 90.808c12.625 0 22.86 10.235 22.86 22.86s-10.235 22.86-22.86 22.86s-22.86-10.235-22.86-22.86s10.235-22.86 22.86-22.86Z"></path></svg>
+</file>
+
+<file path="assets/vite.svg">
+<svg xmlns="http://www.w3.org/2000/svg" width="77" height="47" fill="none" aria-labelledby="vite-logo-title" viewBox="0 0 77 47"><title id="vite-logo-title">Vite</title><style>.parenthesis{fill:#000}@media (prefers-color-scheme:dark){.parenthesis{fill:#fff}}</style><path fill="#9135ff" d="M40.151 45.71c-.663.844-2.02.374-2.02-.699V34.708a2.26 2.26 0 0 0-2.262-2.262H24.493c-.92 0-1.457-1.04-.92-1.788l7.479-10.471c1.07-1.498 0-3.578-1.842-3.578H15.443c-.92 0-1.456-1.04-.92-1.788l9.696-13.576c.213-.297.556-.474.92-.474h28.894c.92 0 1.456 1.04.92 1.788l-7.48 10.472c-1.07 1.497 0 3.578 1.842 3.578h11.376c.944 0 1.474 1.087.89 1.83L40.153 45.712z"/><mask id="a" width="48" height="47" x="14" y="0" maskUnits="userSpaceOnUse" style="mask-type:alpha"><path fill="#000" d="M40.047 45.71c-.663.843-2.02.374-2.02-.699V34.708a2.26 2.26 0 0 0-2.262-2.262H24.389c-.92 0-1.457-1.04-.92-1.788l7.479-10.472c1.07-1.497 0-3.578-1.842-3.578H15.34c-.92 0-1.456-1.04-.92-1.788l9.696-13.575c.213-.297.556-.474.92-.474H53.93c.92 0 1.456 1.04.92 1.788L47.37 13.03c-1.07 1.498 0 3.578 1.842 3.578h11.376c.944 0 1.474 1.088.89 1.831L40.049 45.712z"/></mask><g mask="url(#a)"><g filter="url(#b)"><ellipse cx="5.508" cy="14.704" fill="#eee6ff" rx="5.508" ry="14.704" transform="rotate(269.814 20.96 11.29)scale(-1 1)"/></g><g filter="url(#c)"><ellipse cx="10.399" cy="29.851" fill="#eee6ff" rx="10.399" ry="29.851" transform="rotate(89.814 -16.902 -8.275)scale(1 -1)"/></g><g filter="url(#d)"><ellipse cx="5.508" cy="30.487" fill="#8900ff" rx="5.508" ry="30.487" transform="rotate(89.814 -19.197 -7.127)scale(1 -1)"/></g><g filter="url(#e)"><ellipse cx="5.508" cy="30.599" fill="#8900ff" rx="5.508" ry="30.599" transform="rotate(89.814 -25.928 4.177)scale(1 -1)"/></g><g filter="url(#f)"><ellipse cx="5.508" cy="30.599" fill="#8900ff" rx="5.508" ry="30.599" transform="rotate(89.814 -25.738 5.52)scale(1 -1)"/></g><g filter="url(#g)"><ellipse cx="14.072" cy="22.078" fill="#eee6ff" rx="14.072" ry="22.078" transform="rotate(93.35 31.245 55.578)scale(-1 1)"/></g><g filter="url(#h)"><ellipse cx="3.47" cy="21.501" fill="#8900ff" rx="3.47" ry="21.501" transform="rotate(89.009 35.419 55.202)scale(-1 1)"/></g><g filter="url(#i)"><ellipse cx="3.47" cy="21.501" fill="#8900ff" rx="3.47" ry="21.501" transform="rotate(89.009 35.419 55.202)scale(-1 1)"/></g><g filter="url(#j)"><ellipse cx="14.592" cy="9.743" fill="#8900ff" rx="4.407" ry="29.108" transform="rotate(39.51 14.592 9.743)"/></g><g filter="url(#k)"><ellipse cx="61.728" cy="-5.321" fill="#8900ff" rx="4.407" ry="29.108" transform="rotate(37.892 61.728 -5.32)"/></g><g filter="url(#l)"><ellipse cx="55.618" cy="7.104" fill="#00c2ff" rx="5.971" ry="9.665" transform="rotate(37.892 55.618 7.104)"/></g><g filter="url(#m)"><ellipse cx="12.326" cy="39.103" fill="#8900ff" rx="4.407" ry="29.108" transform="rotate(37.892 12.326 39.103)"/></g><g filter="url(#n)"><ellipse cx="12.326" cy="39.103" fill="#8900ff" rx="4.407" ry="29.108" transform="rotate(37.892 12.326 39.103)"/></g><g filter="url(#o)"><ellipse cx="49.857" cy="30.678" fill="#8900ff" rx="4.407" ry="29.108" transform="rotate(37.892 49.857 30.678)"/></g><g filter="url(#p)"><ellipse cx="52.623" cy="33.171" fill="#00c2ff" rx="5.971" ry="15.297" transform="rotate(37.892 52.623 33.17)"/></g></g><path d="M6.919 0c-9.198 13.166-9.252 33.575 0 46.789h6.215c-9.25-13.214-9.196-33.623 0-46.789zm62.424 0h-6.215c9.198 13.166 9.252 33.575 0 46.789h6.215c9.25-13.214 9.196-33.623 0-46.789" class="parenthesis"/><defs><filter id="b" width="60.045" height="41.654" x="-5.564" y="16.92" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="7.659"/></filter><filter id="c" width="90.34" height="51.437" x="-40.407" y="-6.762" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="7.659"/></filter><filter id="d" width="79.355" height="29.4" x="-35.435" y="2.801" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="e" width="79.579" height="29.4" x="-30.84" y="20.8" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="f" width="79.579" height="29.4" x="-29.307" y="21.949" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="g" width="74.749" height="58.852" x="29.961" y="-17.13" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="7.659"/></filter><filter id="h" width="61.377" height="25.362" x="37.754" y="3.055" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="i" width="61.377" height="25.362" x="37.754" y="3.055" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="j" width="56.045" height="63.649" x="-13.43" y="-22.082" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="k" width="54.814" height="64.646" x="34.321" y="-37.644" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="l" width="33.541" height="35.313" x="38.847" y="-10.552" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="m" width="54.814" height="64.646" x="-15.081" y="6.78" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="n" width="54.814" height="64.646" x="-15.081" y="6.78" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="o" width="54.814" height="64.646" x="22.45" y="-1.645" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="p" width="39.409" height="43.623" x="32.919" y="11.36" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter></defs></svg>
+</file>
+
+<file path="Grafica.jsx">
+import { useState, useEffect } from 'react';
+
+// ============================================================================
+// 1. CÓDIGO DE TU COMPAÑERA
+// ============================================================================
+function GraficaGasto() {
+  const [datos, setDatos] = useState([]);
+  const [cargando, setCargando] = useState(true);
+
+  useEffect(() => {
+    fetch(`http://127.0.0.1:8000/gasto-mensual`)
+      .then(res => res.json())
+      .then(data => {
+        setDatos(data.gasto_mensual || []);
+        setCargando(false);
+      })
+      .catch(err => {
+        console.error("Error cargando los datos de la gráfica:", err);
+        setCargando(false);
+      });
+  }, []);
+
+  if (cargando) {
+    return (
+      <div className="w-full bg-neutral-900 border border-neutral-800 rounded-md p-6 flex justify-center items-center min-h-[250px]">
+        <p className="text-neutral-500 text-sm uppercase tracking-wider animate-pulse">
+          Cargando métricas...
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="w-full bg-neutral-900 border border-neutral-800 rounded-md p-6 shadow-sm">
+      <div className="border-b border-neutral-800 pb-3 mb-8 flex justify-between items-center">
+        <h3 className="text-sm font-semibold uppercase tracking-[0.15em] text-neutral-100">
+          Gasto mensual por usuario
+        </h3>
+      </div>
+
+      <div className="relative flex justify-around items-end h-75 pt-2 pl-8">
+        {datos.map((item) => {
+          const altoBarra = item.porcentaje_gasto > 0 ? item.porcentaje_gasto : '2';
+
+          return (
+            <div key={item.id} className="flex flex-col items-center w-full max-w-[80px]">
+              
+              <span className="text-xs font-mono text-teal-400 mb-2">
+                {item.porcentaje_gasto.toFixed(2)}%
+              </span>
+              
+              <div className="w-full h-60 bg-neutral-950 rounded-t-md relative overflow-hidden border border-neutral-800 border-b-0">
+                <div
+                  className="absolute bottom-0 w-full bg-gradient-to-t from-sky-500 to-teal-400 transition-all duration-1000 ease-out rounded-t-sm"
+                  style={{ height: altoBarra + '%' }}
+                />
+              </div>
+
+              <span className="text-xs font-semibold text-neutral-400 uppercase tracking-wider mt-3 text-center w-full px-1">
+                User {item.id}
+              </span>
+              <span className="text-[10px] font-semibold text-neutral-400 uppercase tracking-wider text-center w-full px-1"> 
+                ({item.tipo_consumidor.replace('-', ' ')})
+              </span>
+              
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ============================================================================
+// 2. ANÁLISIS DE AHORRO (100% IDÉNTICO A LA LÓGICA DE TU HISTORIAL)
+// ============================================================================
+function AnalisisAhorro() {
+  // Misma estructura de estados que usas en Historial.jsx
+  const [usuarios, setUsuarios] = useState({ usuarios: [], total_usuarios: 0 });
+  const [usuarioSeleccionado, setUsuarioSeleccionado] = useState('');
+  
+  // Guardamos los datos de ahorro directamente como vienen del fetch (una lista)
+  const [datosAhorro, setDatosAhorro] = useState([]);
+
+  // Fetch de usuarios calcado a tu Historial
+  useEffect(() => {
+    fetch(`http://127.0.0.1:8000/usuarios`)
+      .then(res => res.json())
+      .then(data => setUsuarios(data))
+      .catch(err => console.error("Error cargando usuarios:", err));
+  }, []); 
+
+  // Fetch de datos calcado a tu Historial
+  useEffect(() => {
+    if (usuarioSeleccionado) {
+      fetch(`http://127.0.0.1:8000/ahorro-mensual/${usuarioSeleccionado}`)
+        .then(res => res.json())
+        .then(data => setDatosAhorro(data))
+        .catch(err => console.error("Error cargando ahorros:", err));
+    } else {
+      setDatosAhorro([]); // Si no hay usuario, limpiamos
+    }
+  }, [usuarioSeleccionado]);
+
+  // Como database.py devuelve una lista [ { ahorro_mensual: X, porcentaje_ahorro: Y } ]
+  // Nos quedamos de forma segura con el primer elemento (índice 0)
+  const infoActual = datosAhorro && datosAhorro.length > 0 
+    ? datosAhorro[0] 
+    : { ahorro_mensual: 0, porcentaje_ahorro: 0 };
+
+  // Buscamos el nombre del usuario para mostrarlo en el panel derecho
+  const usuarioInfo = usuarios.usuarios.find(u => u.id.toString() === usuarioSeleccionado.toString());
+  const nombreMostrar = usuarioInfo ? `${usuarioInfo.tipo_consumidor} (ID: ${usuarioInfo.id})` : 'Selecciona un usuario';
+
+  // Variables para pintar el anillo SVG
+  const porcentajeSeguro = Math.min(Math.max(infoActual.porcentaje_ahorro || 0, 0), 100);
+  const radius = 60;
+  const circumference = 2 * Math.PI * radius;
+  const strokeDashoffset = circumference - (porcentajeSeguro / 100) * circumference;
+
+  return (
+    <div className="overflow-hidden rounded-md border border-neutral-800 bg-neutral-900 shadow-sm mt-8">
+      <div className="h-1 w-full bg-gradient-to-r from-emerald-400 via-teal-400 to-sky-400" />
+      
+      <div className="flex flex-col gap-4 border-b border-neutral-800 px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
+        <h2 className="text-lg font-semibold uppercase tracking-[0.15em] text-neutral-100">
+          Análisis de Ahorro
+        </h2>
+        
+        {/* Desplegable IDÉNTICO a Historial.jsx */}
+        <select 
+          value={usuarioSeleccionado} 
+          onChange={(e) => setUsuarioSeleccionado(e.target.value)}
+          className="rounded-md border border-neutral-700 bg-neutral-950 py-2 pl-3 pr-9 text-md text-neutral-100 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all cursor-pointer"
+        >
+          <option value="">Selecciona usuario...</option>
+          {usuarios.usuarios.map((u) => (
+            <option className="text-md" key={u.id} value={u.id}>
+              {u.tipo_consumidor} (ID: {u.id})
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
+        
+        {/* Anillo de progreso SVG */}
+        <div className="flex flex-col items-center justify-center gap-6 border-b md:border-b-0 md:border-r border-neutral-800 pb-8 md:pb-0">
+          <div className="relative flex items-center justify-center">
+            <svg width="160" height="160" className="transform -rotate-90">
+              <circle cx="80" cy="80" r={radius} stroke="currentColor" strokeWidth="20" fill="transparent" className="text-neutral-800" />
+              <circle
+                cx="80" cy="80" r={radius} stroke="currentColor" strokeWidth="20" fill="transparent"
+                strokeDasharray={circumference} strokeDashoffset={strokeDashoffset}
+                className="text-emerald-500 transition-all duration-1000 ease-in-out"
+              />
+            </svg>
+            <div className="absolute flex flex-col items-center justify-center">
+              <span className="text-2xl font-bold text-white">{porcentajeSeguro.toFixed(0)}%</span>
+              <span className="text-xs text-neutral-400 uppercase tracking-widest mt-1">Ahorrado</span>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-3 w-full max-w-xs">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-sm bg-emerald-500" />
+                <span className="text-neutral-300 text-sm">Ahorro logrado</span>
+              </div>
+              <span className="font-mono text-emerald-400">{porcentajeSeguro.toFixed(2)}%</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-sm bg-neutral-800 border border-neutral-600" />
+                <span className="text-neutral-300 text-sm">Gasto realizado</span>
+              </div>
+              <span className="font-mono text-neutral-400">{(100 - porcentajeSeguro).toFixed(2)}%</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Dato de Ahorro Central */}
+        <div className="flex flex-col justify-center px-4">
+          <h3 className="text-xl font-medium text-white mb-6 flex items-center justify-center md:justify-start gap-2">
+            <span className="w-8 h-1 bg-emerald-500 rounded-full"></span>
+            Balance de Ahorro
+          </h3>
+          
+          <div className="space-y-6">
+            <div className="bg-neutral-950/50 p-6 rounded-lg border border-neutral-800/50 flex flex-col items-center text-center">
+              <p className="text-neutral-400 text-sm mb-1">Ahorro total acumulado este mes:</p>
+              
+              <p className={`text-lg mb-4 ${usuarioSeleccionado ? 'text-teal-300 font-semibold' : 'text-neutral-500 italic'}`}>
+                {nombreMostrar}
+              </p>
+              
+              <div className="flex flex-col items-center gap-1 mt-2">
+                <span className="text-5xl font-bold font-mono text-emerald-400">
+                  ${(infoActual.ahorro_mensual || 0).toFixed(4)}
+                </span>
+                <span className="text-sm text-neutral-500 uppercase tracking-widest mt-1">USD Ahorrados</span>
+              </div>
+            </div>
+
+            {/* Mensaje inferior */}
+            {usuarioSeleccionado !== '' && (
+              <div className={`flex items-start gap-3 p-3 rounded-md border ${
+                (infoActual.ahorro_mensual || 0) > 0 
+                  ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-300/90' 
+                  : 'bg-neutral-800/50 border-neutral-700 text-neutral-400'
+              }`}>
+                <div className="mt-0.5">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+                  </svg>
+                </div>
+                <p className="text-sm">
+                  {(infoActual.ahorro_mensual || 0) > 0 
+                    ? `¡Buen trabajo! Este usuario ha ahorrado un total de $${infoActual.ahorro_mensual.toFixed(4)} USD respecto a su coste máximo permitido.`
+                    : 'Este usuario no registra ahorros acumulados en este ciclo mensual.'}
+                </p>
+              </div>
+            )}
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================================
+// 3. COMPONENTE PRINCIPAL
+// ============================================================================
+export default function Gastos() {
+  return (
+    <div className="space-y-6 px-30">
+      <div className="space-y-2 mb-8">
+        <h1 className="text-4xl font-semibold text-white">Análisis de Gastos y Ahorro</h1>
+        <p className="text-xl text-neutral-400">Revisa el gasto mensual y el impacto del ahorro por usuario</p>
+      </div>
+
+      <GraficaGasto />
+      <AnalisisAhorro />
+    </div>
+  );
+}
+</file>
+
+<file path="Header.jsx">
+function TabButton({ active, onClick, children }) {
+  // Definimos las clases base y las condicionales
+  const baseClasses = "rounded-full px-5 py-2 text-sm font-medium tracking-wide transition-all duration-300";
+  const activeClasses = "bg-teal-600 text-white shadow-lg shadow-teal-900/20";
+  const inactiveClasses = "text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800";
+
+  return (
+    <button
+      onClick={onClick}
+      className={`${baseClasses} ${active ? activeClasses : inactiveClasses}`}
+    >
+      {children}
+    </button>
+  );
+}
+
+export default function Header({ vista, setVista }) {
+  return (
+    <header className="flex items-center justify-between pb-8 px-10 border-b border-neutral-800 mb-2">
+      <div className="flex items-center gap-3">
+        {/* Logo */}
+        <div className="w-12 h-12 rounded-full bg-teal-500/20 flex items-center justify-center border border-teal-500/30">
+          <div className="w-6 h-6 rounded-full bg-teal-400" />
+        </div>
+        <h1 className="text-4xl font-bold text-white tracking-tight">AI FinOps Proxy</h1>
+      </div>
+
+      {/* Navegación */}
+      <div className="flex gap-2 bg-neutral-900 p-1 rounded-full border border-neutral-800">
+        <TabButton active={vista === 'analizador'} onClick={() => setVista('analizador')}>
+          <p className="text-neutral-100 text-md">Analizador</p>
+        </TabButton>
+        <TabButton active={vista === 'historial'} onClick={() => setVista('historial')}>
+          <p className="text-neutral-100 text-md">Historial</p>
+        </TabButton>
+        <TabButton active={vista === 'grafica'} onClick={() => setVista('grafica')}>
+          <p className="text-neutral-100 text-md">Grafica</p>
+        </TabButton>
+      </div>
+    </header>
+  );
+}
+</file>
+
+<file path="Historial.jsx">
+import { useState, useEffect } from 'react';
+
+export default function Historial() {
+  const [datos, setDatos] = useState({ historial: [], total_peticiones: 0 });
+  const [usuarios, setUsuarios] = useState({ usuarios: [], total_usuarios: 0 });
+  const [usuarioSeleccionado, setUsuarioSeleccionado] = useState('');
+
+  useEffect(() => {
+    fetch(`http://127.0.0.1:8000/usuarios`)
+      .then(res => res.json())
+      .then(data => setUsuarios(data))
+      .catch(err => console.error("Error cargando usuarios:", err));
+  }, []); 
+
+  useEffect(() => {
+    if (usuarioSeleccionado) {
+      fetch(`http://127.0.0.1:8000/historial/${usuarioSeleccionado}`)
+        .then(res => res.json())
+        .then(data => setDatos(data))
+        .catch(err => console.error("Error cargando historial:", err));
+    }
+  }, [usuarioSeleccionado]);
+
+  return (
+    <div className="space-y-6 px-30">
+      <div className="space-y-2">
+        <h1 className="text-4xl font-semibold text-white">Historial de Usuario</h1>
+        <p className="text-xl text-neutral-400">Revisa el historial de peticiones de cada uno de los usuarios</p>
+      </div>
+
+      <div className="overflow-hidden rounded-md border border-neutral-800 bg-neutral-900 shadow-sm">
+        <div className="h-1 w-full bg-gradient-to-r from-sky-400 via-teal-400 to-emerald-400" />
+        
+        <div className="flex flex-col gap-4 border-b border-neutral-800 px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
+          <div className="space-y-1">
+            <h2 className="text-md font-semibold uppercase tracking-[0.15em] text-neutral-100">Registro de peticiones</h2>
+            <p className="text-md text-neutral-500">{datos.total_peticiones} petición(es)</p>
+          </div>
+          
+          <select 
+            value={usuarioSeleccionado} 
+            onChange={(e) => setUsuarioSeleccionado(e.target.value)}
+            className="rounded-md border border-neutral-700 bg-neutral-950 pl-3 pr-9 text-md text-neutral-100 outline-none"
+          >
+            <option value="">Selecciona usuario...</option>
+            {usuarios.usuarios.map((u) => (
+              <option className="text-md" key={u.id} value={u.id}>{u.tipo_consumidor} (ID: {u.id})</option>
+            ))}
+          </select>
+        </div>
+
+        <table className="w-full text-left text-md">
+          <thead>
+            <tr className="border-b border-neutral-800 bg-neutral-950/60 text-[11px] uppercase tracking-[0.12em] text-neutral-500">
+              <th className="text-md px-6 py-3 font-semibold">ID Petición</th>
+              <th className="text-md px-6 py-3 font-semibold">Fecha</th>
+              <th className="text-md px-6 py-3 font-semibold">Tokens</th>
+              <th className="text-md px-6 py-3 text-right font-semibold">Coste (USD)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {datos.historial.map((p, index) => (
+              <tr key={index} className="border-b border-neutral-800 hover:bg-neutral-800/50">
+                <td className="px-6 py-3 text-neutral-100">{p.identificador}</td>
+                <td className="px-6 py-3 text-neutral-400">{p.dia}</td>
+                <td className="px-6 py-3 text-neutral-200">{p.tokens}</td>
+                <td className="px-6 py-3 text-right font-mono text-teal-300">${p.coste_usd.toFixed(8)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="index.css">
+@import "tailwindcss"; /* 👈 Esta es la nueva sintaxis de la versión 4 */
+
+body {
+  background-color: #f3f4f6;
+}
+</file>
+
+<file path="main.jsx">
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import App from './App.jsx'
+
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+)
+</file>
+
+<file path="Peticion.jsx">
+import { useState, useEffect } from 'react';
+
+export default function Peticion() {
+  const [prompt, setPrompt] = useState('');
+  const [resultado, setResultado] = useState(null);
+  const [cargando, setCargando] = useState(false);
+  const [error, setError] = useState(null);
+  const [usuarios, setUsuarios] = useState({ usuarios: [], total_usuarios: 0 });
+  const [usuarioSeleccionado, setUsuarioSeleccionado] = useState('');
+
+  useEffect(() => {
+    fetch(`http://127.0.0.1:8000/usuarios`)
+      .then(res => res.json())
+      .then(data => setUsuarios(data))
+      .catch(err => console.error("Error cargando usuarios:", err));
+  }, []);
+
+  const renderTextWithBold = (text) => {
+    if (!text) return null;
+    const parts = text.split(/(\*\*.*?\*\*)/g);
+    return parts.map((part, index) => {
+      if (part.startsWith('**') && part.endsWith('**')) {
+        return <b key={index} className="text-neutral-100">{part.slice(2, -2)}</b>;
+      }
+      return <span key={index}>{part}</span>;
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!prompt.trim() || !usuarioSeleccionado) {
+      setError("Por favor, ingresa un mensaje y selecciona un usuario.");
+      return;
+    }
+
+    setCargando(true);
+    setError(null);
+    setResultado(null);
+
+    try {
+      const API_URL = "http://127.0.0.1:8000/generar";
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt, usuario_id: parseInt(usuarioSeleccionado, 10) }),
+      });
+
+      if (!response.ok) {
+        const errData = await response.json();
+        throw new Error(errData.detail || "Fallo en la comunicación");
+      }
+
+      const data = await response.json();
+      setResultado(data);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setCargando(false);
+    }
+  };
+
+  return (
+    <div className="space-y-8 px-30">
+      {/* Cabecera */}
+      <header className="space-y-1">
+        <h1 className="text-4xl font-semibold text-white tracking-tight">Analizador de peticiones</h1>
+        <p className="text-xl text-neutral-400">Configura tu consulta y optimiza costes.</p>
+      </header>
+
+      {/* Tarjeta Principal */}
+      <div className="overflow-hidden rounded-md border border-neutral-800 bg-neutral-900 shadow-sm">
+        <div className="h-1 w-full bg-gradient-to-r from-sky-400 via-teal-400 to-emerald-400" />
+
+        <div className="px-6 py-5 border-b border-neutral-800">
+          <h2 className="text-md font-semibold uppercase tracking-[0.15em] text-neutral-100">NUEVA PETICIÓN</h2>
+        </div>
+
+        <div className="p-6 space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <label className="block text-md font-semibold tracking-[0.12em] text-neutral-400 mb-2">
+                Usuario / Departamento
+              </label>
+              <select
+                value={usuarioSeleccionado}
+                onChange={(e) => setUsuarioSeleccionado(e.target.value)}
+                className=" text-md w-full rounded-xl border border-neutral-700 bg-neutral-950 py-2.5 px-3 text-sm text-neutral-200 outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400/30"
+              >
+                <option className="text-md" value="">Selecciona un usuario / departamento...</option>
+                {usuarios.usuarios.map((u) => (
+                  <option className="text-md" key={u.id} value={u.id}>{u.tipo_consumidor} (ID: {u.id})</option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-md font-semibold tracking-[0.12em] text-neutral-400 mb-2">
+                Mensaje o Prompt
+              </label>
+              <textarea
+                rows="6"
+                className="w-full p-3 bg-neutral-950 border border-neutral-700 rounded-md text-neutral-200 text-md outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400/30"
+                placeholder="Ej.: Escribe un script en Python para calcular el factorial..."
+                value={prompt}
+                onChange={(e) => setPrompt(e.target.value)}
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={cargando}
+              className="text-md w-full py-3 bg-neutral-800 hover:bg-neutral-700 text-white text-sm font-semibold uppercase tracking-wider transition-colors border border-neutral-700"
+            >
+              {cargando ? "Analizando..." : "Enviar Petición"}
+            </button>
+          </form>
+        </div>
+      </div>
+
+      {/* Resultados */}
+      {resultado && (
+        <div className="space-y-6">
+          <div className="bg-neutral-900 p-6 rounded-md border border-neutral-800">
+            <h2 className="text-md font-semibold uppercase tracking-[0.15em] text-neutral-100 border-b border-neutral-800 pb-3 mb-4">Respuesta de la IA</h2>
+            <div className="text-neutral-300 text-md whitespace-pre-wrap">{renderTextWithBold(resultado.respuesta_ia)}</div>
+          </div>
+
+          <h3 className="text-md font-semibold uppercase tracking-[0.15em] text-neutral-100 border-b border-neutral-800 pb-3 mt-6">FinOps Dashboard · Metadata</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Card Modelo */}
+            <div className="border-t-4 border-teal-400 bg-neutral-900 p-4 border-x border-b">
+              <p className="text-md text-neutral-500 uppercase tracking-wider">Modelo y Proveedor</p>
+              <p className="text-md font-bold text-neutral-100 mt-1">{resultado.finops_metadata.ejecucion.modelo_usado}</p>
+              <p className="text-md text-neutral-400">{resultado.finops_metadata.ejecucion.proveedor}</p>
+            </div>
+            {/* Card Enrutamiento */}
+            <div className="border-t-4 border-teal-400 bg-neutral-900 p-4 border-x border-b">
+              <p className="text-md text-neutral-500 uppercase tracking-wider">Enrutamiento (Complejidad)</p>
+              <p className="text-md font-bold text-neutral-100 mt-1">{resultado.finops_metadata.enrutamiento.complejidad_detectada}</p>
+              <p className="text-md text-neutral-400">{resultado.finops_metadata.enrutamiento.razonamiento_router}</p>
+            </div>
+            {/* Card Coste */}
+            <div className="border-t-4 border-teal-400 bg-neutral-900 p-4 border-x border-b">
+              <p className="text-md text-neutral-500 uppercase tracking-wider">Coste y Presupuesto</p>
+              <p className="text-md font-bold text-neutral-100 mt-1">${resultado.finops_metadata.coste_real_usd.coste_total.toFixed(8)}</p>
+              <p className="text-md text-neutral-400">Límite Depto: ${resultado.finops_metadata.limite_presupuesto_aplicado}</p>
+            </div>
+            {/* Card Consumo */}
+            <div className="border-t-4 border-teal-400 bg-neutral-900 p-4 border-x border-b">
+              <p className="text-md text-neutral-500 uppercase tracking-wider">Consumo (Tokens)</p>
+              <p className="text-md font-bold text-neutral-100 mt-1">{resultado.finops_metadata.ejecucion.tokens_totales} totales</p>
+              <p className="text-md text-neutral-400">In: {resultado.finops_metadata.ejecucion.tokens_input} | Out: {resultado.finops_metadata.ejecucion.tokens_output}</p>
+            </div>
+            {resultado.finops_metadata.enrutamiento.complejidad_detectada === 'baja' ? (
+              <div className="border-t-4 border-teal-400 bg-neutral-900 p-4 border-x border-b">
+                <p className="text-md text-neutral-500 uppercase tracking-wider">Ahorro (Modelo Medio)</p>
+                <p className="text-md font-bold text-neutral-100 mt-1">{resultado.finops_metadata.ahorro_usd["groq/llama-3.1-8b-instant"]}x más barato</p>
+              </div>
+            ) : null}
+            {resultado.finops_metadata.enrutamiento.complejidad_detectada === 'baja' || resultado.finops_metadata.enrutamiento.complejidad_detectada === 'media' ? (
+              <div className="border-t-4 border-teal-400 bg-neutral-900 p-4 border-x border-b">
+                <p className="text-md text-neutral-500 uppercase tracking-wider">Ahorro (Modelo Alto)</p>
+                <p className="text-md font-bold text-neutral-100 mt-1">{resultado.finops_metadata.ahorro_usd["groq/llama-3.3-70b-versatile"]}x más barato</p>
+              </div>
+            ) : null}
+          </div>
+
+          {/* Intervención */}
+          {resultado.finops_metadata.enrutamiento.intervencion_finops && (
+            <div className="border-l-4 border-red-500 bg-neutral-900 p-4 border-y border-r mt-4">
+              <p className="text-md text-red-500 uppercase font-bold tracking-wider">Intervención FinOps Activa</p>
+              <p className="text-md text-neutral-200 mt-1">{resultado.finops_metadata.enrutamiento.intervencion_finops}</p>
+            </div>
+          )}
+        </div>
+      )}
+      {error && (
+        <div className="bg-red-500 text-white p-4 rounded-md mt-6 shadow-md border border-red-700">
+          <p className="text-lg font-semibold">Error:</p>
+          <p>{error}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+</file>
+
+</files>
+</file>
+
+<file path="eslint.config.js">
+import js from '@eslint/js'
+import globals from 'globals'
+import reactHooks from 'eslint-plugin-react-hooks'
+import reactRefresh from 'eslint-plugin-react-refresh'
+import { defineConfig, globalIgnores } from 'eslint/config'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{js,jsx}'],
+    extends: [
+      js.configs.recommended,
+      reactHooks.configs.flat.recommended,
+      reactRefresh.configs.vite,
+    ],
+    languageOptions: {
+      globals: globals.browser,
+      parserOptions: { ecmaFeatures: { jsx: true } },
+    },
+  },
+])
+</file>
+
+<file path="index.html">
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>miatathon</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
+</file>
+
+<file path="package.json">
+{
+  "name": "miatathon",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.3.2",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.3",
+    "eslint": "^10.6.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.3",
+    "globals": "^17.7.0",
+    "tailwindcss": "^4.3.2",
+    "vite": "^8.1.1"
+  }
+}
+</file>
+
+<file path="public/favicon.svg">
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="46" fill="none" viewBox="0 0 48 46"><path fill="#863bff" d="M25.946 44.938c-.664.845-2.021.375-2.021-.698V33.937a2.26 2.26 0 0 0-2.262-2.262H10.287c-.92 0-1.456-1.04-.92-1.788l7.48-10.471c1.07-1.497 0-3.578-1.842-3.578H1.237c-.92 0-1.456-1.04-.92-1.788L10.013.474c.214-.297.556-.474.92-.474h28.894c.92 0 1.456 1.04.92 1.788l-7.48 10.471c-1.07 1.498 0 3.579 1.842 3.579h11.377c.943 0 1.473 1.088.89 1.83L25.947 44.94z" style="fill:#863bff;fill:color(display-p3 .5252 .23 1);fill-opacity:1"/><mask id="a" width="48" height="46" x="0" y="0" maskUnits="userSpaceOnUse" style="mask-type:alpha"><path fill="#000" d="M25.842 44.938c-.664.844-2.021.375-2.021-.698V33.937a2.26 2.26 0 0 0-2.262-2.262H10.183c-.92 0-1.456-1.04-.92-1.788l7.48-10.471c1.07-1.498 0-3.579-1.842-3.579H1.133c-.92 0-1.456-1.04-.92-1.787L9.91.473c.214-.297.556-.474.92-.474h28.894c.92 0 1.456 1.04.92 1.788l-7.48 10.471c-1.07 1.498 0 3.578 1.842 3.578h11.377c.943 0 1.473 1.088.89 1.832L25.843 44.94z" style="fill:#000;fill-opacity:1"/></mask><g mask="url(#a)"><g filter="url(#b)"><ellipse cx="5.508" cy="14.704" fill="#ede6ff" rx="5.508" ry="14.704" style="fill:#ede6ff;fill:color(display-p3 .9275 .9033 1);fill-opacity:1" transform="matrix(.00324 1 1 -.00324 -4.47 31.516)"/></g><g filter="url(#c)"><ellipse cx="10.399" cy="29.851" fill="#ede6ff" rx="10.399" ry="29.851" style="fill:#ede6ff;fill:color(display-p3 .9275 .9033 1);fill-opacity:1" transform="matrix(.00324 1 1 -.00324 -39.328 7.883)"/></g><g filter="url(#d)"><ellipse cx="5.508" cy="30.487" fill="#7e14ff" rx="5.508" ry="30.487" style="fill:#7e14ff;fill:color(display-p3 .4922 .0767 1);fill-opacity:1" transform="rotate(89.814 -25.913 -14.639)scale(1 -1)"/></g><g filter="url(#e)"><ellipse cx="5.508" cy="30.599" fill="#7e14ff" rx="5.508" ry="30.599" style="fill:#7e14ff;fill:color(display-p3 .4922 .0767 1);fill-opacity:1" transform="rotate(89.814 -32.644 -3.334)scale(1 -1)"/></g><g filter="url(#f)"><ellipse cx="5.508" cy="30.599" fill="#7e14ff" rx="5.508" ry="30.599" style="fill:#7e14ff;fill:color(display-p3 .4922 .0767 1);fill-opacity:1" transform="matrix(.00324 1 1 -.00324 -34.34 30.47)"/></g><g filter="url(#g)"><ellipse cx="14.072" cy="22.078" fill="#ede6ff" rx="14.072" ry="22.078" style="fill:#ede6ff;fill:color(display-p3 .9275 .9033 1);fill-opacity:1" transform="rotate(93.35 24.506 48.493)scale(-1 1)"/></g><g filter="url(#h)"><ellipse cx="3.47" cy="21.501" fill="#7e14ff" rx="3.47" ry="21.501" style="fill:#7e14ff;fill:color(display-p3 .4922 .0767 1);fill-opacity:1" transform="rotate(89.009 28.708 47.59)scale(-1 1)"/></g><g filter="url(#i)"><ellipse cx="3.47" cy="21.501" fill="#7e14ff" rx="3.47" ry="21.501" style="fill:#7e14ff;fill:color(display-p3 .4922 .0767 1);fill-opacity:1" transform="rotate(89.009 28.708 47.59)scale(-1 1)"/></g><g filter="url(#j)"><ellipse cx=".387" cy="8.972" fill="#7e14ff" rx="4.407" ry="29.108" style="fill:#7e14ff;fill:color(display-p3 .4922 .0767 1);fill-opacity:1" transform="rotate(39.51 .387 8.972)"/></g><g filter="url(#k)"><ellipse cx="47.523" cy="-6.092" fill="#7e14ff" rx="4.407" ry="29.108" style="fill:#7e14ff;fill:color(display-p3 .4922 .0767 1);fill-opacity:1" transform="rotate(37.892 47.523 -6.092)"/></g><g filter="url(#l)"><ellipse cx="41.412" cy="6.333" fill="#47bfff" rx="5.971" ry="9.665" style="fill:#47bfff;fill:color(display-p3 .2799 .748 1);fill-opacity:1" transform="rotate(37.892 41.412 6.333)"/></g><g filter="url(#m)"><ellipse cx="-1.879" cy="38.332" fill="#7e14ff" rx="4.407" ry="29.108" style="fill:#7e14ff;fill:color(display-p3 .4922 .0767 1);fill-opacity:1" transform="rotate(37.892 -1.88 38.332)"/></g><g filter="url(#n)"><ellipse cx="-1.879" cy="38.332" fill="#7e14ff" rx="4.407" ry="29.108" style="fill:#7e14ff;fill:color(display-p3 .4922 .0767 1);fill-opacity:1" transform="rotate(37.892 -1.88 38.332)"/></g><g filter="url(#o)"><ellipse cx="35.651" cy="29.907" fill="#7e14ff" rx="4.407" ry="29.108" style="fill:#7e14ff;fill:color(display-p3 .4922 .0767 1);fill-opacity:1" transform="rotate(37.892 35.651 29.907)"/></g><g filter="url(#p)"><ellipse cx="38.418" cy="32.4" fill="#47bfff" rx="5.971" ry="15.297" style="fill:#47bfff;fill:color(display-p3 .2799 .748 1);fill-opacity:1" transform="rotate(37.892 38.418 32.4)"/></g></g><defs><filter id="b" width="60.045" height="41.654" x="-19.77" y="16.149" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="7.659"/></filter><filter id="c" width="90.34" height="51.437" x="-54.613" y="-7.533" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="7.659"/></filter><filter id="d" width="79.355" height="29.4" x="-49.64" y="2.03" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="e" width="79.579" height="29.4" x="-45.045" y="20.029" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="f" width="79.579" height="29.4" x="-43.513" y="21.178" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="g" width="74.749" height="58.852" x="15.756" y="-17.901" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="7.659"/></filter><filter id="h" width="61.377" height="25.362" x="23.548" y="2.284" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="i" width="61.377" height="25.362" x="23.548" y="2.284" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="j" width="56.045" height="63.649" x="-27.636" y="-22.853" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="k" width="54.814" height="64.646" x="20.116" y="-38.415" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="l" width="33.541" height="35.313" x="24.641" y="-11.323" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="m" width="54.814" height="64.646" x="-29.286" y="6.009" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="n" width="54.814" height="64.646" x="-29.286" y="6.009" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="o" width="54.814" height="64.646" x="8.244" y="-2.416" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="p" width="39.409" height="43.623" x="18.713" y="10.588" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter></defs></svg>
+</file>
+
+<file path="public/icons.svg">
+<svg xmlns="http://www.w3.org/2000/svg">
+  <symbol id="bluesky-icon" viewBox="0 0 16 17">
+    <g clip-path="url(#bluesky-clip)"><path fill="#08060d" d="M7.75 7.735c-.693-1.348-2.58-3.86-4.334-5.097-1.68-1.187-2.32-.981-2.74-.79C.188 2.065.1 2.812.1 3.251s.241 3.602.398 4.13c.52 1.744 2.367 2.333 4.07 2.145-2.495.37-4.71 1.278-1.805 4.512 3.196 3.309 4.38-.71 4.987-2.746.608 2.036 1.307 5.91 4.93 2.746 2.72-2.746.747-4.143-1.747-4.512 1.702.189 3.55-.4 4.07-2.145.156-.528.397-3.691.397-4.13s-.088-1.186-.575-1.406c-.42-.19-1.06-.395-2.741.79-1.755 1.24-3.64 3.752-4.334 5.099"/></g>
+    <defs><clipPath id="bluesky-clip"><path fill="#fff" d="M.1.85h15.3v15.3H.1z"/></clipPath></defs>
+  </symbol>
+  <symbol id="discord-icon" viewBox="0 0 20 19">
+    <path fill="#08060d" d="M16.224 3.768a14.5 14.5 0 0 0-3.67-1.153c-.158.286-.343.67-.47.976a13.5 13.5 0 0 0-4.067 0c-.128-.306-.317-.69-.476-.976A14.4 14.4 0 0 0 3.868 3.77C1.546 7.28.916 10.703 1.231 14.077a14.7 14.7 0 0 0 4.5 2.306q.545-.748.965-1.587a9.5 9.5 0 0 1-1.518-.74q.191-.14.372-.293c2.927 1.369 6.107 1.369 8.999 0q.183.152.372.294-.723.437-1.52.74.418.838.963 1.588a14.6 14.6 0 0 0 4.504-2.308c.37-3.911-.63-7.302-2.644-10.309m-9.13 8.234c-.878 0-1.599-.82-1.599-1.82 0-.998.705-1.82 1.6-1.82.894 0 1.614.82 1.599 1.82.001 1-.705 1.82-1.6 1.82m5.91 0c-.878 0-1.599-.82-1.599-1.82 0-.998.705-1.82 1.6-1.82.893 0 1.614.82 1.599 1.82 0 1-.706 1.82-1.6 1.82"/>
+  </symbol>
+  <symbol id="documentation-icon" viewBox="0 0 21 20">
+    <path fill="none" stroke="#aa3bff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.35" d="m15.5 13.333 1.533 1.322c.645.555.967.833.967 1.178s-.322.623-.967 1.179L15.5 18.333m-3.333-5-1.534 1.322c-.644.555-.966.833-.966 1.178s.322.623.966 1.179l1.534 1.321"/>
+    <path fill="none" stroke="#aa3bff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.35" d="M17.167 10.836v-4.32c0-1.41 0-2.117-.224-2.68-.359-.906-1.118-1.621-2.08-1.96-.599-.21-1.349-.21-2.848-.21-2.623 0-3.935 0-4.983.369-1.684.591-3.013 1.842-3.641 3.428C3 6.449 3 7.684 3 10.154v2.122c0 2.558 0 3.838.706 4.726q.306.383.713.671c.76.536 1.79.64 3.581.66"/>
+    <path fill="none" stroke="#aa3bff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.35" d="M3 10a2.78 2.78 0 0 1 2.778-2.778c.555 0 1.209.097 1.748-.047.48-.129.854-.503.982-.982.145-.54.048-1.194.048-1.749a2.78 2.78 0 0 1 2.777-2.777"/>
+  </symbol>
+  <symbol id="github-icon" viewBox="0 0 19 19">
+    <path fill="#08060d" fill-rule="evenodd" d="M9.356 1.85C5.05 1.85 1.57 5.356 1.57 9.694a7.84 7.84 0 0 0 5.324 7.44c.387.079.528-.168.528-.376 0-.182-.013-.805-.013-1.454-2.165.467-2.616-.935-2.616-.935-.349-.91-.864-1.143-.864-1.143-.71-.48.051-.48.051-.48.787.051 1.2.805 1.2.805.695 1.194 1.817.857 2.268.649.064-.507.27-.857.49-1.052-1.728-.182-3.545-.857-3.545-3.87 0-.857.31-1.558.8-2.104-.078-.195-.349-1 .077-2.078 0 0 .657-.208 2.14.805a7.5 7.5 0 0 1 1.946-.26c.657 0 1.328.092 1.946.26 1.483-1.013 2.14-.805 2.14-.805.426 1.078.155 1.883.078 2.078.502.546.799 1.247.799 2.104 0 3.013-1.818 3.675-3.558 3.87.284.247.528.714.528 1.454 0 1.052-.012 1.896-.012 2.156 0 .208.142.455.528.377a7.84 7.84 0 0 0 5.324-7.441c.013-4.338-3.48-7.844-7.773-7.844" clip-rule="evenodd"/>
+  </symbol>
+  <symbol id="social-icon" viewBox="0 0 20 20">
+    <path fill="none" stroke="#aa3bff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.35" d="M12.5 6.667a4.167 4.167 0 1 0-8.334 0 4.167 4.167 0 0 0 8.334 0"/>
+    <path fill="none" stroke="#aa3bff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.35" d="M2.5 16.667a5.833 5.833 0 0 1 8.75-5.053m3.837.474.513 1.035c.07.144.257.282.414.309l.93.155c.596.1.736.536.307.965l-.723.73a.64.64 0 0 0-.152.531l.207.903c.164.715-.213.991-.84.618l-.872-.52a.63.63 0 0 0-.577 0l-.872.52c-.624.373-1.003.094-.84-.618l.207-.903a.64.64 0 0 0-.152-.532l-.723-.729c-.426-.43-.289-.864.306-.964l.93-.156a.64.64 0 0 0 .412-.31l.513-1.034c.28-.562.735-.562 1.012 0"/>
+  </symbol>
+  <symbol id="x-icon" viewBox="0 0 19 19">
+    <path fill="#08060d" fill-rule="evenodd" d="M1.893 1.98c.052.072 1.245 1.769 2.653 3.77l2.892 4.114c.183.261.333.48.333.486s-.068.089-.152.183l-.522.593-.765.867-3.597 4.087c-.375.426-.734.834-.798.905a1 1 0 0 0-.118.148c0 .01.236.017.664.017h.663l.729-.83c.4-.457.796-.906.879-.999a692 692 0 0 0 1.794-2.038c.034-.037.301-.34.594-.675l.551-.624.345-.392a7 7 0 0 1 .34-.374c.006 0 .93 1.306 2.052 2.903l2.084 2.965.045.063h2.275c1.87 0 2.273-.003 2.266-.021-.008-.02-1.098-1.572-3.894-5.547-2.013-2.862-2.28-3.246-2.273-3.266.008-.019.282-.332 2.085-2.38l2-2.274 1.567-1.782c.022-.028-.016-.03-.65-.03h-.674l-.3.342a871 871 0 0 1-1.782 2.025c-.067.075-.405.458-.75.852a100 100 0 0 1-.803.91c-.148.172-.299.344-.99 1.127-.304.343-.32.358-.345.327-.015-.019-.904-1.282-1.976-2.808L6.365 1.85H1.8zm1.782.91 8.078 11.294c.772 1.08 1.413 1.973 1.425 1.984.016.017.241.02 1.05.017l1.03-.004-2.694-3.766L7.796 5.75 5.722 2.852l-1.039-.004-1.039-.004z" clip-rule="evenodd"/>
+  </symbol>
+</svg>
+</file>
+
+<file path="README.md">
+# React + Vite
+
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+
+## React Compiler
+
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+</file>
+
+<file path="src/assets/react.svg">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--logos" width="35.93" height="32" preserveAspectRatio="xMidYMid meet" viewBox="0 0 256 228"><path fill="#00D8FF" d="M210.483 73.824a171.49 171.49 0 0 0-8.24-2.597c.465-1.9.893-3.777 1.273-5.621c6.238-30.281 2.16-54.676-11.769-62.708c-13.355-7.7-35.196.329-57.254 19.526a171.23 171.23 0 0 0-6.375 5.848a155.866 155.866 0 0 0-4.241-3.917C100.759 3.829 77.587-4.822 63.673 3.233C50.33 10.957 46.379 33.89 51.995 62.588a170.974 170.974 0 0 0 1.892 8.48c-3.28.932-6.445 1.924-9.474 2.98C17.309 83.498 0 98.307 0 113.668c0 15.865 18.582 31.778 46.812 41.427a145.52 145.52 0 0 0 6.921 2.165a167.467 167.467 0 0 0-2.01 9.138c-5.354 28.2-1.173 50.591 12.134 58.266c13.744 7.926 36.812-.22 59.273-19.855a145.567 145.567 0 0 0 5.342-4.923a168.064 168.064 0 0 0 6.92 6.314c21.758 18.722 43.246 26.282 56.54 18.586c13.731-7.949 18.194-32.003 12.4-61.268a145.016 145.016 0 0 0-1.535-6.842c1.62-.48 3.21-.974 4.76-1.488c29.348-9.723 48.443-25.443 48.443-41.52c0-15.417-17.868-30.326-45.517-39.844Zm-6.365 70.984c-1.4.463-2.836.91-4.3 1.345c-3.24-10.257-7.612-21.163-12.963-32.432c5.106-11 9.31-21.767 12.459-31.957c2.619.758 5.16 1.557 7.61 2.4c23.69 8.156 38.14 20.213 38.14 29.504c0 9.896-15.606 22.743-40.946 31.14Zm-10.514 20.834c2.562 12.94 2.927 24.64 1.23 33.787c-1.524 8.219-4.59 13.698-8.382 15.893c-8.067 4.67-25.32-1.4-43.927-17.412a156.726 156.726 0 0 1-6.437-5.87c7.214-7.889 14.423-17.06 21.459-27.246c12.376-1.098 24.068-2.894 34.671-5.345a134.17 134.17 0 0 1 1.386 6.193ZM87.276 214.515c-7.882 2.783-14.16 2.863-17.955.675c-8.075-4.657-11.432-22.636-6.853-46.752a156.923 156.923 0 0 1 1.869-8.499c10.486 2.32 22.093 3.988 34.498 4.994c7.084 9.967 14.501 19.128 21.976 27.15a134.668 134.668 0 0 1-4.877 4.492c-9.933 8.682-19.886 14.842-28.658 17.94ZM50.35 144.747c-12.483-4.267-22.792-9.812-29.858-15.863c-6.35-5.437-9.555-10.836-9.555-15.216c0-9.322 13.897-21.212 37.076-29.293c2.813-.98 5.757-1.905 8.812-2.773c3.204 10.42 7.406 21.315 12.477 32.332c-5.137 11.18-9.399 22.249-12.634 32.792a134.718 134.718 0 0 1-6.318-1.979Zm12.378-84.26c-4.811-24.587-1.616-43.134 6.425-47.789c8.564-4.958 27.502 2.111 47.463 19.835a144.318 144.318 0 0 1 3.841 3.545c-7.438 7.987-14.787 17.08-21.808 26.988c-12.04 1.116-23.565 2.908-34.161 5.309a160.342 160.342 0 0 1-1.76-7.887Zm110.427 27.268a347.8 347.8 0 0 0-7.785-12.803c8.168 1.033 15.994 2.404 23.343 4.08c-2.206 7.072-4.956 14.465-8.193 22.045a381.151 381.151 0 0 0-7.365-13.322Zm-45.032-43.861c5.044 5.465 10.096 11.566 15.065 18.186a322.04 322.04 0 0 0-30.257-.006c4.974-6.559 10.069-12.652 15.192-18.18ZM82.802 87.83a323.167 323.167 0 0 0-7.227 13.238c-3.184-7.553-5.909-14.98-8.134-22.152c7.304-1.634 15.093-2.97 23.209-3.984a321.524 321.524 0 0 0-7.848 12.897Zm8.081 65.352c-8.385-.936-16.291-2.203-23.593-3.793c2.26-7.3 5.045-14.885 8.298-22.6a321.187 321.187 0 0 0 7.257 13.246c2.594 4.48 5.28 8.868 8.038 13.147Zm37.542 31.03c-5.184-5.592-10.354-11.779-15.403-18.433c4.902.192 9.899.29 14.978.29c5.218 0 10.376-.117 15.453-.343c-4.985 6.774-10.018 12.97-15.028 18.486Zm52.198-57.817c3.422 7.8 6.306 15.345 8.596 22.52c-7.422 1.694-15.436 3.058-23.88 4.071a382.417 382.417 0 0 0 7.859-13.026a347.403 347.403 0 0 0 7.425-13.565Zm-16.898 8.101a358.557 358.557 0 0 1-12.281 19.815a329.4 329.4 0 0 1-23.444.823c-7.967 0-15.716-.248-23.178-.732a310.202 310.202 0 0 1-12.513-19.846h.001a307.41 307.41 0 0 1-10.923-20.627a310.278 310.278 0 0 1 10.89-20.637l-.001.001a307.318 307.318 0 0 1 12.413-19.761c7.613-.576 15.42-.876 23.31-.876H128c7.926 0 15.743.303 23.354.883a329.357 329.357 0 0 1 12.335 19.695a358.489 358.489 0 0 1 11.036 20.54a329.472 329.472 0 0 1-11 20.722Zm22.56-122.124c8.572 4.944 11.906 24.881 6.52 51.026c-.344 1.668-.73 3.367-1.15 5.09c-10.622-2.452-22.155-4.275-34.23-5.408c-7.034-10.017-14.323-19.124-21.64-27.008a160.789 160.789 0 0 1 5.888-5.4c18.9-16.447 36.564-22.941 44.612-18.3ZM128 90.808c12.625 0 22.86 10.235 22.86 22.86s-10.235 22.86-22.86 22.86s-22.86-10.235-22.86-22.86s10.235-22.86 22.86-22.86Z"></path></svg>
+</file>
+
+<file path="src/assets/vite.svg">
+<svg xmlns="http://www.w3.org/2000/svg" width="77" height="47" fill="none" aria-labelledby="vite-logo-title" viewBox="0 0 77 47"><title id="vite-logo-title">Vite</title><style>.parenthesis{fill:#000}@media (prefers-color-scheme:dark){.parenthesis{fill:#fff}}</style><path fill="#9135ff" d="M40.151 45.71c-.663.844-2.02.374-2.02-.699V34.708a2.26 2.26 0 0 0-2.262-2.262H24.493c-.92 0-1.457-1.04-.92-1.788l7.479-10.471c1.07-1.498 0-3.578-1.842-3.578H15.443c-.92 0-1.456-1.04-.92-1.788l9.696-13.576c.213-.297.556-.474.92-.474h28.894c.92 0 1.456 1.04.92 1.788l-7.48 10.472c-1.07 1.497 0 3.578 1.842 3.578h11.376c.944 0 1.474 1.087.89 1.83L40.153 45.712z"/><mask id="a" width="48" height="47" x="14" y="0" maskUnits="userSpaceOnUse" style="mask-type:alpha"><path fill="#000" d="M40.047 45.71c-.663.843-2.02.374-2.02-.699V34.708a2.26 2.26 0 0 0-2.262-2.262H24.389c-.92 0-1.457-1.04-.92-1.788l7.479-10.472c1.07-1.497 0-3.578-1.842-3.578H15.34c-.92 0-1.456-1.04-.92-1.788l9.696-13.575c.213-.297.556-.474.92-.474H53.93c.92 0 1.456 1.04.92 1.788L47.37 13.03c-1.07 1.498 0 3.578 1.842 3.578h11.376c.944 0 1.474 1.088.89 1.831L40.049 45.712z"/></mask><g mask="url(#a)"><g filter="url(#b)"><ellipse cx="5.508" cy="14.704" fill="#eee6ff" rx="5.508" ry="14.704" transform="rotate(269.814 20.96 11.29)scale(-1 1)"/></g><g filter="url(#c)"><ellipse cx="10.399" cy="29.851" fill="#eee6ff" rx="10.399" ry="29.851" transform="rotate(89.814 -16.902 -8.275)scale(1 -1)"/></g><g filter="url(#d)"><ellipse cx="5.508" cy="30.487" fill="#8900ff" rx="5.508" ry="30.487" transform="rotate(89.814 -19.197 -7.127)scale(1 -1)"/></g><g filter="url(#e)"><ellipse cx="5.508" cy="30.599" fill="#8900ff" rx="5.508" ry="30.599" transform="rotate(89.814 -25.928 4.177)scale(1 -1)"/></g><g filter="url(#f)"><ellipse cx="5.508" cy="30.599" fill="#8900ff" rx="5.508" ry="30.599" transform="rotate(89.814 -25.738 5.52)scale(1 -1)"/></g><g filter="url(#g)"><ellipse cx="14.072" cy="22.078" fill="#eee6ff" rx="14.072" ry="22.078" transform="rotate(93.35 31.245 55.578)scale(-1 1)"/></g><g filter="url(#h)"><ellipse cx="3.47" cy="21.501" fill="#8900ff" rx="3.47" ry="21.501" transform="rotate(89.009 35.419 55.202)scale(-1 1)"/></g><g filter="url(#i)"><ellipse cx="3.47" cy="21.501" fill="#8900ff" rx="3.47" ry="21.501" transform="rotate(89.009 35.419 55.202)scale(-1 1)"/></g><g filter="url(#j)"><ellipse cx="14.592" cy="9.743" fill="#8900ff" rx="4.407" ry="29.108" transform="rotate(39.51 14.592 9.743)"/></g><g filter="url(#k)"><ellipse cx="61.728" cy="-5.321" fill="#8900ff" rx="4.407" ry="29.108" transform="rotate(37.892 61.728 -5.32)"/></g><g filter="url(#l)"><ellipse cx="55.618" cy="7.104" fill="#00c2ff" rx="5.971" ry="9.665" transform="rotate(37.892 55.618 7.104)"/></g><g filter="url(#m)"><ellipse cx="12.326" cy="39.103" fill="#8900ff" rx="4.407" ry="29.108" transform="rotate(37.892 12.326 39.103)"/></g><g filter="url(#n)"><ellipse cx="12.326" cy="39.103" fill="#8900ff" rx="4.407" ry="29.108" transform="rotate(37.892 12.326 39.103)"/></g><g filter="url(#o)"><ellipse cx="49.857" cy="30.678" fill="#8900ff" rx="4.407" ry="29.108" transform="rotate(37.892 49.857 30.678)"/></g><g filter="url(#p)"><ellipse cx="52.623" cy="33.171" fill="#00c2ff" rx="5.971" ry="15.297" transform="rotate(37.892 52.623 33.17)"/></g></g><path d="M6.919 0c-9.198 13.166-9.252 33.575 0 46.789h6.215c-9.25-13.214-9.196-33.623 0-46.789zm62.424 0h-6.215c9.198 13.166 9.252 33.575 0 46.789h6.215c9.25-13.214 9.196-33.623 0-46.789" class="parenthesis"/><defs><filter id="b" width="60.045" height="41.654" x="-5.564" y="16.92" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="7.659"/></filter><filter id="c" width="90.34" height="51.437" x="-40.407" y="-6.762" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="7.659"/></filter><filter id="d" width="79.355" height="29.4" x="-35.435" y="2.801" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="e" width="79.579" height="29.4" x="-30.84" y="20.8" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="f" width="79.579" height="29.4" x="-29.307" y="21.949" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="g" width="74.749" height="58.852" x="29.961" y="-17.13" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="7.659"/></filter><filter id="h" width="61.377" height="25.362" x="37.754" y="3.055" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="i" width="61.377" height="25.362" x="37.754" y="3.055" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="j" width="56.045" height="63.649" x="-13.43" y="-22.082" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="k" width="54.814" height="64.646" x="34.321" y="-37.644" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="l" width="33.541" height="35.313" x="38.847" y="-10.552" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="m" width="54.814" height="64.646" x="-15.081" y="6.78" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="n" width="54.814" height="64.646" x="-15.081" y="6.78" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="o" width="54.814" height="64.646" x="22.45" y="-1.645" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="p" width="39.409" height="43.623" x="32.919" y="11.36" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter></defs></svg>
+</file>
+
+<file path="src/index.css">
+@import "tailwindcss"; /* 👈 Esta es la nueva sintaxis de la versión 4 */
+
+body {
+  background-color: #f3f4f6;
+}
+</file>
+
+<file path="src/main.jsx">
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import App from './App.jsx'
+
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+)
+</file>
+
+<file path="vite.config.js">
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [
+    react(),
+    tailwindcss(),
+  ],
+})
+</file>
+
+<file path=".gitignore">
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+.env
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+</file>
+
+<file path="ProyectoFinal/config.py">
+PRECIOS_FINOPS = {
+    "groq/llama-3.3-70b-versatile": {"input": 0.59, "output": 0.79, "provider": "Groq (Cloud)"}, # Nivel 0 (Caro/Complejo)
+    "groq/llama-3.1-8b-instant": {"input": 0.15, "output": 0.15, "provider": "Groq (Cloud)"},    # Nivel 1 (Medio)
+    "ollama/llama3.2:3b": {"input": 0.05, "output": 0.05, "provider": "Ollama A (Local)"}        # Nivel 2 (Barato)
+}
+
+API_BASES = {
+    "ollama/llama3.2:3b": "http://localhost:11434"
+}
+
+DB_FILE = "finops_mercedes.db"
+
+JERARQUIA_MODELOS = [
+    "groq/llama-3.3-70b-versatile", # Nivel 0: Alta
+    "groq/llama-3.1-8b-instant",    # Nivel 1: Media
+    "ollama/llama3.2:3b"            # Nivel 2: Baja
+]
+
+PRESUPUESTOS_POR_EQUIPO = {
+    "equipo-vip": 0.05,        
+    "backend": 0.01,           
+    "frontend": 0.01,
+    "marketing": 0.005,
+    "produccion": 0.0001,      
+}
+
+ESTIMACION_OUTPUT_TOKENS = {"baja": 150, "media": 600, "alta": 1500}
+
+SYS_PROMPT_ROUTER = """
+Eres un clasificador de IA de alta precisión. Tu trabajo es analizar la intención del usuario y clasificar la complejidad del prompt para optimizar costes.
+Reglas estrictas:
+"baja": Preguntas directas, saludos, datos simples, cultura general, opiniones breves, tiempo, o tareas de una sola oración.
+"media": Redacción de textos, resúmenes, extracción de datos estructurados, emails, o explicaciones de nivel intermedio.
+"alta": Programación, matemáticas avanzadas, lógica compleja, análisis de grandes documentos, o razonamiento multi-paso.
+Ejemplos:
+User: "Hola, ¿qué tal?" -> {"complejidad": "baja", "razonamiento": "Saludo simple"}
+User: "¿Qué tiempo hace en Madrid?" -> {"complejidad": "baja", "razonamiento": "Consulta de información puntual"}
+User: "Escribe un correo electrónico para mi jefe pidiendo vacaciones." -> {"complejidad": "media", "razonamiento": "Generación de texto estructurado"}
+User: "Escribe una función en Python para calcular el número de Fibonacci." -> {"complejidad": "alta", "razonamiento": "Tarea de programación"}
+Analiza el prompt del usuario y responde estrictamente en formato JSON según el esquema proporcionado.
+"""
+</file>
+
+<file path="ProyectoFinal/helpers.py">
+import asyncio
+import litellm
+
+def contar_tokens_input(modelo: str, messages: list, prompt: str) -> int:
+    """
+    Intenta obtener el conteo EXACTO de tokens de entrada llamando a la
+    API de conteo real del proveedor (litellm.acount_tokens -> Gemini/OpenAI/Anthropic).
+    Si el proveedor no está soportado (p.ej. Groq) o falla la llamada,
+    cae en litellm.token_counter (tokenizador local, aproximado) y por
+    último en una heurística por nº de palabras.
+    """
+    try:
+        resultado = asyncio.run(litellm.acount_tokens(model=modelo, messages=messages))
+        if not resultado.error and resultado.total_tokens:
+            return resultado.total_tokens
+    except Exception:
+        pass
+
+    try:
+        return litellm.token_counter(model=modelo, messages=messages)
+    except Exception:
+        return int(len(prompt.split()) * 1.3) + 30
+</file>
+
+<file path="ProyectoFinal/schemas.py">
+from pydantic import BaseModel
+from typing import Literal
+
+class PeticionUsuario(BaseModel):
+    prompt: str
+    usuario_id: int
+
+class ClasificacionEnrutador(BaseModel):
+    complejidad: Literal["baja", "media", "alta"]
+    razonamiento: str
+</file>
+
+<file path="ProyectoFinal/repomix-output.xml">
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+config.py
+database.py
+finops_mercedes.db
+finops_service.py
+helpers.py
+main.py
+schemas.py
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path="config.py">
+PRECIOS_FINOPS = {
+    "groq/llama-3.3-70b-versatile": {"input": 0.59, "output": 0.79, "provider": "Groq (Cloud)"}, # Nivel 0 (Caro/Complejo)
+    "groq/llama-3.1-8b-instant": {"input": 0.15, "output": 0.15, "provider": "Groq (Cloud)"},    # Nivel 1 (Medio)
+    "ollama/llama3.2:3b": {"input": 0.05, "output": 0.05, "provider": "Ollama A (Local)"}        # Nivel 2 (Barato)
+}
+
+API_BASES = {
+    "ollama/llama3.2:3b": "http://localhost:11434"
+}
+
+DB_FILE = "finops_mercedes.db"
+
+JERARQUIA_MODELOS = [
+    "groq/llama-3.3-70b-versatile", # Nivel 0: Alta
+    "groq/llama-3.1-8b-instant",    # Nivel 1: Media
+    "ollama/llama3.2:3b"            # Nivel 2: Baja
+]
+
+PRESUPUESTOS_POR_EQUIPO = {
+    "equipo-vip": 0.05,        
+    "backend": 0.01,           
+    "frontend": 0.01,
+    "marketing": 0.005,
+    "produccion": 0.0001,      
+}
+
+ESTIMACION_OUTPUT_TOKENS = {"baja": 150, "media": 600, "alta": 1500}
+
+SYS_PROMPT_ROUTER = """
+Eres un clasificador de IA de alta precisión. Tu trabajo es analizar la intención del usuario y clasificar la complejidad del prompt para optimizar costes.
+Reglas estrictas:
+"baja": Preguntas directas, saludos, datos simples, cultura general, opiniones breves, tiempo, o tareas de una sola oración.
+"media": Redacción de textos, resúmenes, extracción de datos estructurados, emails, o explicaciones de nivel intermedio.
+"alta": Programación, matemáticas avanzadas, lógica compleja, análisis de grandes documentos, o razonamiento multi-paso.
+Ejemplos:
+User: "Hola, ¿qué tal?" -> {"complejidad": "baja", "razonamiento": "Saludo simple"}
+User: "¿Qué tiempo hace en Madrid?" -> {"complejidad": "baja", "razonamiento": "Consulta de información puntual"}
+User: "Escribe un correo electrónico para mi jefe pidiendo vacaciones." -> {"complejidad": "media", "razonamiento": "Generación de texto estructurado"}
+User: "Escribe una función en Python para calcular el número de Fibonacci." -> {"complejidad": "alta", "razonamiento": "Tarea de programación"}
+Analiza el prompt del usuario y responde estrictamente en formato JSON según el esquema proporcionado.
+"""
+</file>
+
+<file path="database.py">
+import sqlite3
+from datetime import date
+import calendar
+from config import DB_FILE, PRESUPUESTOS_POR_EQUIPO
+
+def init_db():
+    with sqlite3.connect(DB_FILE) as conn:
+        cursor = conn.cursor()
+        
+        # Tabla de usuarios
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS usuarios (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                tipo_consumidor TEXT NOT NULL
+            )
+        ''')
+        
+        # Tabla de peticiones (Historial)
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS peticiones (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                usuario_id INTEGER,
+                tipo_consumidor TEXT,
+                coste_peticion REAL,
+                tokens_peticion REAL,
+                coste_maximo REAL,
+                porcentaje_ahorro REAL,
+                dia DATE,
+                FOREIGN KEY(usuario_id) REFERENCES usuarios(id)
+            )
+        ''')
+        
+        # Insertar usuarios de prueba si la tabla está vacía
+        cursor.execute("SELECT COUNT(*) FROM usuarios")
+        if cursor.fetchone()[0] == 0:
+            usuarios_demo = [
+                ("marketing",),
+                ("produccion",),
+                ("frontend",),
+                ("backend",),
+                ("equipo-vip",) # Agregado para probar presupuestos altos
+            ]
+            cursor.executemany("INSERT INTO usuarios (tipo_consumidor) VALUES (?)", usuarios_demo)
+            
+        conn.commit()
+
+def obtener_tipo_consumidor(usuario_id: int) -> str | None:
+    with sqlite3.connect(DB_FILE) as conn:
+        cursor = conn.cursor()
+        cursor.execute("SELECT tipo_consumidor FROM usuarios WHERE id = ?", (usuario_id,))
+        resultado_usuario = cursor.fetchone()
+        return resultado_usuario[0] if resultado_usuario else None
+
+def obtener_gasto_y_dias_activos(usuario_id: int, año_mes: str) -> tuple[float, int]:
+    with sqlite3.connect(DB_FILE) as conn:
+        cursor = conn.cursor()
+        cursor.execute('''
+            SELECT SUM(coste_peticion), COUNT(DISTINCT dia) 
+            FROM peticiones 
+            WHERE usuario_id = ? AND substr(dia, 1, 7) = ?
+        ''', (usuario_id, año_mes))
+        resultado = cursor.fetchone()
+        gasto_actual = resultado[0] or 0.0
+        dias_activos = resultado[1] or 1
+        return gasto_actual, dias_activos
+
+def obtener_usuarios_lista() -> list[dict]:
+    with sqlite3.connect(DB_FILE) as conn:
+        cursor = conn.cursor()
+        cursor.execute("SELECT id, tipo_consumidor FROM usuarios")
+        filas = cursor.fetchall()
+        return [{"id": fila[0], "tipo_consumidor": fila[1]} for fila in filas]
+
+def obtener_coste_diario_usuario(usuario_id: int, hoy_str: str) -> tuple[float, float, int]:
+    with sqlite3.connect(DB_FILE) as conn:
+        cursor = conn.cursor()
+        cursor.execute('''
+            SELECT SUM(coste_peticion), SUM(tokens_peticion), COUNT(id)
+            FROM peticiones
+            WHERE usuario_id = ? AND dia = ?
+        ''', (usuario_id, hoy_str))
+        resultado = cursor.fetchone()
+        coste_total = resultado[0] or 0.0
+        tokens_totales = resultado[1] or 0.0
+        num_peticiones = resultado[2] or 0
+        return coste_total, tokens_totales, num_peticiones
+
+def obtener_historial_usuario_lista(usuario_id: int) -> list[dict]:
+    with sqlite3.connect(DB_FILE) as conn:
+        cursor = conn.cursor()
+        cursor.execute('''
+            SELECT id, tokens_peticion, coste_peticion, dia
+            FROM peticiones
+            WHERE usuario_id = ?
+            ORDER BY id ASC
+        ''', (usuario_id,))
+        filas = cursor.fetchall()
+        return [
+            {
+                "identificador": f"Petición {i}",
+                "id_bd": f[0],
+                "tokens": f[1],
+                "coste_usd": round(f[2], 10),
+                "dia": f[3]
+            }
+            for i, f in enumerate(filas, start=1)
+        ]
+
+def registrar_peticion(usuario_id: int, tipo_consumidor: str, coste_total_usd: float, tokens_totales: float, coste_maximo: float, porcentaje_ahorro: float, hoy_str: str) -> str:
+    try:
+        with sqlite3.connect(DB_FILE) as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                INSERT INTO peticiones (usuario_id, tipo_consumidor, coste_peticion, tokens_peticion, coste_maximo, porcentaje_ahorro, dia)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+            ''', (usuario_id, tipo_consumidor, coste_total_usd, tokens_totales, coste_maximo, porcentaje_ahorro, hoy_str))
+            conn.commit()
+        return "registrado_ok"
+    except Exception as e:
+        return f"error_db: {e}"
+
+def obtenerGatosMensuales() -> list[dict]:
+    # 1. Obtenemos el mes actual y la cantidad de días del mes
+    hoy = date.today()
+    mes_actual = hoy.strftime("%Y-%m")
+    dias_mes = calendar.monthrange(hoy.year, hoy.month)[1]
+    
+    with sqlite3.connect(DB_FILE) as conn:
+        cursor = conn.cursor()
+        
+        # 2. Hacemos un LEFT JOIN filtrando las peticiones sólo al mes actual
+        # COALESCE convierte los nulls en 0.0 para usuarios sin gasto este mes
+        cursor.execute('''
+            SELECT u.id, u.tipo_consumidor, COALESCE(SUM(p.coste_peticion), 0) AS gasto_mensual
+            FROM usuarios u
+            LEFT JOIN peticiones p ON u.id = p.usuario_id AND substr(p.dia, 1, 7) = ?
+            GROUP BY u.id, u.tipo_consumidor
+            ORDER BY u.id ASC
+        ''', (mes_actual,))
+        
+        filas = cursor.fetchall()
+        
+        resultado = []
+        for fila in filas:
+            usuario_id = fila[0]
+            tipo_consumidor = fila[1]
+            gasto_mensual = round(fila[2], 10)
+            
+            # 3. Calculamos el límite mensual basado en el presupuesto diario
+            limite_diario = PRESUPUESTOS_POR_EQUIPO.get(tipo_consumidor, 0.0001)
+            limite_mensual = round(limite_diario * dias_mes, 4)
+            
+            # 4. Agregamos el resultado con la estructura solicitada
+            resultado.append({
+                "id": usuario_id,
+                "tipo_consumidor": tipo_consumidor,
+                "gasto_mensual_actual": gasto_mensual,
+                "limite_de_gasto": limite_mensual,
+                "porcentaje_gasto": round((gasto_mensual / limite_mensual) * 100, 2) if limite_mensual > 0 else 0.0
+            })
+            
+        return resultado
+    
+def obtenerAhorrosMensuales(usuario_id: int) -> list[dict]:
+    # Obtenemos el mes actual
+    hoy = date.today()
+    mes_actual = hoy.strftime("%Y-%m")
+    
+    with sqlite3.connect(DB_FILE) as conn:
+        cursor = conn.cursor()
+        
+        # Solución: En vez de coger un 'porcentaje_ahorro' de una fila suelta, 
+        # sumamos todos los costes reales y máximos del mes.
+        cursor.execute('''
+            SELECT u.id, 
+                   COALESCE(SUM(p.coste_peticion), 0) AS coste_total,
+                   COALESCE(SUM(p.coste_maximo), 0) AS coste_maximo_total
+            FROM usuarios u 
+            LEFT JOIN peticiones p ON u.id = p.usuario_id AND substr(p.dia, 1, 7) = ?
+            WHERE u.id = ?
+            GROUP BY u.id
+        ''', (mes_actual, usuario_id))
+        
+        fila = cursor.fetchone() 
+
+        # Si el usuario no existe, devolvemos una lista vacía
+        if not fila:
+            return []
+
+        # Extraemos los datos agregados
+        id_usuario, coste_total, coste_maximo_total = fila
+        
+        # Calculamos el ahorro total en dólares del mes
+        ahorro_mensual = coste_maximo_total - coste_total
+        
+        # Calculamos el porcentaje mensual basados en los totales reales
+        if coste_maximo_total > 0:
+            porcentaje_ahorro = 100 - (coste_total * 100 / coste_maximo_total)
+        else:
+            porcentaje_ahorro = 0.0
+        
+        return [{
+            "id": id_usuario,
+            "ahorro_mensual": round(ahorro_mensual, 10),
+            "porcentaje_ahorro": round(porcentaje_ahorro, 2)
+        }]
+</file>
+
+<file path="finops_service.py">
+import os
+import json
+import litellm
+from datetime import date
+from config import (
+    PRECIOS_FINOPS,
+    API_BASES,
+    JERARQUIA_MODELOS,
+    PRESUPUESTOS_POR_EQUIPO,
+    ESTIMACION_OUTPUT_TOKENS,
+    SYS_PROMPT_ROUTER
+)
+from schemas import ClasificacionEnrutador
+from helpers import contar_tokens_input
+from database import obtener_coste_diario_usuario
+
+def clasificar_complejidad(prompt: str) -> ClasificacionEnrutador:
+    response_router = litellm.completion(
+        model="ollama/llama3.2:3b",
+        api_base=API_BASES["ollama/llama3.2:3b"],
+        messages=[
+            {"role": "system", "content": SYS_PROMPT_ROUTER},
+            {"role": "user", "content": prompt}
+        ],
+        response_format={"type": "json_object"}
+    )
+    return ClasificacionEnrutador(**json.loads(response_router.choices[0].message.content))
+
+def calcular_coste_estimado(modelo: str, prompt: str, mensajes: list, tokens_output_estimados: int) -> tuple[float, int]:
+    tokens_input_est = contar_tokens_input(modelo, mensajes, prompt)
+    coste_input_est = (tokens_input_est / 1_000_000) * PRECIOS_FINOPS[modelo]["input"]
+    coste_output_est = (tokens_output_estimados / 1_000_000) * PRECIOS_FINOPS[modelo]["output"]
+    return coste_input_est + coste_output_est, tokens_input_est
+
+def seleccionar_modelo(
+    prompt: str,
+    complejidad: str,
+    usuario_id: int,
+    tipo_consumidor: str
+) -> tuple[str, float, int, int, int, str | None]:
+    """
+    Selecciona el modelo óptimo según complejidad, presupuesto diario del equipo y coste acumulado.
+    Retorna: (modelo_final, coste_estimado, tokens_input_est, tokens_output_est, tokens_totales_est, razon_sobreescritura)
+    """
+    hoy_str = date.today().isoformat()
+    limite_gasto_usd = PRESUPUESTOS_POR_EQUIPO.get(tipo_consumidor, 0.0001)
+    
+    # Obtener el gasto acumulado hoy desde la base de datos
+    coste_acumulado_hoy, _, _ = obtener_coste_diario_usuario(usuario_id, hoy_str)
+
+    if complejidad == "alta":
+        idx_deseado = 0
+    elif complejidad == "media":
+        idx_deseado = 1
+    else:
+        idx_deseado = 2
+
+    tokens_output_estimados = ESTIMACION_OUTPUT_TOKENS[complejidad]
+    mensajes_para_api = [{"role": "user", "content": prompt}]
+    
+    modelo_final = None
+    coste_estimado = 0.0
+    tokens_input_estimados = 0
+    tokens_totales_estimados = 0
+    razon_sobreescritura = None
+
+    idx = idx_deseado
+    while idx < len(JERARQUIA_MODELOS) and modelo_final is None:
+        modelo_candidato = JERARQUIA_MODELOS[idx]
+        coste_candidato, tokens_input_candidato = calcular_coste_estimado(
+            modelo_candidato, prompt, mensajes_para_api, tokens_output_estimados
+        )
+        
+        # Comprueba Coste Acumulado + Coste Estimado vs Presupuesto Diario
+        if (coste_acumulado_hoy + coste_candidato) <= limite_gasto_usd:
+            modelo_final = modelo_candidato
+            coste_estimado = coste_candidato
+            tokens_input_estimados = tokens_input_candidato
+            if idx == 2: 
+                tokens_input_estimados += 25
+            tokens_totales_estimados = tokens_input_candidato + tokens_output_estimados
+            
+            if idx > idx_deseado:
+                razon_sobreescritura = (
+                    f"Downgrade a {modelo_final}. El gasto de hoy ({coste_acumulado_hoy:.5f}$) + "
+                    f"estimación de esta petición ({coste_candidato:.5f}$) superaba el límite diario de {limite_gasto_usd}$."
+                )
+        idx += 1
+
+    # Fallback de emergencia si no cabe en el presupuesto con ningún modelo
+    if modelo_final is None:
+        modelo_final = JERARQUIA_MODELOS[-1] # Ollama
+        coste_estimado, tokens_input_estimados = calcular_coste_estimado(
+            modelo_final, prompt, mensajes_para_api, tokens_output_estimados
+        )
+        tokens_totales_estimados = tokens_input_estimados + tokens_output_estimados
+        
+        if idx_deseado == (len(JERARQUIA_MODELOS) - 1):
+            razon_sobreescritura = (
+                f"Aviso FinOps: Presupuesto superado (Gasto: {coste_acumulado_hoy:.5f}$ / Límite: {limite_gasto_usd}$). "
+                f"Como la petición era sencilla, se mantiene el modelo económico asignado ({modelo_final})."
+            )
+        else:
+            razon_sobreescritura = (
+                f"ALERTA CRÍTICA: Límite diario superado (Gasto: {coste_acumulado_hoy:.5f}$ / Límite: {limite_gasto_usd}$). "
+                f"Forzando modelo económico ({modelo_final}) en lugar del solicitado."
+            )
+
+    return modelo_final, coste_estimado, tokens_input_estimados, tokens_output_estimados, tokens_totales_estimados, razon_sobreescritura
+
+def ejecutar_peticion(modelo: str, prompt: str):
+    mensajes_para_api = [{"role": "user", "content": prompt}]
+    completion_kwargs = {
+        "model": modelo,
+        "messages": mensajes_para_api,
+    }
+    
+    if "ollama" in modelo:
+        completion_kwargs["api_base"] = API_BASES[modelo]
+    elif "gemini" in modelo:
+        completion_kwargs["api_key"] = os.getenv("GEMINI_API_KEY", "TU_GEMINI_API_KEY_AQUI")
+    else:
+        completion_kwargs["api_key"] = os.getenv("GROQ_API_KEY", "TU_GROQ_API_KEY_AQUI")
+
+    return litellm.completion(**completion_kwargs)
+
+def calcular_costes_reales_y_ahorros(modelo_final: str, tokens_input: int, tokens_output: int) -> tuple[float, float, float, dict, float, float]:
+    precio_input = PRECIOS_FINOPS[modelo_final]["input"]
+    precio_output = PRECIOS_FINOPS[modelo_final]["output"]
+    
+    coste_input_usd = (tokens_input / 1_000_000) * precio_input
+    coste_output_usd = (tokens_output / 1_000_000) * precio_output
+    coste_total_usd = coste_input_usd + coste_output_usd
+
+    ahorro_vs_alternativas = {}
+    
+    # Añadimos el coste real actual a la lista de posibles costes máximos
+    costes_hipoteticos = [coste_total_usd] 
+
+    for modelo_alt, precios_alt in PRECIOS_FINOPS.items():
+        if modelo_alt != modelo_final:
+            coste_hipotetico = (
+                ((tokens_input / 1_000_000) * precios_alt["input"]) + 
+                ((tokens_output / 1_000_000) * precios_alt["output"])
+            )
+            costes_hipoteticos.append(coste_hipotetico)
+            
+            ahorro_vs_alternativas[modelo_alt] = (
+                round(coste_hipotetico / coste_total_usd, 2) if coste_total_usd > 0 else 0.0
+            )
+
+    # El coste máximo es simplemente el valor más alto posible para esta petición
+    coste_maximo = max(costes_hipoteticos)
+    porcentaje_ahorro = 100 -(coste_total_usd*100 / coste_maximo) if coste_maximo > 0 else 0.0
+    
+    return coste_input_usd, coste_output_usd, coste_total_usd, ahorro_vs_alternativas, coste_maximo, porcentaje_ahorro
+</file>
+
+<file path="helpers.py">
+import asyncio
+import litellm
+
+def contar_tokens_input(modelo: str, messages: list, prompt: str) -> int:
+    """
+    Intenta obtener el conteo EXACTO de tokens de entrada llamando a la
+    API de conteo real del proveedor (litellm.acount_tokens -> Gemini/OpenAI/Anthropic).
+    Si el proveedor no está soportado (p.ej. Groq) o falla la llamada,
+    cae en litellm.token_counter (tokenizador local, aproximado) y por
+    último en una heurística por nº de palabras.
+    """
+    try:
+        resultado = asyncio.run(litellm.acount_tokens(model=modelo, messages=messages))
+        if not resultado.error and resultado.total_tokens:
+            return resultado.total_tokens
+    except Exception:
+        pass
+
+    try:
+        return litellm.token_counter(model=modelo, messages=messages)
+    except Exception:
+        return int(len(prompt.split()) * 1.3) + 30
+</file>
+
+<file path="main.py">
+import calendar
+from datetime import date
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+import litellm
+
+# Configuración global de LiteLLM
+litellm.drop_params = True
+
+# Importaciones modulares
+from config import PRESUPUESTOS_POR_EQUIPO, PRECIOS_FINOPS
+from schemas import PeticionUsuario
+from database import (
+    init_db,
+    obtener_tipo_consumidor,
+    obtener_gasto_y_dias_activos,
+    obtener_usuarios_lista,
+    obtener_coste_diario_usuario,
+    obtener_historial_usuario_lista,
+    obtenerAhorrosMensuales,
+    registrar_peticion,
+    obtenerGatosMensuales
+)
+from finops_service import (
+    clasificar_complejidad,
+    seleccionar_modelo,
+    ejecutar_peticion,
+    calcular_costes_reales_y_ahorros
+)
+
+# Inicializar Base de Datos
+init_db()
+
+app = FastAPI(title="AI FinOps Proxy - Hackathon")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+@app.get("/")
+def health_check():
+    return {"status": "AI FinOps Proxy encendido y escuchando"}
+
+@app.get("/usuarios")
+def obtener_usuarios():
+    try:
+        usuarios = obtener_usuarios_lista()
+        return {"total_usuarios": len(usuarios), "usuarios": usuarios}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error en BD: {str(e)}")
+    
+@app.get("/ahorro/{usuario_id}")
+def obtener_ahorro(usuario_id: int):
+    try:
+        ahorros = obtenerAhorrosMensuales(usuario_id)
+        return {"ahorros_mensuales": ahorros}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error en BD: {str(e)}")
+
+@app.get("/gasto-mensual")
+def obtener_gasto_mensual():
+    try:
+        datos = obtenerGatosMensuales()
+        return {"gasto_mensual": datos}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error en BD: {str(e)}")
+
+
+@app.get("/prediccion/{usuario_id}")
+def predecir_coste_mensual(usuario_id: int):
+    try:
+        hoy = date.today()
+        dias_mes = calendar.monthrange(hoy.year, hoy.month)[1]
+        año_mes_str = hoy.strftime("%Y-%m")
+        
+        gasto_actual, dias_activos = obtener_gasto_y_dias_activos(usuario_id, año_mes_str)
+        
+        # Cálculo de tendencia
+        gasto_promedio_diario = gasto_actual / dias_activos
+        gasto_proyectado_fin_de_mes = gasto_promedio_diario * dias_mes
+        
+        return {
+            "usuario_id": usuario_id,
+            "mes": año_mes_str,
+            "gasto_actual_usd": round(gasto_actual, 4),
+            "proyeccion_fin_de_mes_usd": round(gasto_proyectado_fin_de_mes, 4),
+            "alerta": "Peligro" if gasto_proyectado_fin_de_mes > 1.0 else "Saludable"
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/coste-diario/{usuario_id}")
+def obtener_coste_diario(usuario_id: int):
+    try:
+        hoy_str = date.today().isoformat()
+        coste_total, tokens_totales, num_peticiones = obtener_coste_diario_usuario(usuario_id, hoy_str)
+        
+        return {
+            "usuario_id": usuario_id,
+            "fecha": hoy_str,
+            "metricas_hoy": {
+                "peticiones_realizadas": num_peticiones,
+                "tokens_consumidos": tokens_totales,
+                "coste_total_usd": round(coste_total, 10)
+            }
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error en BD: {str(e)}")
+
+@app.get("/historial/{usuario_id}")
+def obtener_historial_usuario(usuario_id: int):
+    try:
+        historial = obtener_historial_usuario_lista(usuario_id)
+        return {"usuario_id": usuario_id, "total_peticiones": len(historial), "historial": historial}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error en BD: {str(e)}")
+
+@app.post("/generar")
+def generar_respuesta(peticion: PeticionUsuario):
+    # --- PASO 0: VERIFICAR IDENTIDAD DEL USUARIO EN BD ---
+    try:
+        tipo_consumidor_db = obtener_tipo_consumidor(peticion.usuario_id)
+        if not tipo_consumidor_db:
+            raise HTTPException(status_code=404, detail=f"El usuario con ID {peticion.usuario_id} no existe.")
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error al verificar usuario: {str(e)}")
+
+    try:
+        # --- PASO 1: ENRUTADO ---
+        decision = clasificar_complejidad(peticion.prompt)
+        print(f"-> Decisión Router (User {peticion.usuario_id} - {tipo_consumidor_db}): {decision.complejidad} | Razón: {decision.razonamiento}")
+        
+        # --- PASO 2: MOTOR DE DECISIÓN (COMPLEJIDAD + PRESUPUESTO) ---
+        modelo_final, coste_estimado, tokens_input_est, tokens_output_est, tokens_totales_est, razon_sobreescritura = seleccionar_modelo(
+            prompt=peticion.prompt,
+            complejidad=decision.complejidad,
+            usuario_id=peticion.usuario_id,
+            tipo_consumidor=tipo_consumidor_db
+        )
+        
+        # Obtener el gasto diario acumulado previo para los metadatos finales
+        hoy_str = date.today().isoformat()
+        coste_acumulado_previo, _, _ = obtener_coste_diario_usuario(peticion.usuario_id, hoy_str)
+        limite_gasto_usd = PRESUPUESTOS_POR_EQUIPO.get(tipo_consumidor_db, 0.0001)
+
+        # --- PASO 3: EJECUCIÓN FINAL ---
+        print(f"-> Ejecutando en modelo: {modelo_final}")
+        response_final = ejecutar_peticion(modelo_final, peticion.prompt)
+
+        # --- PASO 4: CÁLCULO MATEMÁTICO FINOPS ---
+        tokens_input = response_final.usage.prompt_tokens
+        tokens_output = response_final.usage.completion_tokens
+        tokens_totales = response_final.usage.total_tokens
+        
+        coste_input_usd, coste_output_usd, coste_total_usd, ahorro_vs_alternativas, coste_maximo, porcentaje_ahorro = calcular_costes_reales_y_ahorros(
+            modelo_final=modelo_final,
+            tokens_input=tokens_input,
+            tokens_output=tokens_output
+        )
+
+        # --- PASO 5: REGISTRO EN SQLITE ---
+        estado_db = registrar_peticion(
+            usuario_id=peticion.usuario_id,
+            tipo_consumidor=tipo_consumidor_db,
+            coste_total_usd=coste_total_usd,
+            tokens_totales=tokens_totales,
+            coste_maximo=coste_maximo,  
+            porcentaje_ahorro=porcentaje_ahorro,
+            hoy_str=hoy_str
+        )
+
+        # --- PASO 6: RETORNAR LA RESPUESTA ---
+        respuesta_json = {
+            "respuesta_ia": response_final.choices[0].message.content,
+            "finops_metadata": {
+                "usuario": {
+                    "id": peticion.usuario_id,
+                    "departamento": tipo_consumidor_db,
+                    "gasto_diario_acumulado_previo_usd": round(coste_acumulado_previo, 8)
+                },
+                "estado_registro_db": estado_db,
+                "limite_presupuesto_aplicado": limite_gasto_usd,
+                "enrutamiento": {
+                    "complejidad_detectada": decision.complejidad,
+                    "razonamiento_router": decision.razonamiento
+                },
+                "estimacion_coste": {
+                    "tokens_input_estimados": tokens_input_est,
+                    "tokens_output_estimados": tokens_output_est,
+                    "tokens_totales_estimados": tokens_totales_est,
+                    "coste_estimado_usd": round(coste_estimado, 8)
+                },
+                "coste_real_usd": {
+                    "coste_input": round(coste_input_usd, 8),
+                    "coste_output": round(coste_output_usd, 8),
+                    "coste_total": round(coste_total_usd, 8)
+                },
+                "ahorro_usd": ahorro_vs_alternativas,
+                "ejecucion": {
+                    "modelo_usado": modelo_final,
+                    "proveedor": PRECIOS_FINOPS[modelo_final]["provider"],
+                    "tokens_input": tokens_input,
+                    "tokens_output": tokens_output,
+                    "tokens_totales": tokens_totales
+                }
+            }
+        }
+
+        if razon_sobreescritura:
+            respuesta_json["finops_metadata"]["enrutamiento"]["intervencion_finops"] = razon_sobreescritura
+
+        return respuesta_json
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error en el servidor: {str(e)}")
+</file>
+
+<file path="schemas.py">
+from pydantic import BaseModel
+from typing import Literal
+
+class PeticionUsuario(BaseModel):
+    prompt: str
+    usuario_id: int
+
+class ClasificacionEnrutador(BaseModel):
+    complejidad: Literal["baja", "media", "alta"]
+    razonamiento: str
+</file>
+
+</files>
+</file>
+
+<file path="src/Grafica.jsx">
+import { useState, useEffect } from 'react';
+
+function GraficaGasto() {
+  const [datos, setDatos] = useState([]);
+  const [cargando, setCargando] = useState(true);
+
+  useEffect(() => {
+    fetch(`http://127.0.0.1:8000/gasto-mensual`)
+      .then(res => res.json())
+      .then(data => {
+        // SEGURIDAD 1: Forzamos estrictamente que sea un Array
+        if (data && Array.isArray(data.gasto_mensual)) {
+          setDatos(data.gasto_mensual);
+        } else if (Array.isArray(data)) {
+          setDatos(data);
+        } else {
+          setDatos([]);
+        }
+        setCargando(false);
+      })
+      .catch(err => {
+        console.error("Error cargando los datos de la gráfica:", err);
+        setDatos([]);
+        setCargando(false);
+      });
+  }, []);
+}
+
+// ============================================================================
+// 2. PANEL MIXTO: AHORROS (Izquierda) Y PREDICCIONES (Derecha)
+// ============================================================================
+function AnalisisMixto() {
+  const [usuarios, setUsuarios] = useState([]);
+  const [usuarioSeleccionado, setUsuarioSeleccionado] = useState('');
+  
+  const [datosAhorro, setDatosAhorro] = useState([]);
+  const [datosGasto, setDatosGasto] = useState([]);
+
+  // Fetch de Usuarios
+  useEffect(() => {
+    fetch(`http://127.0.0.1:8000/usuarios`)
+      .then(res => res.json())
+      .then(data => {
+        if (data && Array.isArray(data.usuarios)) setUsuarios(data.usuarios);
+        else if (Array.isArray(data)) setUsuarios(data);
+      });
+  }, []); 
+
+  // Fetch de Ahorros
+  useEffect(() => {
+    if (usuarioSeleccionado) {
+      fetch(`http://127.0.0.1:8000/ahorro-mensual/${usuarioSeleccionado}`)
+        .then(res => res.json())
+        .then(data => {
+          console.log("📥 Datos crudos AHORRO desde FastAPI:", data); // ¡Míralo en F12!
+          if (Array.isArray(data)) setDatosAhorro(data);
+          else if (data && typeof data === 'object') setDatosAhorro([data]);
+        });
+    }
+  }, [usuarioSeleccionado]);
+
+  // Fetch de Gastos
+  useEffect(() => {
+    fetch(`http://127.0.0.1:8000/gasto-mensual`)
+      .then(res => res.json())
+      .then(data => {
+        console.log("📥 Datos crudos GASTO desde FastAPI:", data); // ¡Míralo en F12!
+        if (data && Array.isArray(data.gasto_mensual)) setDatosGasto(data.gasto_mensual);
+        else if (Array.isArray(data)) setDatosGasto(data);
+      });
+  }, []);
+
+  // --- PROCESAMIENTO INTELIGENTE (Busca múltiples nombres de variables por si acaso) ---
+  const infoAhorro = datosAhorro.length > 0 ? datosAhorro[0] : {};
+  
+  // Extrae Ahorro
+  const ahorro_mensual = Number(infoAhorro.ahorro_mensual || infoAhorro.ahorro || infoAhorro.total_ahorro) || 0;
+  const porcentaje_ahorro = Number(infoAhorro.porcentaje_ahorro || infoAhorro.porcentaje) || 0;
+
+  // Extrae Gasto
+  const arrayGastoValido = Array.isArray(datosGasto) ? datosGasto : [];
+  const infoGasto = arrayGastoValido.find(u => String(u.id) === String(usuarioSeleccionado)) || {};
+  
+  const gasto_mensual_actual = Number(infoGasto.gasto_mensual_actual || infoGasto.gasto_actual || infoGasto.coste_total) || 0;
+  const limite_de_gasto = Number(infoGasto.limite_de_gasto || infoGasto.coste_maximo || infoGasto.limite_mensual || infoGasto.presupuesto) || 0;
+  const porcentaje_gasto = Number(infoGasto.porcentaje_gasto || infoGasto.porcentaje_uso) || 0;
+
+  // CÁLCULO PREDICCIÓN
+  const hoy = new Date();
+  const diaActual = hoy.getDate();
+  const diasEnMes = new Date(hoy.getFullYear(), hoy.getMonth() + 1, 0).getDate();
+  
+  const prediccionEstimada = gasto_mensual_actual > 0 
+    ? (gasto_mensual_actual / diaActual) * diasEnMes 
+    : 0;
+
+  const superaPresupuesto = limite_de_gasto > 0 && prediccionEstimada > limite_de_gasto;
+
+  // CONFIGURACIÓN SVG
+  const radius = 50;
+  const circumference = 2 * Math.PI * radius;
+  
+  const porcentajeAhorroSeguro = Math.min(Math.max(porcentaje_ahorro, 0), 100);
+  const strokeDashoffsetAhorro = circumference - (porcentajeAhorroSeguro / 100) * circumference;
+
+  const porcentajeGastoSeguro = Math.min(Math.max(porcentaje_gasto, 0), 100);
+  const strokeDashoffsetGasto = circumference - (porcentajeGastoSeguro / 100) * circumference;
+
+  return (
+    <div className="overflow-hidden rounded-md border border-neutral-800 bg-neutral-900 shadow-sm mt-8">
+      <div className="h-1 w-full bg-gradient-to-r from-emerald-400 via-teal-400 to-rose-400" />
+      
+      <div className="flex flex-col gap-4 border-b border-neutral-800 px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
+        <h2 className="text-lg font-semibold uppercase tracking-[0.15em] text-neutral-100">
+          Métricas de Ahorro y Predicción
+        </h2>
+        
+        <select 
+          value={usuarioSeleccionado} 
+          onChange={(e) => setUsuarioSeleccionado(e.target.value)}
+          className="rounded-md border border-neutral-700 bg-neutral-950 py-2 pl-3 pr-9 text-md text-neutral-100 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all cursor-pointer"
+        >
+          <option value="">Selecciona usuario...</option>
+          {usuarios.map((u, i) => (
+            <option className="text-md" key={u.id || i} value={u.id}>
+              {u.tipo_consumidor || 'Usuario'} (ID: {u.id || i})
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2">
+        
+        {/* ================= AHORROS ================= */}
+        <div className="flex flex-col border-b md:border-b-0 md:border-r border-neutral-800 p-8 gap-8 relative hover:bg-neutral-800/20 transition-colors">
+          <div className="absolute top-4 left-6 flex items-center gap-2 opacity-50">
+            <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+            <span className="text-xs uppercase tracking-widest text-emerald-400 font-semibold">/ahorro-mensual</span>
+          </div>
+          <h3 className="text-xl font-medium text-white text-center mt-4">Balance de Ahorro</h3>
+          <div className="flex items-center justify-center">
+            <div className="relative flex items-center justify-center">
+              <svg width="140" height="140" className="transform -rotate-90">
+                <circle cx="70" cy="70" r={radius} stroke="currentColor" strokeWidth="16" fill="transparent" className="text-neutral-800" />
+                <circle cx="70" cy="70" r={radius} stroke="currentColor" strokeWidth="16" fill="transparent" strokeDasharray={circumference} strokeDashoffset={strokeDashoffsetAhorro} className="text-emerald-500 transition-all duration-1000 ease-in-out" />
+              </svg>
+              <div className="absolute flex flex-col items-center justify-center">
+                <span className="text-2xl font-bold text-white">{porcentajeAhorroSeguro.toFixed(0)}%</span>
+                <span className="text-[10px] text-neutral-400 uppercase tracking-widest mt-1">Ahorrado</span>
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-col items-center text-center mt-2">
+            <span className={`text-4xl font-bold font-mono ${usuarioSeleccionado ? 'text-emerald-400' : 'text-neutral-600'}`}>
+              ${ahorro_mensual.toFixed(4)}
+            </span>
+            <span className="text-sm text-neutral-500 uppercase tracking-widest mt-2">USD Ahorrados este mes</span>
+          </div>
+        </div>
+
+        {/* ================= PREDICCIONES ================= */}
+        <div className="flex flex-col p-8 gap-8 relative hover:bg-neutral-800/20 transition-colors">
+          <div className="absolute top-4 right-6 flex items-center gap-2 opacity-50">
+            <span className="text-xs uppercase tracking-widest text-teal-400 font-semibold">/gasto-mensual</span>
+            <span className="w-2 h-2 rounded-full bg-teal-500"></span>
+          </div>
+          <h3 className="text-xl font-medium text-white text-center mt-4">Predicción de Gasto</h3>
+          <div className="flex items-center justify-center">
+            <div className="relative flex items-center justify-center">
+              <svg width="140" height="140" className="transform -rotate-90">
+                <circle cx="70" cy="70" r={radius} stroke="currentColor" strokeWidth="16" fill="transparent" className="text-neutral-800" />
+                <circle cx="70" cy="70" r={radius} stroke="currentColor" strokeWidth="16" fill="transparent" strokeDasharray={circumference} strokeDashoffset={strokeDashoffsetGasto} className={`${superaPresupuesto ? 'text-rose-500' : 'text-teal-400'} transition-all duration-1000 ease-in-out`} />
+              </svg>
+              <div className="absolute flex flex-col items-center justify-center">
+                <span className="text-2xl font-bold text-white">{porcentajeGastoSeguro.toFixed(0)}%</span>
+                <span className="text-[10px] text-neutral-400 uppercase tracking-widest mt-1">Consumido</span>
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-col items-center text-center mt-2">
+            <span className={`text-4xl font-bold font-mono ${!usuarioSeleccionado ? 'text-neutral-600' : (superaPresupuesto ? 'text-rose-400' : 'text-white')}`}>
+              ${prediccionEstimada.toFixed(4)}
+            </span>
+            <span className="text-sm text-neutral-500 uppercase tracking-widest mt-2">USD Proyectados a fin de mes</span>
+          </div>
+          
+          {usuarioSeleccionado !== '' && superaPresupuesto && limite_de_gasto > 0 && (
+            <div className="absolute bottom-4 left-6 right-6 flex items-start gap-3 p-3 rounded-md bg-rose-500/10 border border-rose-500/20">
+              <div className="text-rose-400 mt-0.5 animate-pulse">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                  <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+                </svg>
+              </div>
+              <p className="text-xs text-rose-300/90 text-left">
+                El ritmo de gasto actual causará que supere el límite mensual asignado de ${limite_de_gasto.toFixed(4)}.
+              </p>
+            </div>
+          )}
+
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================================
+// 3. COMPONENTE PRINCIPAL MÁSTER
+// ============================================================================
+export default function Gastos() {
+  return (
+    <div className="space-y-6 px-30">
+      
+      <div className="space-y-2 mb-8">
+        <h1 className="text-4xl font-semibold text-white">Análisis de Gastos y Ahorro</h1>
+        <p className="text-xl text-neutral-400">Revisa el gasto mensual y el impacto del ahorro por usuario</p>
+      </div>
+
+      <GraficaGasto />
+      <AnalisisMixto />
+
+    </div>
+  );
+}
+</file>
+
+<file path="src/Header.jsx">
+function TabButton({ active, onClick, children }) {
+  // Definimos las clases base y las condicionales
+  const baseClasses = "rounded-full px-5 py-2 text-sm font-medium tracking-wide transition-all duration-300";
+  const activeClasses = "bg-teal-600 text-white shadow-lg shadow-teal-900/20";
+  const inactiveClasses = "text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800";
+
+  return (
+    <button
+      onClick={onClick}
+      className={`${baseClasses} ${active ? activeClasses : inactiveClasses}`}
+    >
+      {children}
+    </button>
+  );
+}
+
+export default function Header({ vista, setVista }) {
+  return (
+    <header className="flex items-center justify-between pb-8 px-10 border-b border-neutral-800 mb-2">
+      <div className="flex items-center gap-3">
+        {/* Logo */}
+        <div className="w-12 h-12 rounded-full bg-teal-500/20 flex items-center justify-center border border-teal-500/30">
+          <div className="w-6 h-6 rounded-full bg-teal-400" />
+        </div>
+        <h1 className="text-4xl font-bold text-white tracking-tight">AI FinOps Proxy</h1>
+      </div>
+
+      {/* Navegación */}
+      <div className="flex gap-2 bg-neutral-900 p-1 rounded-full border border-neutral-800">
+        <TabButton active={vista === 'analizador'} onClick={() => setVista('analizador')}>
+          <p className="text-neutral-100 text-md">Analizador</p>
+        </TabButton>
+        <TabButton active={vista === 'historial'} onClick={() => setVista('historial')}>
+          <p className="text-neutral-100 text-md">Historial</p>
+        </TabButton>
+        <TabButton active={vista === 'grafica'} onClick={() => setVista('grafica')}>
+          <p className="text-neutral-100 text-md">Grafica</p>
+        </TabButton>
+      </div>
+    </header>
+  );
+}
+</file>
+
+<file path="main5.py">
+import json
+import os
+import sqlite3
+from datetime import date
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+from typing import Literal
+import litellm
+
+# ==========================================
+# 1. CONFIGURACIÓN DE LITELLM Y PRECIOS
+# ==========================================
+litellm.drop_params = True 
+
+# 🔥 TABLA DE PRECIOS CORREGIDA (Alta -> Media -> Baja)
+PRECIOS_FINOPS = {
+    "groq/llama-3.3-70b-versatile": {"input": 0.59, "output": 0.79, "provider": "Groq (Cloud)"}, # Nivel 0 (Caro/Complejo)
+    "gemini/gemini-2.5-flash": {"input": 0.30, "output": 0.60, "provider": "Google (Cloud)"}, # Nivel 0 (Caro)
+    "groq/llama-3.1-8b-instant": {"input": 0.15, "output": 0.15, "provider": "Groq (Cloud)"}, # Nivel 1 (Medio)
+    "ollama/llama3.2:3b": {"input": 0.05, "output": 0.05, "provider": "Ollama A (Local)"}     # Nivel 2 (Barato)
+}
+
+API_BASES = {
+    "ollama/llama3.2:3b": "http://localhost:11434"
+}
+
+# ==========================================
+# 2. CONFIGURACIÓN DE SQLITE (Usuarios y Peticiones)
+# ==========================================
+DB_FILE = "finops_mercedes.db"
+
+def init_db():
+    with sqlite3.connect(DB_FILE) as conn:
+        cursor = conn.cursor()
+        
+        # Tabla de usuarios
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS usuarios (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                tipo_consumidor TEXT NOT NULL
+            )
+        ''')
+        
+        # Tabla de peticiones (Historial)
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS peticiones (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                usuario_id INTEGER,
+                tipo_consumidor TEXT,
+                coste_peticion REAL,
+                tokens_peticion REAL,
+                dia DATE,
+                FOREIGN KEY(usuario_id) REFERENCES usuarios(id)
+            )
+        ''')
+        
+        # Insertar usuarios de prueba si la tabla está vacía
+        cursor.execute("SELECT COUNT(*) FROM usuarios")
+        if cursor.fetchone()[0] == 0:
+            usuarios_demo = [
+                ("marketing",),
+                ("produccion",),
+                ("frontend",),
+                ("backend",),
+                ("equipo-vip",) # Agregado para probar presupuestos altos
+            ]
+            cursor.executemany("INSERT INTO usuarios (tipo_consumidor) VALUES (?)", usuarios_demo)
+            
+        conn.commit()
+
+init_db()
+
+# ==========================================
+# 3. DEFINICIÓN DE ESTRUCTURAS (PYDANTIC)
+# ==========================================
+app = FastAPI(title="AI FinOps Proxy - Hackathon")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+class PeticionUsuario(BaseModel):
+    prompt: str
+    usuario_id: int  # Conectado a la DB
+
+class ClasificacionEnrutador(BaseModel):
+    complejidad: Literal["baja", "media", "alta"]
+    razonamiento: str
+
+# ==========================================
+# 4. ENDPOINTS FINOPS Y USUARIOS (Base de Datos)
+# ==========================================
+
+@app.get("/usuarios")
+def obtener_usuarios():
+    try:
+        with sqlite3.connect(DB_FILE) as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT id, tipo_consumidor FROM usuarios")
+            filas = cursor.fetchall()
+            usuarios = [{"id": fila[0], "tipo_consumidor": fila[1]} for fila in filas]
+            return {"total_usuarios": len(usuarios), "usuarios": usuarios}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error en BD: {str(e)}")
+
+@app.get("/coste-diario/{usuario_id}")
+def obtener_coste_diario(usuario_id: int):
+    try:
+        hoy = date.today().isoformat()
+        with sqlite3.connect(DB_FILE) as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                SELECT SUM(coste_peticion), SUM(tokens_peticion), COUNT(id)
+                FROM peticiones 
+                WHERE usuario_id = ? AND dia = ?
+            ''', (usuario_id, hoy))
+            resultado = cursor.fetchone()
+            coste_total = resultado[0] or 0.0
+            tokens_totales = resultado[1] or 0.0
+            num_peticiones = resultado[2] or 0
+
+        return {
+            "usuario_id": usuario_id,
+            "fecha": hoy,
+            "metricas_hoy": {
+                "peticiones_realizadas": num_peticiones,
+                "tokens_consumidos": tokens_totales,
+                "coste_total_usd": round(coste_total, 10)
+            }
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error en BD: {str(e)}")
+
+@app.get("/historial/{usuario_id}")
+def obtener_historial_usuario(usuario_id: int):
+    try:
+        with sqlite3.connect(DB_FILE) as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                SELECT id, tokens_peticion, coste_peticion, dia 
+                FROM peticiones 
+                WHERE usuario_id = ?
+                ORDER BY id ASC
+            ''', (usuario_id,))
+            filas = cursor.fetchall()
+            
+        historial = [{"identificador": f"Petición {i}", "id_bd": f[0], "tokens": f[1], "coste_usd": round(f[2], 10), "dia": f[3]} for i, f in enumerate(filas, start=1)]
+            
+        return {"usuario_id": usuario_id, "total_peticiones": len(historial), "historial": historial}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error en BD: {str(e)}")
+
+# ==========================================
+# 5. LÓGICA PRINCIPAL (PROXY, ENRUTADO Y DB)
+# ==========================================
+@app.post("/generar")
+def generar_respuesta(peticion: PeticionUsuario):
+    # --- PASO 0: VERIFICAR IDENTIDAD DEL USUARIO EN BD ---
+    try:
+        with sqlite3.connect(DB_FILE) as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT tipo_consumidor FROM usuarios WHERE id = ?", (peticion.usuario_id,))
+            resultado_usuario = cursor.fetchone()
+            
+            if not resultado_usuario:
+                raise HTTPException(status_code=404, detail=f"El usuario con ID {peticion.usuario_id} no existe.")
+            
+            tipo_consumidor_db = resultado_usuario[0]
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error al verificar usuario: {str(e)}")
+
+    try:
+        sys_prompt_router = """
+Eres un clasificador de IA de alta precisión. Tu trabajo es analizar la intención del usuario y clasificar la complejidad del prompt para optimizar costes.
+
+Reglas estrictas:
+- "baja": Preguntas directas, saludos, datos simples, cultura general, opiniones breves, tiempo, o tareas de una sola oración.
+- "media": Redacción de textos, resúmenes, extracción de datos estructurados, emails, o explicaciones de nivel intermedio.
+- "alta": Programación, matemáticas avanzadas, lógica compleja, análisis de grandes documentos, o razonamiento multi-paso.
+
+Ejemplos:
+User: "Hola, ¿qué tal?" -> {"complejidad": "baja", "razonamiento": "Saludo simple"}
+User: "¿Qué tiempo hace en Madrid?" -> {"complejidad": "baja", "razonamiento": "Consulta de información puntual"}
+User: "Escribe un correo electrónico para mi jefe pidiendo vacaciones." -> {"complejidad": "media", "razonamiento": "Generación de texto estructurado"}
+User: "Escribe una función en Python para calcular el número de Fibonacci." -> {"complejidad": "alta", "razonamiento": "Tarea de programación"}
+
+Analiza el prompt del usuario y responde estrictamente en formato JSON según el esquema proporcionado.
+"""
+        # --- PASO 1: ENRUTADO ---
+        response_router = litellm.completion(
+            model="ollama/llama3.2:3b",
+            api_base=API_BASES["ollama/llama3.2:3b"],
+            messages=[
+                {"role": "system", "content": sys_prompt_router}, 
+                {"role": "user", "content": peticion.prompt}
+            ],
+            response_format={"type": "json_object"} 
+        )
+        
+        decision = ClasificacionEnrutador(**json.loads(response_router.choices[0].message.content))
+        print(f"-> Decisión Router (User {peticion.usuario_id} - {tipo_consumidor_db}): {decision.complejidad} | Razón: {decision.razonamiento}")
+        
+        # --- PASO 2: MOTOR DE DECISIÓN (COMPLEJIDAD + PRESUPUESTO) ---
+        presupuestos_por_equipo = {
+            "equipo-vip": 0.05,        
+            "backend": 0.01,           
+            "frontend": 0.01,
+            "marketing": 0.005,
+            "produccion": 0.0001,      
+        }
+        # Limite de gasto DIARIO por departamento
+        limite_gasto_usd = presupuestos_por_equipo.get(tipo_consumidor_db, 0.0001)
+
+        # OBTENER EL GASTO ACUMULADO HOY DESDE LA BD
+        hoy_str = date.today().isoformat()
+        with sqlite3.connect(DB_FILE) as conn:
+            cursor = conn.cursor()
+            cursor.execute('SELECT SUM(coste_peticion) FROM peticiones WHERE usuario_id = ? AND dia = ?', (peticion.usuario_id, hoy_str))
+            resultado_suma = cursor.fetchone()
+            coste_acumulado_hoy = resultado_suma[0] if resultado_suma[0] is not None else 0.0
+
+        jerarquia_modelos = [
+            "groq/llama-3.3-70b-versatile",    # Nivel 0: Alta
+            "groq/llama-3.1-8b-instant",  # Nivel 1: Media
+            "ollama/llama3.2:3b"          # Nivel 2: Baja
+        ]
+
+        if decision.complejidad == "alta": idx_deseado = 0
+        elif decision.complejidad == "media": idx_deseado = 1
+        else: idx_deseado = 2
+
+        tokens_estimados = litellm.token_counter(model=jerarquia_modelos[idx_deseado], text=peticion.prompt)
+        
+        modelo_final = None
+        coste_estimado = 0
+        razon_sobreescritura = None
+
+        idx = idx_deseado
+        while idx < len(jerarquia_modelos) and modelo_final is None:
+            modelo_candidato = jerarquia_modelos[idx]
+            coste_candidato = (tokens_estimados / 1_000_000) * PRECIOS_FINOPS[modelo_candidato]["input"]
+            
+            # Comprueba Coste Acumulado + Coste Estimado vs Presupuesto Diario
+            if (coste_acumulado_hoy + coste_candidato) <= limite_gasto_usd:
+                modelo_final = modelo_candidato
+                coste_estimado = coste_candidato
+                if idx > idx_deseado:
+                    razon_sobreescritura = f"Downgrade a {modelo_final}. El gasto de hoy ({coste_acumulado_hoy:.5f}$) + esta petición superaba el límite diario de {limite_gasto_usd}$."
+            idx += 1
+        
+        if modelo_final is None:
+            modelo_final = jerarquia_modelos[-1]
+            coste_estimado = (tokens_estimados / 1_000_000) * PRECIOS_FINOPS[modelo_final]["input"]
+            razon_sobreescritura = f"ALERTA CRÍTICA: Límite diario superado (Gasto previo: {coste_acumulado_hoy:.5f}$ / Límite: {limite_gasto_usd}$). Forzando modelo económico ({modelo_final})."
+
+        # --- PASO 3: EJECUCIÓN FINAL ---
+        completion_kwargs = {
+            "model": modelo_final,
+            "messages": [{"role": "user", "content": peticion.prompt}]
+        }
+        
+        if "ollama" in modelo_final:
+            completion_kwargs["api_base"] = API_BASES[modelo_final]
+        elif "gemini" in modelo_final:
+            completion_kwargs["api_key"] = os.getenv("GEMINI_API_KEY", "TU_API_KEY_DE_GEMINI_AQUI")
+        else:
+            completion_kwargs["api_key"] = os.getenv("GROQ_API_KEY", "TU_API_KEY_AQUI")
+
+        print(f"-> Ejecutando en modelo: {modelo_final}")
+        response_final = litellm.completion(**completion_kwargs)
+
+        # --- PASO 4: CÁLCULO MATEMÁTICO FINOPS ---
+        tokens_input = response_final.usage.prompt_tokens
+        tokens_output = response_final.usage.completion_tokens
+        tokens_totales = response_final.usage.total_tokens
+        
+        precio_input = PRECIOS_FINOPS[modelo_final]["input"]
+        precio_output = PRECIOS_FINOPS[modelo_final]["output"]
+        
+        coste_input_usd = (tokens_input / 1_000_000) * precio_input
+        coste_output_usd = (tokens_output / 1_000_000) * precio_output
+        coste_total_usd = coste_input_usd + coste_output_usd
+
+        ahorro_vs_alternativas = {}
+        for modelo_alt, precios_alt in PRECIOS_FINOPS.items():
+            if modelo_alt != modelo_final:
+                coste_hipotetico = ((tokens_input / 1_000_000) * precios_alt["input"]) + ((tokens_output / 1_000_000) * precios_alt["output"])
+                ahorro_vs_alternativas[modelo_alt] = round(coste_hipotetico - coste_total_usd, 8)
+
+        # --- PASO 5: REGISTRO EN SQLITE ---
+        hoy = date.today().isoformat()
+        try:
+            with sqlite3.connect(DB_FILE) as conn:
+                cursor = conn.cursor()
+                cursor.execute('''
+                    INSERT INTO peticiones (usuario_id, tipo_consumidor, coste_peticion, tokens_peticion, dia)
+                    VALUES (?, ?, ?, ?, ?)
+                ''', (peticion.usuario_id, tipo_consumidor_db, coste_total_usd, tokens_totales, hoy))
+                conn.commit()
+            estado_db = "registrado_ok"
+        except Exception as e:
+            estado_db = f"error_db: {e}"
+
+        # --- PASO 6: RETORNAR LA RESPUESTA ---
+        respuesta_json = {
+            "respuesta_ia": response_final.choices[0].message.content,
+            "finops_metadata": {
+                "usuario": {
+                    "id": peticion.usuario_id,
+                    "departamento": tipo_consumidor_db,
+                    "gasto_diario_acumulado_previo_usd": round(coste_acumulado_hoy, 8)
+                },
+                "estado_registro_db": estado_db,
+                "limite_presupuesto_aplicado": limite_gasto_usd,
+                "enrutamiento": {
+                    "complejidad_detectada": decision.complejidad,
+                    "razonamiento_router": decision.razonamiento
+                },
+                "estimacion_coste": {
+                    "tokens_input_estimados": tokens_estimados,
+                    "coste_estimado_usd": round(coste_estimado, 8)
+                },
+                "coste_real_usd": {
+                    "coste_input": round(coste_input_usd, 8),
+                    "coste_output": round(coste_output_usd, 8),
+                    "coste_total": round(coste_total_usd, 8)
+                },
+                "ahorro_usd": ahorro_vs_alternativas,
+                "ejecucion": {
+                    "modelo_usado": modelo_final,
+                    "proveedor": PRECIOS_FINOPS[modelo_final]["provider"],
+                    "tokens_input": tokens_input,
+                    "tokens_output": tokens_output,
+                    "tokens_totales": tokens_totales
+                }
+            }
+        }
+
+        if razon_sobreescritura:
+            respuesta_json["finops_metadata"]["enrutamiento"]["intervencion_finops"] = razon_sobreescritura
+
+        return respuesta_json
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error en el servidor: {str(e)}")
+
+@app.get("/")
+def health_check():
+    return {"status": "AI FinOps Proxy encendido y escuchando"}
+</file>
+
+<file path="ProyectoFinal/finops_service.py">
+import os
+import json
+import litellm
+from datetime import date
+from config import (
+    PRECIOS_FINOPS,
+    API_BASES,
+    JERARQUIA_MODELOS,
+    PRESUPUESTOS_POR_EQUIPO,
+    ESTIMACION_OUTPUT_TOKENS,
+    SYS_PROMPT_ROUTER
+)
+from schemas import ClasificacionEnrutador
+from helpers import contar_tokens_input
+from database import obtener_coste_diario_usuario
+
+def clasificar_complejidad(prompt: str) -> ClasificacionEnrutador:
+    response_router = litellm.completion(
+        model="ollama/llama3.2:3b",
+        api_base=API_BASES["ollama/llama3.2:3b"],
+        messages=[
+            {"role": "system", "content": SYS_PROMPT_ROUTER},
+            {"role": "user", "content": prompt}
+        ],
+        response_format={"type": "json_object"}
+    )
+    return ClasificacionEnrutador(**json.loads(response_router.choices[0].message.content))
+
+def calcular_coste_estimado(modelo: str, prompt: str, mensajes: list, tokens_output_estimados: int) -> tuple[float, int]:
+    tokens_input_est = contar_tokens_input(modelo, mensajes, prompt)
+    coste_input_est = (tokens_input_est / 1_000_000) * PRECIOS_FINOPS[modelo]["input"]
+    coste_output_est = (tokens_output_estimados / 1_000_000) * PRECIOS_FINOPS[modelo]["output"]
+    return coste_input_est + coste_output_est, tokens_input_est
+
+def seleccionar_modelo(
+    prompt: str,
+    complejidad: str,
+    usuario_id: int,
+    tipo_consumidor: str
+) -> tuple[str, float, int, int, int, str | None]:
+    """
+    Selecciona el modelo óptimo según complejidad, presupuesto diario del equipo y coste acumulado.
+    Retorna: (modelo_final, coste_estimado, tokens_input_est, tokens_output_est, tokens_totales_est, razon_sobreescritura)
+    """
+    hoy_str = date.today().isoformat()
+    limite_gasto_usd = PRESUPUESTOS_POR_EQUIPO.get(tipo_consumidor, 0.0001)
+    
+    # Obtener el gasto acumulado hoy desde la base de datos
+    coste_acumulado_hoy, _, _ = obtener_coste_diario_usuario(usuario_id, hoy_str)
+
+    if complejidad == "alta":
+        idx_deseado = 0
+    elif complejidad == "media":
+        idx_deseado = 1
+    else:
+        idx_deseado = 2
+
+    tokens_output_estimados = ESTIMACION_OUTPUT_TOKENS[complejidad]
+    mensajes_para_api = [{"role": "user", "content": prompt}]
+    
+    modelo_final = None
+    coste_estimado = 0.0
+    tokens_input_estimados = 0
+    tokens_totales_estimados = 0
+    razon_sobreescritura = None
+
+    idx = idx_deseado
+    while idx < len(JERARQUIA_MODELOS) and modelo_final is None:
+        modelo_candidato = JERARQUIA_MODELOS[idx]
+        coste_candidato, tokens_input_candidato = calcular_coste_estimado(
+            modelo_candidato, prompt, mensajes_para_api, tokens_output_estimados
+        )
+        
+        # Comprueba Coste Acumulado + Coste Estimado vs Presupuesto Diario
+        if (coste_acumulado_hoy + coste_candidato) <= limite_gasto_usd:
+            modelo_final = modelo_candidato
+            coste_estimado = coste_candidato
+            tokens_input_estimados = tokens_input_candidato
+            if idx == 2: 
+                tokens_input_estimados += 25
+            tokens_totales_estimados = tokens_input_candidato + tokens_output_estimados
+            
+            if idx > idx_deseado:
+                razon_sobreescritura = (
+                    f"Downgrade a {modelo_final}. El gasto de hoy ({coste_acumulado_hoy:.5f}$) + "
+                    f"estimación de esta petición ({coste_candidato:.5f}$) superaba el límite diario de {limite_gasto_usd}$."
+                )
+        idx += 1
+
+    # Fallback de emergencia si no cabe en el presupuesto con ningún modelo
+    if modelo_final is None:
+        modelo_final = JERARQUIA_MODELOS[-1] # Ollama
+        coste_estimado, tokens_input_estimados = calcular_coste_estimado(
+            modelo_final, prompt, mensajes_para_api, tokens_output_estimados
+        )
+        tokens_totales_estimados = tokens_input_estimados + tokens_output_estimados
+        
+        if idx_deseado == (len(JERARQUIA_MODELOS) - 1):
+            razon_sobreescritura = (
+                f"Aviso FinOps: Presupuesto superado (Gasto: {coste_acumulado_hoy:.5f}$ / Límite: {limite_gasto_usd}$). "
+                f"Como la petición era sencilla, se mantiene el modelo económico asignado ({modelo_final})."
+            )
+        else:
+            razon_sobreescritura = (
+                f"ALERTA CRÍTICA: Límite diario superado (Gasto: {coste_acumulado_hoy:.5f}$ / Límite: {limite_gasto_usd}$). "
+                f"Forzando modelo económico ({modelo_final}) en lugar del solicitado."
+            )
+
+    return modelo_final, coste_estimado, tokens_input_estimados, tokens_output_estimados, tokens_totales_estimados, razon_sobreescritura
+
+def ejecutar_peticion(modelo: str, prompt: str):
+    mensajes_para_api = [{"role": "user", "content": prompt}]
+    completion_kwargs = {
+        "model": modelo,
+        "messages": mensajes_para_api,
+    }
+    
+    if "ollama" in modelo:
+        completion_kwargs["api_base"] = API_BASES[modelo]
+    elif "gemini" in modelo:
+        completion_kwargs["api_key"] = os.getenv("GEMINI_API_KEY", "TU_GEMINI_API_KEY_AQUI")
+    else:
+        completion_kwargs["api_key"] = os.getenv("GROQ_API_KEY", "TU_GROQ_API_KEY_AQUI")
+    try:
+        return litellm.completion(
+            model=modelo,
+            messages=mensajes_para_api,
+            # ... (tus api keys)
+        )
+    except Exception as e:
+        print(f"Error en proveedor principal ({e}). Activando FALLBACK a Ollama...")
+        return litellm.completion(
+            model="ollama/llama3.2:3b",
+            api_base=API_BASES["ollama/llama3.2:3b"],
+            messages=mensajes_para_api
+        )
+
+def calcular_costes_reales_y_ahorros(modelo_final: str, tokens_input: int, tokens_output: int) -> tuple[float, float, float, dict, float, float]:
+    precio_input = PRECIOS_FINOPS[modelo_final]["input"]
+    precio_output = PRECIOS_FINOPS[modelo_final]["output"]
+    
+    coste_input_usd = (tokens_input / 1_000_000) * precio_input
+    coste_output_usd = (tokens_output / 1_000_000) * precio_output
+    coste_total_usd = coste_input_usd + coste_output_usd
+
+    ahorro_vs_alternativas = {}
+    
+    # Añadimos el coste real actual a la lista de posibles costes máximos
+    costes_hipoteticos = [coste_total_usd] 
+
+    for modelo_alt, precios_alt in PRECIOS_FINOPS.items():
+        if modelo_alt != modelo_final:
+            coste_hipotetico = (
+                ((tokens_input / 1_000_000) * precios_alt["input"]) + 
+                ((tokens_output / 1_000_000) * precios_alt["output"])
+            )
+            costes_hipoteticos.append(coste_hipotetico)
+            
+            ahorro_vs_alternativas[modelo_alt] = (
+                round(coste_hipotetico / coste_total_usd, 2) if coste_total_usd > 0 else 0.0
+            )
+
+    # El coste máximo es simplemente el valor más alto posible para esta petición
+    coste_maximo = max(costes_hipoteticos)
+    porcentaje_ahorro = 100 -(coste_total_usd*100 / coste_maximo) if coste_maximo > 0 else 0.0
+    
+    return coste_input_usd, coste_output_usd, coste_total_usd, ahorro_vs_alternativas, coste_maximo, porcentaje_ahorro
+</file>
+
+<file path="src/Historial.jsx">
+import { useState, useEffect } from 'react';
+
+export default function Historial() {
+  const [datos, setDatos] = useState({ historial: [], total_peticiones: 0 });
+  const [usuarios, setUsuarios] = useState({ usuarios: [], total_usuarios: 0 });
+  const [usuarioSeleccionado, setUsuarioSeleccionado] = useState('');
+
+  useEffect(() => {
+    fetch(`http://127.0.0.1:8000/usuarios`)
+      .then(res => res.json())
+      .then(data => setUsuarios(data))
+      .catch(err => console.error("Error cargando usuarios:", err));
+  }, []); 
+
+  useEffect(() => {
+    if (usuarioSeleccionado) {
+      fetch(`http://127.0.0.1:8000/historial/${usuarioSeleccionado}`)
+        .then(res => res.json())
+        .then(data => setDatos(data))
+        .catch(err => console.error("Error cargando historial:", err));
+    }
+  }, [usuarioSeleccionado]);
+
+  return (
+    <div className="space-y-6 px-30">
+      <div className="space-y-2">
+        <h1 className="text-4xl font-semibold text-white">Historial de Usuario</h1>
+        <p className="text-xl text-neutral-400">Revisa el historial de peticiones de cada uno de los usuarios</p>
+      </div>
+
+      <div className="overflow-hidden rounded-md border border-neutral-800 bg-neutral-900 shadow-sm">
+        <div className="h-1 w-full bg-gradient-to-r from-sky-400 via-teal-400 to-emerald-400" />
+        
+        <div className="flex flex-col gap-4 border-b border-neutral-800 px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
+          <div className="space-y-1">
+            <h2 className="text-md font-semibold uppercase tracking-[0.15em] text-neutral-100">Registro de peticiones</h2>
+            <p className="text-md text-neutral-500">{datos.total_peticiones} petición(es)</p>
+          </div>
+          
+          <select 
+            value={usuarioSeleccionado} 
+            onChange={(e) => setUsuarioSeleccionado(e.target.value)}
+            className="rounded-md border border-neutral-700 bg-neutral-950 pl-3 pr-9 text-md text-neutral-100 outline-none"
+          >
+            <option value="">Selecciona usuario...</option>
+            {usuarios.usuarios.map((u) => (
+              <option className="text-md" key={u.id} value={u.id}>{u.tipo_consumidor} (ID: {u.id})</option>
+            ))}
+          </select>
+        </div>
+
+        <table className="w-full text-left text-md">
+          <thead>
+            <tr className="border-b border-neutral-800 bg-neutral-950/60 text-[11px] uppercase tracking-[0.12em] text-neutral-500">
+              <th className="text-md px-6 py-3 font-semibold">ID Petición</th>
+              <th className="text-md px-6 py-3 font-semibold">Fecha</th>
+              <th className="text-md px-6 py-3 font-semibold">Tokens</th>
+              <th className="text-md px-6 py-3 text-right font-semibold">Coste (USD)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {datos.historial.map((p, index) => (
+              <tr key={index} className="border-b border-neutral-800 hover:bg-neutral-800/50">
+                <td className="px-6 py-3 text-neutral-100">{p.identificador}</td>
+                <td className="px-6 py-3 text-neutral-400">{p.dia}</td>
+                <td className="px-6 py-3 text-neutral-200">{p.tokens}</td>
+                <td className="px-6 py-3 text-right font-mono text-teal-300">${p.coste_usd.toFixed(8)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="ProyectoFinal/database.py">
+import sqlite3
+from datetime import date
+import calendar
+from config import DB_FILE, PRESUPUESTOS_POR_EQUIPO
+
+def init_db():
+    with sqlite3.connect(DB_FILE) as conn:
+        cursor = conn.cursor()
+        
+        # Tabla de usuarios
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS usuarios (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                tipo_consumidor TEXT NOT NULL
+            )
+        ''')
+        
+        # Tabla de peticiones (Historial)
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS peticiones (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                usuario_id INTEGER,
+                tipo_consumidor TEXT,
+                coste_peticion REAL,
+                tokens_peticion REAL,
+                coste_maximo REAL,
+                porcentaje_ahorro REAL,
+                dia DATE,
+                FOREIGN KEY(usuario_id) REFERENCES usuarios(id)
+            )
+        ''')
+        
+        # Insertar usuarios de prueba si la tabla está vacía
+        cursor.execute("SELECT COUNT(*) FROM usuarios")
+        if cursor.fetchone()[0] == 0:
+            usuarios_demo = [
+                ("marketing",),
+                ("produccion",),
+                ("frontend",),
+                ("backend",),
+                ("equipo-vip",) # Agregado para probar presupuestos altos
+            ]
+            cursor.executemany("INSERT INTO usuarios (tipo_consumidor) VALUES (?)", usuarios_demo)
+            
+        conn.commit()
+
+def obtener_tipo_consumidor(usuario_id: int) -> str | None:
+    with sqlite3.connect(DB_FILE) as conn:
+        cursor = conn.cursor()
+        cursor.execute("SELECT tipo_consumidor FROM usuarios WHERE id = ?", (usuario_id,))
+        resultado_usuario = cursor.fetchone()
+        return resultado_usuario[0] if resultado_usuario else None
+
+def obtener_gasto_y_dias_activos(usuario_id: int, año_mes: str) -> tuple[float, int]:
+    with sqlite3.connect(DB_FILE) as conn:
+        cursor = conn.cursor()
+        cursor.execute('''
+            SELECT SUM(coste_peticion), COUNT(DISTINCT dia) 
+            FROM peticiones 
+            WHERE usuario_id = ? AND substr(dia, 1, 7) = ?
+        ''', (usuario_id, año_mes))
+        resultado = cursor.fetchone()
+        gasto_actual = resultado[0] or 0.0
+        dias_activos = resultado[1] or 1
+        return gasto_actual, dias_activos
+
+def obtener_usuarios_lista() -> list[dict]:
+    with sqlite3.connect(DB_FILE) as conn:
+        cursor = conn.cursor()
+        cursor.execute("SELECT id, tipo_consumidor FROM usuarios")
+        filas = cursor.fetchall()
+        return [{"id": fila[0], "tipo_consumidor": fila[1]} for fila in filas]
+
+def obtener_coste_diario_usuario(usuario_id: int, hoy_str: str) -> tuple[float, float, int]:
+    with sqlite3.connect(DB_FILE) as conn:
+        cursor = conn.cursor()
+        cursor.execute('''
+            SELECT SUM(coste_peticion), SUM(tokens_peticion), COUNT(id)
+            FROM peticiones
+            WHERE usuario_id = ? AND dia = ?
+        ''', (usuario_id, hoy_str))
+        resultado = cursor.fetchone()
+        coste_total = resultado[0] or 0.0
+        tokens_totales = resultado[1] or 0.0
+        num_peticiones = resultado[2] or 0
+        return coste_total, tokens_totales, num_peticiones
+
+def obtener_historial_usuario_lista(usuario_id: int) -> list[dict]:
+    with sqlite3.connect(DB_FILE) as conn:
+        cursor = conn.cursor()
+        cursor.execute('''
+            SELECT id, tokens_peticion, coste_peticion, dia
+            FROM peticiones
+            WHERE usuario_id = ?
+            ORDER BY id ASC
+        ''', (usuario_id,))
+        filas = cursor.fetchall()
+        return [
+            {
+                "identificador": f"Petición {i}",
+                "id_bd": f[0],
+                "tokens": f[1],
+                "coste_usd": round(f[2], 10),
+                "dia": f[3]
+            }
+            for i, f in enumerate(filas, start=1)
+        ]
+
+def registrar_peticion(usuario_id: int, tipo_consumidor: str, coste_total_usd: float, tokens_totales: float, coste_maximo: float, porcentaje_ahorro: float, hoy_str: str) -> str:
+    try:
+        with sqlite3.connect(DB_FILE) as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                INSERT INTO peticiones (usuario_id, tipo_consumidor, coste_peticion, tokens_peticion, coste_maximo, porcentaje_ahorro, dia)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+            ''', (usuario_id, tipo_consumidor, coste_total_usd, tokens_totales, coste_maximo, porcentaje_ahorro, hoy_str))
+            conn.commit()
+        return "registrado_ok"
+    except Exception as e:
+        return f"error_db: {e}"
+
+def obtenerGatosMensuales() -> list[dict]:
+    # 1. Obtenemos el mes actual y la cantidad de días del mes
+    hoy = date.today()
+    mes_actual = hoy.strftime("%Y-%m")
+    dias_mes = calendar.monthrange(hoy.year, hoy.month)[1]
+    
+    with sqlite3.connect(DB_FILE) as conn:
+        cursor = conn.cursor()
+        
+        # 2. Hacemos un LEFT JOIN filtrando las peticiones sólo al mes actual
+        # COALESCE convierte los nulls en 0.0 para usuarios sin gasto este mes
+        cursor.execute('''
+            SELECT u.id, u.tipo_consumidor, COALESCE(SUM(p.coste_peticion), 0) AS gasto_mensual
+            FROM usuarios u
+            LEFT JOIN peticiones p ON u.id = p.usuario_id AND substr(p.dia, 1, 7) = ?
+            GROUP BY u.id, u.tipo_consumidor
+            ORDER BY u.id ASC
+        ''', (mes_actual,))
+        
+        filas = cursor.fetchall()
+        
+        resultado = []
+        for fila in filas:
+            usuario_id = fila[0]
+            tipo_consumidor = fila[1]
+            gasto_mensual = round(fila[2], 10)
+            
+            # 3. Calculamos el límite mensual basado en el presupuesto diario
+            limite_diario = PRESUPUESTOS_POR_EQUIPO.get(tipo_consumidor, 0.0001)
+            limite_mensual = round(limite_diario * dias_mes, 4)
+            
+            # 4. Agregamos el resultado con la estructura solicitada
+            resultado.append({
+                "id": usuario_id,
+                "tipo_consumidor": tipo_consumidor,
+                "gasto_mensual_actual": gasto_mensual,
+                "limite_de_gasto": limite_mensual,
+                "porcentaje_gasto": round((gasto_mensual / limite_mensual) * 100, 2) if limite_mensual > 0 else 0.0
+            })
+            
+        return resultado
+    
+def obtenerAhorrosMensuales(usuario_id: int) -> list[dict]:
+    # Obtenemos el mes actual
+    hoy = date.today()
+    mes_actual = hoy.strftime("%Y-%m")
+    
+    with sqlite3.connect(DB_FILE) as conn:
+        cursor = conn.cursor()
+        
+        # Solución: En vez de coger un 'porcentaje_ahorro' de una fila suelta, 
+        # sumamos todos los costes reales y máximos del mes.
+        cursor.execute('''
+            SELECT u.id, 
+                   COALESCE(SUM(p.coste_peticion), 0) AS coste_total,
+                   COALESCE(SUM(p.coste_maximo), 0) AS coste_maximo_total
+            FROM usuarios u 
+            LEFT JOIN peticiones p ON u.id = p.usuario_id AND substr(p.dia, 1, 7) = ?
+            WHERE u.id = ?
+            GROUP BY u.id
+        ''', (mes_actual, usuario_id))
+        
+        fila = cursor.fetchone() 
+
+        # Si el usuario no existe, devolvemos una lista vacía
+        if not fila:
+            return []
+
+        # Extraemos los datos agregados
+        id_usuario, coste_total, coste_maximo_total = fila
+        
+        # Calculamos el ahorro total en dólares del mes
+        ahorro_mensual = coste_maximo_total - coste_total
+        
+        # Calculamos el porcentaje mensual basados en los totales reales
+        if coste_maximo_total > 0:
+            porcentaje_ahorro = 100 - (coste_total * 100 / coste_maximo_total)
+        else:
+            porcentaje_ahorro = 0.0
+        
+        return [{
+            "id": id_usuario,
+            "ahorro_mensual": round(ahorro_mensual, 10),
+            "porcentaje_ahorro": round(porcentaje_ahorro, 2)
+        }]
+</file>
+
+<file path="ProyectoFinal/main.py">
+import calendar
+from datetime import date
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+import litellm
+
+# Configuración global de LiteLLM
+litellm.drop_params = True
+
+# Importaciones modulares
+from config import PRESUPUESTOS_POR_EQUIPO, PRECIOS_FINOPS
+from schemas import PeticionUsuario
+from database import (
+    init_db,
+    obtener_tipo_consumidor,
+    obtener_gasto_y_dias_activos,
+    obtener_usuarios_lista,
+    obtener_coste_diario_usuario,
+    obtener_historial_usuario_lista,
+    obtenerAhorrosMensuales,
+    registrar_peticion,
+    obtenerGatosMensuales
+)
+from finops_service import (
+    clasificar_complejidad,
+    seleccionar_modelo,
+    ejecutar_peticion,
+    calcular_costes_reales_y_ahorros
+)
+
+# Inicializar Base de Datos
+init_db()
+
+app = FastAPI(title="AI FinOps Proxy - Hackathon")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+litellm.cache = litellm.Cache(type="local")
+
+@app.get("/")
+def health_check():
+    return {"status": "AI FinOps Proxy encendido y escuchando"}
+
+@app.get("/usuarios")
+def obtener_usuarios():
+    try:
+        usuarios = obtener_usuarios_lista()
+        return {"total_usuarios": len(usuarios), "usuarios": usuarios}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error en BD: {str(e)}")
+    
+@app.get("/ahorro/{usuario_id}")
+def obtener_ahorro(usuario_id: int):
+    try:
+        ahorros = obtenerAhorrosMensuales(usuario_id)
+        return {"ahorros_mensuales": ahorros}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error en BD: {str(e)}")
+
+@app.get("/gasto-mensual")
+def obtener_gasto_mensual():
+    try:
+        datos = obtenerGatosMensuales()
+        return {"gasto_mensual": datos}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error en BD: {str(e)}")
+
+
+@app.get("/prediccion/{usuario_id}")
+def predecir_coste_mensual(usuario_id: int):
+    try:
+        hoy = date.today()
+        dias_mes = calendar.monthrange(hoy.year, hoy.month)[1]
+        año_mes_str = hoy.strftime("%Y-%m")
+        
+        gasto_actual, dias_activos = obtener_gasto_y_dias_activos(usuario_id, año_mes_str)
+        
+        # Cálculo de tendencia
+        gasto_promedio_diario = gasto_actual / dias_activos
+        gasto_proyectado_fin_de_mes = gasto_promedio_diario * dias_mes
+        
+        return {
+            "usuario_id": usuario_id,
+            "mes": año_mes_str,
+            "gasto_actual_usd": round(gasto_actual, 4),
+            "proyeccion_fin_de_mes_usd": round(gasto_proyectado_fin_de_mes, 4),
+            "alerta": "Peligro" if gasto_proyectado_fin_de_mes > 1.0 else "Saludable"
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/coste-diario/{usuario_id}")
+def obtener_coste_diario(usuario_id: int):
+    try:
+        hoy_str = date.today().isoformat()
+        coste_total, tokens_totales, num_peticiones = obtener_coste_diario_usuario(usuario_id, hoy_str)
+        
+        return {
+            "usuario_id": usuario_id,
+            "fecha": hoy_str,
+            "metricas_hoy": {
+                "peticiones_realizadas": num_peticiones,
+                "tokens_consumidos": tokens_totales,
+                "coste_total_usd": round(coste_total, 10)
+            }
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error en BD: {str(e)}")
+
+@app.get("/historial/{usuario_id}")
+def obtener_historial_usuario(usuario_id: int):
+    try:
+        historial = obtener_historial_usuario_lista(usuario_id)
+        return {"usuario_id": usuario_id, "total_peticiones": len(historial), "historial": historial}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error en BD: {str(e)}")
+
+@app.post("/generar")
+def generar_respuesta(peticion: PeticionUsuario):
+    # --- PASO 0: VERIFICAR IDENTIDAD DEL USUARIO EN BD ---
+    try:
+        tipo_consumidor_db = obtener_tipo_consumidor(peticion.usuario_id)
+        if not tipo_consumidor_db:
+            raise HTTPException(status_code=404, detail=f"El usuario con ID {peticion.usuario_id} no existe.")
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error al verificar usuario: {str(e)}")
+
+    try:
+        # --- PASO 1: ENRUTADO ---
+        decision = clasificar_complejidad(peticion.prompt)
+        print(f"-> Decisión Router (User {peticion.usuario_id} - {tipo_consumidor_db}): {decision.complejidad} | Razón: {decision.razonamiento}")
+        
+        # --- PASO 2: MOTOR DE DECISIÓN (COMPLEJIDAD + PRESUPUESTO) ---
+        modelo_final, coste_estimado, tokens_input_est, tokens_output_est, tokens_totales_est, razon_sobreescritura = seleccionar_modelo(
+            prompt=peticion.prompt,
+            complejidad=decision.complejidad,
+            usuario_id=peticion.usuario_id,
+            tipo_consumidor=tipo_consumidor_db
+        )
+        
+        # Obtener el gasto diario acumulado previo para los metadatos finales
+        hoy_str = date.today().isoformat()
+        coste_acumulado_previo, _, _ = obtener_coste_diario_usuario(peticion.usuario_id, hoy_str)
+        limite_gasto_usd = PRESUPUESTOS_POR_EQUIPO.get(tipo_consumidor_db, 0.0001)
+
+        # --- PASO 3: EJECUCIÓN FINAL ---
+        print(f"-> Ejecutando en modelo: {modelo_final}")
+        response_final = ejecutar_peticion(modelo_final, peticion.prompt)
+
+        # --- PASO 4: CÁLCULO MATEMÁTICO FINOPS ---
+        tokens_input = response_final.usage.prompt_tokens
+        tokens_output = response_final.usage.completion_tokens
+        tokens_totales = response_final.usage.total_tokens
+        
+        coste_input_usd, coste_output_usd, coste_total_usd, ahorro_vs_alternativas, coste_maximo, porcentaje_ahorro = calcular_costes_reales_y_ahorros(
+            modelo_final=modelo_final,
+            tokens_input=tokens_input,
+            tokens_output=tokens_output
+        )
+
+        # --- PASO 5: REGISTRO EN SQLITE ---
+        estado_db = registrar_peticion(
+            usuario_id=peticion.usuario_id,
+            tipo_consumidor=tipo_consumidor_db,
+            coste_total_usd=coste_total_usd,
+            tokens_totales=tokens_totales,
+            coste_maximo=coste_maximo,  
+            porcentaje_ahorro=porcentaje_ahorro,
+            hoy_str=hoy_str
+        )
+
+        # --- PASO 6: RETORNAR LA RESPUESTA ---
+        respuesta_json = {
+            "respuesta_ia": response_final.choices[0].message.content,
+            "finops_metadata": {
+                "usuario": {
+                    "id": peticion.usuario_id,
+                    "departamento": tipo_consumidor_db,
+                    "gasto_diario_acumulado_previo_usd": round(coste_acumulado_previo, 8)
+                },
+                "estado_registro_db": estado_db,
+                "limite_presupuesto_aplicado": limite_gasto_usd,
+                "enrutamiento": {
+                    "complejidad_detectada": decision.complejidad,
+                    "razonamiento_router": decision.razonamiento
+                },
+                "estimacion_coste": {
+                    "tokens_input_estimados": tokens_input_est,
+                    "tokens_output_estimados": tokens_output_est,
+                    "tokens_totales_estimados": tokens_totales_est,
+                    "coste_estimado_usd": round(coste_estimado, 8)
+                },
+                "coste_real_usd": {
+                    "coste_input": round(coste_input_usd, 8),
+                    "coste_output": round(coste_output_usd, 8),
+                    "coste_total": round(coste_total_usd, 8)
+                },
+                "ahorro_usd": ahorro_vs_alternativas,
+                "ejecucion": {
+                    "modelo_usado": modelo_final,
+                    "proveedor": PRECIOS_FINOPS[modelo_final]["provider"],
+                    "tokens_input": tokens_input,
+                    "tokens_output": tokens_output,
+                    "tokens_totales": tokens_totales
+                }
+            }
+        }
+
+        if razon_sobreescritura:
+            respuesta_json["finops_metadata"]["enrutamiento"]["intervencion_finops"] = razon_sobreescritura
+
+        return respuesta_json
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error en el servidor: {str(e)}")
+</file>
+
+<file path="src/App.jsx">
+import { useState } from 'react';
+import Header from './Header';
+import Historial from './Historial';
+import Peticion from './Peticion';
+// IMPORTANTE: Lo importamos de tu archivo Grafica.jsx
+import Gastos from './Grafica'; 
+
+function App() {
+  const [vista, setVista] = useState('analizador');
+
+  return (
+    <div className="min-h-screen w-full font-sans text-neutral-100 bg-neutral-950 p-6 md:p-8">
+      <div className="flex flex-col h-full w-full gap-8">
+        
+        {/* Header controlado */}
+        <Header vista={vista} setVista={setVista} />
+        
+        {/* Main con triple condición estricta */}
+        <main className="flex-1 w-full">
+          {vista === 'analizador' && <Peticion />}
+          {vista === 'historial' && <Historial />}
+          {/* Cambiado a 'grafica' para que coincida con el botón de tu Header */}
+          {vista === 'grafica' && <Gastos />}
+        </main>
+        
+      </div>
+    </div>
+  );
+}
+
+export default App;
+</file>
+
+<file path="main.py">
+import asyncio
+import json
+import os
+import sqlite3
+from datetime import date
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+from typing import Literal
+import litellm
+
+# ==========================================
+# 1. CONFIGURACIÓN DE LITELLM Y PRECIOS
+# ==========================================
+litellm.drop_params = True 
+
+# TABLA DE PRECIOS CORREGIDA (Alta -> Media -> Baja)
+PRECIOS_FINOPS = {
+    "gemini/gemini-2.5-flash": {"input": 0.30, "output": 0.60, "provider": "Google (Cloud)"}, # Nivel 0 (Caro)
+    "groq/llama-3.1-8b-instant": {"input": 0.15, "output": 0.15, "provider": "Groq (Cloud)"}, # Nivel 1 (Medio)
+    "ollama/llama3.2:3b": {"input": 0.05, "output": 0.05, "provider": "Ollama A (Local)"}     # Nivel 2 (Barato)
+}
+
+API_BASES = {
+    "ollama/llama3.2:3b": "http://localhost:11434"
+}
+
+# ==========================================
+# 2. CONFIGURACIÓN DE SQLITE (Usuarios y Peticiones)
+# ==========================================
+DB_FILE = "finops_mercedes.db"
+
+def init_db():
+    with sqlite3.connect(DB_FILE) as conn:
+        cursor = conn.cursor()
+        
+        # Tabla de usuarios
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS usuarios (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                tipo_consumidor TEXT NOT NULL
+            )
+        ''')
+        
+        # Tabla de peticiones (Historial)
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS peticiones (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                usuario_id INTEGER,
+                tipo_consumidor TEXT,
+                coste_peticion REAL,
+                tokens_peticion REAL,
+                dia DATE,
+                FOREIGN KEY(usuario_id) REFERENCES usuarios(id)
+            )
+        ''')
+        
+        # Insertar usuarios de prueba si la tabla está vacía
+        cursor.execute("SELECT COUNT(*) FROM usuarios")
+        if cursor.fetchone()[0] == 0:
+            usuarios_demo = [
+                ("marketing",),
+                ("produccion",),
+                ("frontend",),
+                ("backend",),
+                ("equipo-vip",) # Agregado para probar presupuestos altos
+            ]
+            cursor.executemany("INSERT INTO usuarios (tipo_consumidor) VALUES (?)", usuarios_demo)
+            
+        conn.commit()
+
+init_db()
+
+# ==========================================
+# 3. DEFINICIÓN DE ESTRUCTURAS (PYDANTIC)
+# ==========================================
+def contar_tokens_input(modelo: str, messages: list, prompt: str) -> int:
+    """
+    Intenta obtener el conteo EXACTO de tokens de entrada llamando a la
+    API de conteo real del proveedor (litellm.acount_tokens -> Gemini/OpenAI/Anthropic).
+    Si el proveedor no está soportado (p.ej. Groq) o falla la llamada,
+    cae en litellm.token_counter (tokenizador local, aproximado) y por
+    último en una heurística por nº de palabras.
+    """
+    try:
+        resultado = asyncio.run(litellm.acount_tokens(model=modelo, messages=messages))
+        if not resultado.error and resultado.total_tokens:
+            return resultado.total_tokens
+    except Exception:
+        pass
+
+    try:
+        return litellm.token_counter(model=modelo, messages=messages)
+    except Exception:
+        return int(len(prompt.split()) * 1.3) + 30
+
+
+app = FastAPI(title="AI FinOps Proxy - Hackathon")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+class PeticionUsuario(BaseModel):
+    prompt: str
+    usuario_id: int  # Conectado a la DB
+
+class ClasificacionEnrutador(BaseModel):
+    complejidad: Literal["baja", "media", "alta"]
+    razonamiento: str
+
+# ==========================================
+# 4. ENDPOINTS FINOPS Y USUARIOS (Base de Datos)
+# ==========================================
+
+@app.get("/usuarios")
+def obtener_usuarios():
+    try:
+        with sqlite3.connect(DB_FILE) as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT id, tipo_consumidor FROM usuarios")
+            filas = cursor.fetchall()
+            usuarios = [{"id": fila[0], "tipo_consumidor": fila[1]} for fila in filas]
+            return {"total_usuarios": len(usuarios), "usuarios": usuarios}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error en BD: {str(e)}")
+
+@app.get("/coste-diario/{usuario_id}")
+def obtener_coste_diario(usuario_id: int):
+    try:
+        hoy = date.today().isoformat()
+        with sqlite3.connect(DB_FILE) as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                SELECT SUM(coste_peticion), SUM(tokens_peticion), COUNT(id)
+                FROM peticiones 
+                WHERE usuario_id = ? AND dia = ?
+            ''', (usuario_id, hoy))
+            resultado = cursor.fetchone()
+            coste_total = resultado[0] or 0.0
+            tokens_totales = resultado[1] or 0.0
+            num_peticiones = resultado[2] or 0
+
+        return {
+            "usuario_id": usuario_id,
+            "fecha": hoy,
+            "metricas_hoy": {
+                "peticiones_realizadas": num_peticiones,
+                "tokens_consumidos": tokens_totales,
+                "coste_total_usd": round(coste_total, 10)
+            }
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error en BD: {str(e)}")
+
+@app.get("/historial/{usuario_id}")
+def obtener_historial_usuario(usuario_id: int):
+    try:
+        with sqlite3.connect(DB_FILE) as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                SELECT id, tokens_peticion, coste_peticion, dia 
+                FROM peticiones 
+                WHERE usuario_id = ?
+                ORDER BY id ASC
+            ''', (usuario_id,))
+            filas = cursor.fetchall()
+            
+        historial = [{"identificador": f"Petición {i}", "id_bd": f[0], "tokens": f[1], "coste_usd": round(f[2], 10), "dia": f[3]} for i, f in enumerate(filas, start=1)]
+            
+        return {"usuario_id": usuario_id, "total_peticiones": len(historial), "historial": historial}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error en BD: {str(e)}")
+
+# ==========================================
+# 5. LÓGICA PRINCIPAL (PROXY, ENRUTADO Y DB)
+# ==========================================
+@app.post("/generar")
+def generar_respuesta(peticion: PeticionUsuario):
+    try:
+        with sqlite3.connect(DB_FILE) as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT tipo_consumidor FROM usuarios WHERE id = ?", (peticion.usuario_id,))
+            resultado_usuario = cursor.fetchone()
+            
+            if not resultado_usuario:
+                raise HTTPException(status_code=404, detail=f"El usuario con ID {peticion.usuario_id} no existe.")
+            
+            tipo_consumidor_db = resultado_usuario[0]
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error al verificar usuario: {str(e)}")
+
+    try:
+        sys_prompt_router = """
+Eres un clasificador de IA de alta precisión. Tu trabajo es analizar la intención del usuario y clasificar la complejidad del prompt para optimizar costes.
+
+Reglas estrictas:
+- "baja": Preguntas directas, saludos, datos simples, cultura general, opiniones breves, tiempo, o tareas de una sola oración.
+- "media": Redacción de textos, resúmenes, extracción de datos estructurados, emails, o explicaciones de nivel intermedio.
+- "alta": Programación, matemáticas avanzadas, lógica compleja, análisis de grandes documentos, o razonamiento multi-paso.
+
+Ejemplos:
+User: "Hola, ¿qué tal?" -> {"complejidad": "baja", "razonamiento": "Saludo simple"}
+User: "¿Qué tiempo hace en Madrid?" -> {"complejidad": "baja", "razonamiento": "Consulta de información puntual"}
+User: "Escribe un correo electrónico para mi jefe pidiendo vacaciones." -> {"complejidad": "media", "razonamiento": "Generación de texto estructurado"}
+User: "Escribe una función en Python para calcular el número de Fibonacci." -> {"complejidad": "alta", "razonamiento": "Tarea de programación"}
+
+Analiza el prompt del usuario y responde estrictamente en formato JSON según el esquema proporcionado.
+"""
+        response_router = litellm.completion(
+            model="ollama/llama3.2:3b",
+            api_base=API_BASES["ollama/llama3.2:3b"],
+            messages=[
+                {"role": "system", "content": sys_prompt_router}, 
+                {"role": "user", "content": peticion.prompt}
+            ],
+            response_format={"type": "json_object"} 
+        )
+        
+        decision = ClasificacionEnrutador(**json.loads(response_router.choices[0].message.content))
+        print(f"-> Decisión Router (User {peticion.usuario_id} - {tipo_consumidor_db}): {decision.complejidad} | Razón: {decision.razonamiento}")
+        
+        presupuestos_por_equipo = {
+            "equipo-vip": 0.05,        
+            "backend": 0.01,           
+            "frontend": 0.01,
+            "marketing": 0.005,
+            "produccion": 0.0001,      
+        }
+        limite_gasto_usd = presupuestos_por_equipo.get(tipo_consumidor_db, 0.0001)
+
+        hoy_str = date.today().isoformat()
+        with sqlite3.connect(DB_FILE) as conn:
+            cursor = conn.cursor()
+            cursor.execute('SELECT SUM(coste_peticion) FROM peticiones WHERE usuario_id = ? AND dia = ?', (peticion.usuario_id, hoy_str))
+            resultado_suma = cursor.fetchone()
+            coste_acumulado_hoy = resultado_suma[0] if resultado_suma[0] is not None else 0.0
+
+        jerarquia_modelos = [
+            "gemini/gemini-2.5-flash",    # Nivel 0: Alta
+            "groq/llama-3.1-8b-instant",  # Nivel 1: Media
+            "ollama/llama3.2:3b"          # Nivel 2: Baja
+        ]
+
+        if decision.complejidad == "alta": idx_deseado = 0
+        elif decision.complejidad == "media": idx_deseado = 1
+        else: idx_deseado = 2
+
+        ESTIMACION_OUTPUT_TOKENS = {"baja": 150, "media": 600, "alta": 1500}
+        tokens_output_estimados = ESTIMACION_OUTPUT_TOKENS[decision.complejidad]
+        
+        modelo_final = None
+        coste_estimado = 0
+        tokens_input_estimados = 0
+        tokens_totales_estimados = 0
+        razon_sobreescritura = None
+
+        mensajes_para_api = [{"role": "user", "content": peticion.prompt}]
+
+        idx = idx_deseado
+        while idx < len(jerarquia_modelos) and modelo_final is None:
+            modelo_candidato = jerarquia_modelos[idx]
+            
+            tokens_input_candidato = contar_tokens_input(modelo_candidato, mensajes_para_api, peticion.prompt)
+                
+            coste_input_est = (tokens_input_candidato / 1_000_000) * PRECIOS_FINOPS[modelo_candidato]["input"]
+            coste_output_est = (tokens_output_estimados / 1_000_000) * PRECIOS_FINOPS[modelo_candidato]["output"]
+            coste_candidato = coste_input_est + coste_output_est
+            
+            if (coste_acumulado_hoy + coste_candidato) <= limite_gasto_usd:
+                modelo_final = modelo_candidato
+                coste_estimado = coste_candidato
+                tokens_input_estimados = tokens_input_candidato
+                if(idx == 2): 
+                    tokens_input_estimados += 25
+                tokens_totales_estimados = tokens_input_candidato + tokens_output_estimados
+                
+                if idx > idx_deseado:
+                    razon_sobreescritura = f"Downgrade a {modelo_final}. El gasto de hoy ({coste_acumulado_hoy:.5f}$) + estimación de esta petición ({coste_candidato:.5f}$) superaba el límite diario de {limite_gasto_usd}$."
+            idx += 1  
+        
+        if modelo_final is None:
+            modelo_final = jerarquia_modelos[-1]
+            tokens_input_estimados = contar_tokens_input(modelo_final, mensajes_para_api, peticion.prompt)
+
+            tokens_totales_estimados = tokens_input_estimados + tokens_output_estimados
+            coste_input_est = (tokens_input_estimados / 1_000_000) * PRECIOS_FINOPS[modelo_final]["input"]
+            coste_output_est = (tokens_output_estimados / 1_000_000) * PRECIOS_FINOPS[modelo_final]["output"]
+            coste_estimado = coste_input_est + coste_output_est
+            
+            razon_sobreescritura = f"ALERTA CRÍTICA: Límite diario superado (Gasto previo: {coste_acumulado_hoy:.5f}$ / Límite: {limite_gasto_usd}$). Forzando modelo económico ({modelo_final})."
+
+        # --- PASO 3: EJECUCIÓN FINAL ---
+        completion_kwargs = {
+            "model": modelo_final,
+            "messages": mensajes_para_api,
+            "max_tokens": tokens_output_estimados 
+        }
+        
+        if "ollama" in modelo_final:
+            completion_kwargs["api_base"] = API_BASES[modelo_final]
+        elif "gemini" in modelo_final:
+            completion_kwargs["api_key"] = os.getenv("GEMINI_API_KEY", "TU_API_KEY_DE_GEMINI_AQUI")
+        else:
+            completion_kwargs["api_key"] = os.getenv("GROQ_API_KEY", "TU_API_KEY_DE_GROQ_AQUI")
+
+        print(f"-> Ejecutando en modelo: {modelo_final}")
+        response_final = litellm.completion(**completion_kwargs)
+
+        # --- PASO 4: CÁLCULO MATEMÁTICO FINOPS ---
+        tokens_input = response_final.usage.prompt_tokens
+        tokens_output = response_final.usage.completion_tokens
+        tokens_totales = response_final.usage.total_tokens
+        
+        precio_input = PRECIOS_FINOPS[modelo_final]["input"]
+        precio_output = PRECIOS_FINOPS[modelo_final]["output"]
+        
+        coste_input_usd = (tokens_input / 1_000_000) * precio_input
+        coste_output_usd = (tokens_output / 1_000_000) * precio_output
+        coste_total_usd = coste_input_usd + coste_output_usd
+
+        ahorro_vs_alternativas = {}
+        for modelo_alt, precios_alt in PRECIOS_FINOPS.items():
+            if modelo_alt != modelo_final:
+                coste_hipotetico = ((tokens_input / 1_000_000) * precios_alt["input"]) + ((tokens_output / 1_000_000) * precios_alt["output"])
+                ahorro_vs_alternativas[modelo_alt] = round(coste_hipotetico/coste_total_usd, 2) if coste_total_usd > 0 else None
+
+        # --- PASO 5: REGISTRO EN SQLITE ---
+        hoy = date.today().isoformat()
+        try:
+            with sqlite3.connect(DB_FILE) as conn:
+                cursor = conn.cursor()
+                cursor.execute('''
+                    INSERT INTO peticiones (usuario_id, tipo_consumidor, coste_peticion, tokens_peticion, dia)
+                    VALUES (?, ?, ?, ?, ?)
+                ''', (peticion.usuario_id, tipo_consumidor_db, coste_total_usd, tokens_totales, hoy))
+                conn.commit()
+            estado_db = "registrado_ok"
+        except Exception as e:
+            estado_db = f"error_db: {e}"
+
+        # --- PASO 6: RETORNAR LA RESPUESTA ---
+        respuesta_json = {
+            "respuesta_ia": response_final.choices[0].message.content,
+            "finops_metadata": {
+                "usuario": {
+                    "id": peticion.usuario_id,
+                    "departamento": tipo_consumidor_db,
+                    "gasto_diario_acumulado_previo_usd": round(coste_acumulado_hoy, 8)
+                },
+                "estado_registro_db": estado_db,
+                "limite_presupuesto_aplicado": limite_gasto_usd,
+                "enrutamiento": {
+                    "complejidad_detectada": decision.complejidad,
+                    "razonamiento_router": decision.razonamiento
+                },
+                "estimacion_coste": {
+                    "tokens_input_estimados": tokens_input_estimados,
+                    "tokens_output_estimados": tokens_output_estimados,
+                    "tokens_totales_estimados": tokens_totales_estimados,
+                    "coste_estimado_usd": round(coste_estimado, 8)
+                },
+                "coste_real_usd": {
+                    "coste_input": round(coste_input_usd, 8),
+                    "coste_output": round(coste_output_usd, 8),
+                    "coste_total": round(coste_total_usd, 8)
+                },
+                "ahorro_usd": ahorro_vs_alternativas,
+                "ejecucion": {
+                    "modelo_usado": modelo_final,
+                    "proveedor": PRECIOS_FINOPS[modelo_final]["provider"],
+                    "tokens_input": tokens_input,
+                    "tokens_output": tokens_output,
+                    "tokens_totales": tokens_totales
+                }
+            }
+        }
+
+        if razon_sobreescritura:
+            respuesta_json["finops_metadata"]["enrutamiento"]["intervencion_finops"] = razon_sobreescritura
+
+        return respuesta_json
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error en el servidor: {str(e)}")
+
+@app.get("/")
+def health_check():
+    return {"status": "AI FinOps Proxy encendido y escuchando"}
+</file>
+
+<file path="src/Peticion.jsx">
+import { useState, useEffect } from 'react';
+
+export default function Peticion() {
+  const [prompt, setPrompt] = useState('');
+  const [resultado, setResultado] = useState(null);
+  const [cargando, setCargando] = useState(false);
+  const [error, setError] = useState(null);
+  const [usuarios, setUsuarios] = useState({ usuarios: [], total_usuarios: 0 });
+  const [usuarioSeleccionado, setUsuarioSeleccionado] = useState('');
+
+  useEffect(() => {
+    fetch(`http://127.0.0.1:8000/usuarios`)
+      .then(res => res.json())
+      .then(data => setUsuarios(data))
+      .catch(err => console.error("Error cargando usuarios:", err));
+  }, []);
+
+  const renderTextWithBold = (text) => {
+    if (!text) return null;
+    const parts = text.split(/(\*\*.*?\*\*)/g);
+    return parts.map((part, index) => {
+      if (part.startsWith('**') && part.endsWith('**')) {
+        return <b key={index} className="text-neutral-100">{part.slice(2, -2)}</b>;
+      }
+      return <span key={index}>{part}</span>;
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!prompt.trim() || !usuarioSeleccionado) {
+      setError("Por favor, ingresa un mensaje y selecciona un usuario.");
+      return;
+    }
+
+    setCargando(true);
+    setError(null);
+    setResultado(null);
+
+    try {
+      const API_URL = "http://127.0.0.1:8000/generar";
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt, usuario_id: parseInt(usuarioSeleccionado, 10) }),
+      });
+
+      if (!response.ok) {
+        const errData = await response.json();
+        throw new Error(errData.detail || "Fallo en la comunicación");
+      }
+
+      const data = await response.json();
+      setResultado(data);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setCargando(false);
+    }
+  };
+
+  return (
+    <div className="space-y-8 px-30">
+      {/* Cabecera */}
+      <header className="space-y-1">
+        <h1 className="text-4xl font-semibold text-white tracking-tight">Analizador de peticiones</h1>
+        <p className="text-xl text-neutral-400">Configura tu consulta y optimiza costes.</p>
+      </header>
+
+      {/* Tarjeta Principal */}
+      <div className="overflow-hidden rounded-md border border-neutral-800 bg-neutral-900 shadow-sm">
+        <div className="h-1 w-full bg-gradient-to-r from-sky-400 via-teal-400 to-emerald-400" />
+
+        <div className="px-6 py-5 border-b border-neutral-800">
+          <h2 className="text-md font-semibold uppercase tracking-[0.15em] text-neutral-100">NUEVA PETICIÓN</h2>
+        </div>
+
+        <div className="p-6 space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <label className="block text-md font-semibold tracking-[0.12em] text-neutral-400 mb-2">
+                Usuario / Departamento
+              </label>
+              <select
+                value={usuarioSeleccionado}
+                onChange={(e) => setUsuarioSeleccionado(e.target.value)}
+                className=" text-md w-full rounded-xl border border-neutral-700 bg-neutral-950 py-2.5 px-3 text-sm text-neutral-200 outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400/30"
+              >
+                <option className="text-md" value="">Selecciona un usuario / departamento...</option>
+                {usuarios.usuarios.map((u) => (
+                  <option className="text-md" key={u.id} value={u.id}>{u.tipo_consumidor} (ID: {u.id})</option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-md font-semibold tracking-[0.12em] text-neutral-400 mb-2">
+                Mensaje o Prompt
+              </label>
+              <textarea
+                rows="6"
+                className="w-full p-3 bg-neutral-950 border border-neutral-700 rounded-md text-neutral-200 text-md outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400/30"
+                placeholder="Ej.: Escribe un script en Python para calcular el factorial..."
+                value={prompt}
+                onChange={(e) => setPrompt(e.target.value)}
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={cargando}
+              className="text-md w-full py-3 bg-neutral-800 hover:bg-neutral-700 text-white text-sm font-semibold uppercase tracking-wider transition-colors border border-neutral-700"
+            >
+              {cargando ? "Analizando..." : "Enviar Petición"}
+            </button>
+          </form>
+        </div>
+      </div>
+
+      {/* Resultados */}
+      {resultado && (
+        <div className="space-y-6">
+          <div className="bg-neutral-900 p-6 rounded-md border border-neutral-800">
+            <h2 className="text-md font-semibold uppercase tracking-[0.15em] text-neutral-100 border-b border-neutral-800 pb-3 mb-4">Respuesta de la IA</h2>
+            <div className="text-neutral-300 text-md whitespace-pre-wrap">{renderTextWithBold(resultado.respuesta_ia)}</div>
+          </div>
+
+          <h3 className="text-md font-semibold uppercase tracking-[0.15em] text-neutral-100 border-b border-neutral-800 pb-3 mt-6">FinOps Dashboard · Metadata</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Card Modelo */}
+            <div className="border-t-4 border-teal-400 bg-neutral-900 p-4 border-x border-b">
+              <p className="text-md text-neutral-500 uppercase tracking-wider">Modelo y Proveedor</p>
+              <p className="text-md font-bold text-neutral-100 mt-1">{resultado.finops_metadata.ejecucion.modelo_usado}</p>
+              <p className="text-md text-neutral-400">{resultado.finops_metadata.ejecucion.proveedor}</p>
+            </div>
+            {/* Card Enrutamiento */}
+            <div className="border-t-4 border-teal-400 bg-neutral-900 p-4 border-x border-b">
+              <p className="text-md text-neutral-500 uppercase tracking-wider">Enrutamiento (Complejidad)</p>
+              <p className="text-md font-bold text-neutral-100 mt-1">{resultado.finops_metadata.enrutamiento.complejidad_detectada}</p>
+              <p className="text-md text-neutral-400">{resultado.finops_metadata.enrutamiento.razonamiento_router}</p>
+            </div>
+            {/* Card Coste */}
+            <div className="border-t-4 border-teal-400 bg-neutral-900 p-4 border-x border-b">
+              <p className="text-md text-neutral-500 uppercase tracking-wider">Coste y Presupuesto</p>
+              <p className="text-md font-bold text-neutral-100 mt-1">${resultado.finops_metadata.coste_real_usd.coste_total.toFixed(8)}</p>
+              <p className="text-md text-neutral-400">Límite Depto: ${resultado.finops_metadata.limite_presupuesto_aplicado}</p>
+            </div>
+            {/* Card Consumo */}
+            <div className="border-t-4 border-teal-400 bg-neutral-900 p-4 border-x border-b">
+              <p className="text-md text-neutral-500 uppercase tracking-wider">Consumo (Tokens)</p>
+              <p className="text-md font-bold text-neutral-100 mt-1">{resultado.finops_metadata.ejecucion.tokens_totales} totales</p>
+              <p className="text-md text-neutral-400">In: {resultado.finops_metadata.ejecucion.tokens_input} | Out: {resultado.finops_metadata.ejecucion.tokens_output}</p>
+            </div>
+            {resultado.finops_metadata.enrutamiento.complejidad_detectada === 'baja' ? (
+              <div className="border-t-4 border-teal-400 bg-neutral-900 p-4 border-x border-b">
+                <p className="text-md text-neutral-500 uppercase tracking-wider">Ahorro (Modelo Medio)</p>
+                <p className="text-md font-bold text-neutral-100 mt-1">{resultado.finops_metadata.ahorro_usd["groq/llama-3.1-8b-instant"]}x más barato</p>
+              </div>
+            ) : null}
+            {resultado.finops_metadata.enrutamiento.complejidad_detectada === 'baja' || resultado.finops_metadata.enrutamiento.complejidad_detectada === 'media' ? (
+              <div className="border-t-4 border-teal-400 bg-neutral-900 p-4 border-x border-b">
+                <p className="text-md text-neutral-500 uppercase tracking-wider">Ahorro (Modelo Alto)</p>
+                <p className="text-md font-bold text-neutral-100 mt-1">{resultado.finops_metadata.ahorro_usd["groq/llama-3.3-70b-versatile"]}x más barato</p>
+              </div>
+            ) : null}
+          </div>
+
+          {/* Intervención */}
+          {resultado.finops_metadata.enrutamiento.intervencion_finops && (
+            <div className="border-l-4 border-red-500 bg-neutral-900 p-4 border-y border-r mt-4">
+              <p className="text-md text-red-500 uppercase font-bold tracking-wider">Intervención FinOps Activa</p>
+              <p className="text-md text-neutral-200 mt-1">{resultado.finops_metadata.enrutamiento.intervencion_finops}</p>
+            </div>
+          )}
+        </div>
+      )}
+      {error && (
+        <div className="bg-red-500 text-white p-4 rounded-md mt-6 shadow-md border border-red-700">
+          <p className="text-lg font-semibold">Error:</p>
+          <p>{error}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+</file>
+
+</files>

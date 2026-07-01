@@ -40,6 +40,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+litellm.cache = litellm.Cache(type="local")
+
 @app.get("/")
 def health_check():
     return {"status": "AI FinOps Proxy encendido y escuchando"}

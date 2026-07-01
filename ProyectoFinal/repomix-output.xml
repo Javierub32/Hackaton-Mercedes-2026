@@ -261,39 +261,47 @@ def obtenerGatosMensuales() -> list[dict]:
         return resultado
     
 def obtenerAhorrosMensuales(usuario_id: int) -> list[dict]:
-    # Obtenemos el mes actual y la cantidad de días del mes
+    # Obtenemos el mes actual
     hoy = date.today()
     mes_actual = hoy.strftime("%Y-%m")
-    dias_mes = calendar.monthrange(hoy.year, hoy.month)[1]
     
     with sqlite3.connect(DB_FILE) as conn:
         cursor = conn.cursor()
         
-        # CORRECCIÓN: El WHERE va después del JOIN y añadimos GROUP BY
-        # OJO: Asumimos que vas a crear la columna 'coste_maximo' en la DB
+        # Solución: En vez de coger un 'porcentaje_ahorro' de una fila suelta, 
+        # sumamos todos los costes reales y máximos del mes.
         cursor.execute('''
-            SELECT u.id, p.porcentaje_ahorro, COALESCE(SUM(p.coste_maximo - p.coste_peticion), 0) AS ahorro_mensual
+            SELECT u.id, 
+                   COALESCE(SUM(p.coste_peticion), 0) AS coste_total,
+                   COALESCE(SUM(p.coste_maximo), 0) AS coste_maximo_total
             FROM usuarios u 
             LEFT JOIN peticiones p ON u.id = p.usuario_id AND substr(p.dia, 1, 7) = ?
             WHERE u.id = ?
-            GROUP BY u.id, u.tipo_consumidor
+            GROUP BY u.id
         ''', (mes_actual, usuario_id))
         
-        # Usamos fetchone() porque filtramos por un ID único
         fila = cursor.fetchone() 
 
         # Si el usuario no existe, devolvemos una lista vacía
         if not fila:
             return []
 
-        # Extraemos los datos
-        id_usuario, porcentaje_ahorro, ahorro_mensual = fila
-        ahorro_mensual = round(ahorro_mensual, 10)
+        # Extraemos los datos agregados
+        id_usuario, coste_total, coste_maximo_total = fila
+        
+        # Calculamos el ahorro total en dólares del mes
+        ahorro_mensual = coste_maximo_total - coste_total
+        
+        # Calculamos el porcentaje mensual basados en los totales reales
+        if coste_maximo_total > 0:
+            porcentaje_ahorro = 100 - (coste_total * 100 / coste_maximo_total)
+        else:
+            porcentaje_ahorro = 0.0
         
         return [{
             "id": id_usuario,
-            "ahorro_mensual": ahorro_mensual,
-            "porcentaje_ahorro": porcentaje_ahorro
+            "ahorro_mensual": round(ahorro_mensual, 10),
+            "porcentaje_ahorro": round(porcentaje_ahorro, 2)
         }]
 </file>
 

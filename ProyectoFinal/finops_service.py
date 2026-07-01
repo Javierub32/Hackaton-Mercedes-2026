@@ -121,8 +121,19 @@ def ejecutar_peticion(modelo: str, prompt: str):
         completion_kwargs["api_key"] = os.getenv("GEMINI_API_KEY", "TU_GEMINI_API_KEY_AQUI")
     else:
         completion_kwargs["api_key"] = os.getenv("GROQ_API_KEY", "TU_GROQ_API_KEY_AQUI")
-
-    return litellm.completion(**completion_kwargs)
+    try:
+        return litellm.completion(
+            model=modelo,
+            messages=mensajes_para_api,
+            # ... (tus api keys)
+        )
+    except Exception as e:
+        print(f"Error en proveedor principal ({e}). Activando FALLBACK a Ollama...")
+        return litellm.completion(
+            model="ollama/llama3.2:3b",
+            api_base=API_BASES["ollama/llama3.2:3b"],
+            messages=mensajes_para_api
+        )
 
 def calcular_costes_reales_y_ahorros(modelo_final: str, tokens_input: int, tokens_output: int) -> tuple[float, float, float, dict, float, float]:
     precio_input = PRECIOS_FINOPS[modelo_final]["input"]

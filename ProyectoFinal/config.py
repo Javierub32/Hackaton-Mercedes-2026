@@ -19,7 +19,7 @@ JERARQUIA_MODELOS = [
 PRESUPUESTOS_POR_EQUIPO = {
     "equipo-vip": 0.05,        
     "backend": 0.01,           
-    "frontend": 0.01,
+    "frontend": 0.0001,
     "marketing": 0.005,
     "produccion": 0.0001,      
 }
