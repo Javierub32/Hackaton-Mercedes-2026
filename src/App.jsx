@@ -30,6 +30,7 @@ function App() {
       }
 
       const data = await response.json();
+	  console.log(data);
       setResultado(data);
     } catch (err) {
       setError(err.message);
