@@ -15,6 +15,7 @@ litellm.drop_params = True
 
 # 🔥 TABLA DE PRECIOS CORREGIDA (Alta -> Media -> Baja)
 PRECIOS_FINOPS = {
+    "groq/llama-3.3-70b-versatile": {"input": 0.59, "output": 0.79, "provider": "Groq (Cloud)"}, # Nivel 0 (Caro/Complejo)
     "gemini/gemini-2.5-flash": {"input": 0.30, "output": 0.60, "provider": "Google (Cloud)"}, # Nivel 0 (Caro)
     "groq/llama-3.1-8b-instant": {"input": 0.15, "output": 0.15, "provider": "Groq (Cloud)"}, # Nivel 1 (Medio)
     "ollama/llama3.2:3b": {"input": 0.05, "output": 0.05, "provider": "Ollama A (Local)"}     # Nivel 2 (Barato)
@@ -226,7 +227,7 @@ Analiza el prompt del usuario y responde estrictamente en formato JSON según el
             coste_acumulado_hoy = resultado_suma[0] if resultado_suma[0] is not None else 0.0
 
         jerarquia_modelos = [
-            "gemini/gemini-2.5-flash",    # Nivel 0: Alta
+            "groq/llama-3.3-70b-versatile",    # Nivel 0: Alta
             "groq/llama-3.1-8b-instant",  # Nivel 1: Media
             "ollama/llama3.2:3b"          # Nivel 2: Baja
         ]
