@@ -15,6 +15,18 @@ export default function Peticion() {
       .catch(err => console.error("Error cargando usuarios:", err));
   }, []); 
 
+  const renderTextWithBold = (text) => {
+  if (!text) return null;
+  const parts = text.split(/(\*\*.*?\*\*)/g);
+  
+  return parts.map((part, index) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      return <b key={index}>{part.slice(2, -2)}</b>;
+    }
+    return <span key={index}>{part}</span>;
+  });
+};
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     
@@ -127,7 +139,7 @@ export default function Peticion() {
           <h2 className="text-xl font-bold mb-4 border-b pb-2">Respuesta de la IA</h2>
           
           <div className="bg-gray-50 p-4 rounded-lg mb-6 whitespace-pre-wrap text-gray-800 border border-gray-200">
-            {resultado.respuesta_ia}
+            <td className="p-3">{renderTextWithBold(resultado.respuesta_ia)}</td>
           </div>
 
           <h3 className="text-lg font-bold mb-4 border-b pb-2 text-indigo-600">FinOps Dashboard (Metadata)</h3>
