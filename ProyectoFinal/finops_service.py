@@ -118,9 +118,9 @@ def ejecutar_peticion(modelo: str, prompt: str):
     if "ollama" in modelo:
         completion_kwargs["api_base"] = API_BASES[modelo]
     elif "gemini" in modelo:
-        completion_kwargs["api_key"] = os.getenv("GEMINI_API_KEY", "TU_API_KEY_DE_GEMINI_AQUI")
+        completion_kwargs["api_key"] = os.getenv("GEMINI_API_KEY", "TU_GEMINI_API_KEY_AQUI")
     else:
-        completion_kwargs["api_key"] = os.getenv("GROQ_API_KEY", "TU_API_KEY_AQUI")
+        completion_kwargs["api_key"] = os.getenv("GROQ_API_KEY", "TU_GROQ_API_KEY_AQUI")
 
     return litellm.completion(**completion_kwargs)
 
@@ -151,6 +151,6 @@ def calcular_costes_reales_y_ahorros(modelo_final: str, tokens_input: int, token
 
     # El coste máximo es simplemente el valor más alto posible para esta petición
     coste_maximo = max(costes_hipoteticos)
-    porcentaje_ahorro = coste_total_usd*100 / coste_maximo if coste_maximo > 0 else 0.0
+    porcentaje_ahorro = 100 -(coste_total_usd*100 / coste_maximo) if coste_maximo > 0 else 0.0
     
     return coste_input_usd, coste_output_usd, coste_total_usd, ahorro_vs_alternativas, coste_maximo, porcentaje_ahorro
