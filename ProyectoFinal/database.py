@@ -23,6 +23,8 @@ def init_db():
                 tipo_consumidor TEXT,
                 coste_peticion REAL,
                 tokens_peticion REAL,
+                coste_maximo REAL,
+                porcentaje_ahorro REAL,
                 dia DATE,
                 FOREIGN KEY(usuario_id) REFERENCES usuarios(id)
             )
@@ -104,14 +106,14 @@ def obtener_historial_usuario_lista(usuario_id: int) -> list[dict]:
             for i, f in enumerate(filas, start=1)
         ]
 
-def registrar_peticion(usuario_id: int, tipo_consumidor: str, coste_total_usd: float, tokens_totales: float, hoy_str: str) -> str:
+def registrar_peticion(usuario_id: int, tipo_consumidor: str, coste_total_usd: float, tokens_totales: float, coste_maximo: float, porcentaje_ahorro: float, hoy_str: str) -> str:
     try:
         with sqlite3.connect(DB_FILE) as conn:
             cursor = conn.cursor()
             cursor.execute('''
-                INSERT INTO peticiones (usuario_id, tipo_consumidor, coste_peticion, tokens_peticion, dia)
-                VALUES (?, ?, ?, ?, ?)
-            ''', (usuario_id, tipo_consumidor, coste_total_usd, tokens_totales, hoy_str))
+                INSERT INTO peticiones (usuario_id, tipo_consumidor, coste_peticion, tokens_peticion, coste_maximo, porcentaje_ahorro, dia)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+            ''', (usuario_id, tipo_consumidor, coste_total_usd, tokens_totales, coste_maximo, porcentaje_ahorro, hoy_str))
             conn.commit()
         return "registrado_ok"
     except Exception as e:
@@ -158,3 +160,39 @@ def obtenerGatosMensuales() -> list[dict]:
             })
             
         return resultado
+    
+def obtenerAhorrosMensuales(usuario_id: int) -> list[dict]:
+    # Obtenemos el mes actual y la cantidad de días del mes
+    hoy = date.today()
+    mes_actual = hoy.strftime("%Y-%m")
+    dias_mes = calendar.monthrange(hoy.year, hoy.month)[1]
+    
+    with sqlite3.connect(DB_FILE) as conn:
+        cursor = conn.cursor()
+        
+        # CORRECCIÓN: El WHERE va después del JOIN y añadimos GROUP BY
+        # OJO: Asumimos que vas a crear la columna 'coste_maximo' en la DB
+        cursor.execute('''
+            SELECT u.id, p.porcentaje_ahorro, COALESCE(SUM(p.coste_maximo - p.coste_peticion), 0) AS ahorro_mensual
+            FROM usuarios u 
+            LEFT JOIN peticiones p ON u.id = p.usuario_id AND substr(p.dia, 1, 7) = ?
+            WHERE u.id = ?
+            GROUP BY u.id, u.tipo_consumidor
+        ''', (mes_actual, usuario_id))
+        
+        # Usamos fetchone() porque filtramos por un ID único
+        fila = cursor.fetchone() 
+
+        # Si el usuario no existe, devolvemos una lista vacía
+        if not fila:
+            return []
+
+        # Extraemos los datos
+        id_usuario, porcentaje_ahorro, ahorro_mensual = fila
+        ahorro_mensual = round(ahorro_mensual, 10)
+        
+        return [{
+            "id": id_usuario,
+            "ahorro_mensual": ahorro_mensual,
+            "porcentaje_ahorro": porcentaje_ahorro
+        }]

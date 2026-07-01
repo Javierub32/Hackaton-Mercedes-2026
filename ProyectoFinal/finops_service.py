@@ -124,7 +124,7 @@ def ejecutar_peticion(modelo: str, prompt: str):
 
     return litellm.completion(**completion_kwargs)
 
-def calcular_costes_reales_y_ahorros(modelo_final: str, tokens_input: int, tokens_output: int) -> tuple[float, float, float, dict]:
+def calcular_costes_reales_y_ahorros(modelo_final: str, tokens_input: int, tokens_output: int) -> tuple[float, float, float, dict, float, float]:
     precio_input = PRECIOS_FINOPS[modelo_final]["input"]
     precio_output = PRECIOS_FINOPS[modelo_final]["output"]
     
@@ -133,13 +133,24 @@ def calcular_costes_reales_y_ahorros(modelo_final: str, tokens_input: int, token
     coste_total_usd = coste_input_usd + coste_output_usd
 
     ahorro_vs_alternativas = {}
+    
+    # Añadimos el coste real actual a la lista de posibles costes máximos
+    costes_hipoteticos = [coste_total_usd] 
+
     for modelo_alt, precios_alt in PRECIOS_FINOPS.items():
         if modelo_alt != modelo_final:
             coste_hipotetico = (
                 ((tokens_input / 1_000_000) * precios_alt["input"]) + 
                 ((tokens_output / 1_000_000) * precios_alt["output"])
             )
+            costes_hipoteticos.append(coste_hipotetico)
+            
             ahorro_vs_alternativas[modelo_alt] = (
-                round(coste_hipotetico / coste_total_usd, 2) if coste_total_usd > 0 else None
+                round(coste_hipotetico / coste_total_usd, 2) if coste_total_usd > 0 else 0.0
             )
-    return coste_input_usd, coste_output_usd, coste_total_usd, ahorro_vs_alternativas
+
+    # El coste máximo es simplemente el valor más alto posible para esta petición
+    coste_maximo = max(costes_hipoteticos)
+    porcentaje_ahorro = coste_total_usd*100 / coste_maximo if coste_maximo > 0 else 0.0
+    
+    return coste_input_usd, coste_output_usd, coste_total_usd, ahorro_vs_alternativas, coste_maximo, porcentaje_ahorro

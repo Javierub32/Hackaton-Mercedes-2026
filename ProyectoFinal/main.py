@@ -17,6 +17,7 @@ from database import (
     obtener_usuarios_lista,
     obtener_coste_diario_usuario,
     obtener_historial_usuario_lista,
+    obtenerAhorrosMensuales,
     registrar_peticion,
     obtenerGatosMensuales
 )
@@ -51,6 +52,14 @@ def obtener_usuarios():
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error en BD: {str(e)}")
     
+@app.get("/ahorro/{usuario_id}")
+def obtener_ahorro(usuario_id: int):
+    try:
+        ahorros = obtenerAhorrosMensuales(usuario_id)
+        return {"ahorros_mensuales": ahorros}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error en BD: {str(e)}")
+
 @app.get("/gasto-mensual")
 def obtener_gasto_mensual():
     try:
@@ -148,7 +157,7 @@ def generar_respuesta(peticion: PeticionUsuario):
         tokens_output = response_final.usage.completion_tokens
         tokens_totales = response_final.usage.total_tokens
         
-        coste_input_usd, coste_output_usd, coste_total_usd, ahorro_vs_alternativas = calcular_costes_reales_y_ahorros(
+        coste_input_usd, coste_output_usd, coste_total_usd, ahorro_vs_alternativas, coste_maximo, porcentaje_ahorro = calcular_costes_reales_y_ahorros(
             modelo_final=modelo_final,
             tokens_input=tokens_input,
             tokens_output=tokens_output
@@ -160,6 +169,8 @@ def generar_respuesta(peticion: PeticionUsuario):
             tipo_consumidor=tipo_consumidor_db,
             coste_total_usd=coste_total_usd,
             tokens_totales=tokens_totales,
+            coste_maximo=coste_maximo,  
+            porcentaje_ahorro=porcentaje_ahorro,
             hoy_str=hoy_str
         )
 
