@@ -1,5 +1,8 @@
+import asyncio
 import json
 import os
+import sqlite3
+from datetime import date
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -11,32 +14,88 @@ import litellm
 # ==========================================
 litellm.drop_params = True 
 
-# TABLA DE PRECIOS SEGÚN LA DOCUMENTACIÓN
+# 🔥 TABLA DE PRECIOS CORREGIDA (Alta -> Media -> Baja)
 PRECIOS_FINOPS = {
-    "ollama/llama3.2:3b": {"input": 0.06, "output": 0.06, "provider": "Ollama A (Local)"},
-    "ollama/mistral:7b": {"input": 0.24, "output": 0.24, "provider": "Ollama B (Local)"},
-    "groq/llama-3.1-8b-instant": {"input": 0.05, "output": 0.08, "provider": "Groq (Cloud)"}
+    "gemini/gemini-2.5-flash": {"input": 0.30, "output": 0.60, "provider": "Google (Cloud)"}, # Nivel 0 (Caro)
+    "groq/llama-3.1-8b-instant": {"input": 0.15, "output": 0.15, "provider": "Groq (Cloud)"}, # Nivel 1 (Medio)
+    "ollama/llama3.2:3b": {"input": 0.05, "output": 0.05, "provider": "Ollama A (Local)"}     # Nivel 2 (Barato)
 }
-
-try:
-    groq_info = litellm.get_model_info("groq/llama-3.1-8b-instant")
-    PRECIOS_FINOPS["groq/llama-3.1-8b-instant"] = {
-        "input": groq_info["input_cost_per_token"] * 1_000_000,
-        "output": groq_info["output_cost_per_token"] * 1_000_000,
-        "provider": "Groq (Cloud - Tarifa dinámica LiteLLM)"
-    }
-except Exception as e:
-    print("Aviso: No se pudo cargar el precio dinámico de Groq, usando fallback.")
 
 API_BASES = {
-    "ollama/llama3.2:3b": "http://localhost:11434", 
-    "ollama/mistral:7b": "http://localhost:11435"   
+    "ollama/llama3.2:3b": "http://localhost:11434"
 }
 
 # ==========================================
-# 2. DEFINICIÓN DE ESTRUCTURAS (PYDANTIC)
+# 2. CONFIGURACIÓN DE SQLITE (Usuarios y Peticiones)
 # ==========================================
-app = FastAPI(title="AI FinOps Proxy")
+DB_FILE = "finops_mercedes.db"
+
+def init_db():
+    with sqlite3.connect(DB_FILE) as conn:
+        cursor = conn.cursor()
+        
+        # Tabla de usuarios
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS usuarios (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                tipo_consumidor TEXT NOT NULL
+            )
+        ''')
+        
+        # Tabla de peticiones (Historial)
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS peticiones (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                usuario_id INTEGER,
+                tipo_consumidor TEXT,
+                coste_peticion REAL,
+                tokens_peticion REAL,
+                dia DATE,
+                FOREIGN KEY(usuario_id) REFERENCES usuarios(id)
+            )
+        ''')
+        
+        # Insertar usuarios de prueba si la tabla está vacía
+        cursor.execute("SELECT COUNT(*) FROM usuarios")
+        if cursor.fetchone()[0] == 0:
+            usuarios_demo = [
+                ("marketing",),
+                ("produccion",),
+                ("frontend",),
+                ("backend",),
+                ("equipo-vip",) # Agregado para probar presupuestos altos
+            ]
+            cursor.executemany("INSERT INTO usuarios (tipo_consumidor) VALUES (?)", usuarios_demo)
+            
+        conn.commit()
+
+init_db()
+
+# ==========================================
+# 3. DEFINICIÓN DE ESTRUCTURAS (PYDANTIC)
+# ==========================================
+def contar_tokens_input(modelo: str, messages: list, prompt: str) -> int:
+    """
+    Intenta obtener el conteo EXACTO de tokens de entrada llamando a la
+    API de conteo real del proveedor (litellm.acount_tokens -> Gemini/OpenAI/Anthropic).
+    Si el proveedor no está soportado (p.ej. Groq) o falla la llamada,
+    cae en litellm.token_counter (tokenizador local, aproximado) y por
+    último en una heurística por nº de palabras.
+    """
+    try:
+        resultado = asyncio.run(litellm.acount_tokens(model=modelo, messages=messages))
+        if not resultado.error and resultado.total_tokens:
+            return resultado.total_tokens
+    except Exception:
+        pass
+
+    try:
+        return litellm.token_counter(model=modelo, messages=messages)
+    except Exception:
+        return int(len(prompt.split()) * 1.3) + 30
+
+
+app = FastAPI(title="AI FinOps Proxy - Hackathon")
 
 app.add_middleware(
     CORSMiddleware,
@@ -48,17 +107,95 @@ app.add_middleware(
 
 class PeticionUsuario(BaseModel):
     prompt: str
-    consumidor: str = "equipo-default"
+    usuario_id: int  # Conectado a la DB
 
 class ClasificacionEnrutador(BaseModel):
     complejidad: Literal["baja", "media", "alta"]
     razonamiento: str
 
 # ==========================================
-# 3. LÓGICA PRINCIPAL (PROXY Y ENRUTADO)
+# 4. ENDPOINTS FINOPS Y USUARIOS (Base de Datos)
+# ==========================================
+
+@app.get("/usuarios")
+def obtener_usuarios():
+    try:
+        with sqlite3.connect(DB_FILE) as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT id, tipo_consumidor FROM usuarios")
+            filas = cursor.fetchall()
+            usuarios = [{"id": fila[0], "tipo_consumidor": fila[1]} for fila in filas]
+            return {"total_usuarios": len(usuarios), "usuarios": usuarios}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error en BD: {str(e)}")
+
+@app.get("/coste-diario/{usuario_id}")
+def obtener_coste_diario(usuario_id: int):
+    try:
+        hoy = date.today().isoformat()
+        with sqlite3.connect(DB_FILE) as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                SELECT SUM(coste_peticion), SUM(tokens_peticion), COUNT(id)
+                FROM peticiones 
+                WHERE usuario_id = ? AND dia = ?
+            ''', (usuario_id, hoy))
+            resultado = cursor.fetchone()
+            coste_total = resultado[0] or 0.0
+            tokens_totales = resultado[1] or 0.0
+            num_peticiones = resultado[2] or 0
+
+        return {
+            "usuario_id": usuario_id,
+            "fecha": hoy,
+            "metricas_hoy": {
+                "peticiones_realizadas": num_peticiones,
+                "tokens_consumidos": tokens_totales,
+                "coste_total_usd": round(coste_total, 10)
+            }
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error en BD: {str(e)}")
+
+@app.get("/historial/{usuario_id}")
+def obtener_historial_usuario(usuario_id: int):
+    try:
+        with sqlite3.connect(DB_FILE) as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                SELECT id, tokens_peticion, coste_peticion, dia 
+                FROM peticiones 
+                WHERE usuario_id = ?
+                ORDER BY id ASC
+            ''', (usuario_id,))
+            filas = cursor.fetchall()
+            
+        historial = [{"identificador": f"Petición {i}", "id_bd": f[0], "tokens": f[1], "coste_usd": round(f[2], 10), "dia": f[3]} for i, f in enumerate(filas, start=1)]
+            
+        return {"usuario_id": usuario_id, "total_peticiones": len(historial), "historial": historial}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error en BD: {str(e)}")
+
+# ==========================================
+# 5. LÓGICA PRINCIPAL (PROXY, ENRUTADO Y DB)
 # ==========================================
 @app.post("/generar")
 def generar_respuesta(peticion: PeticionUsuario):
+    try:
+        with sqlite3.connect(DB_FILE) as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT tipo_consumidor FROM usuarios WHERE id = ?", (peticion.usuario_id,))
+            resultado_usuario = cursor.fetchone()
+            
+            if not resultado_usuario:
+                raise HTTPException(status_code=404, detail=f"El usuario con ID {peticion.usuario_id} no existe.")
+            
+            tipo_consumidor_db = resultado_usuario[0]
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error al verificar usuario: {str(e)}")
+
     try:
         sys_prompt_router = """
 Eres un clasificador de IA de alta precisión. Tu trabajo es analizar la intención del usuario y clasificar la complejidad del prompt para optimizar costes.
@@ -76,7 +213,6 @@ User: "Escribe una función en Python para calcular el número de Fibonacci." ->
 
 Analiza el prompt del usuario y responde estrictamente en formato JSON según el esquema proporcionado.
 """
-        # --- PASO 1: ENRUTADO ---
         response_router = litellm.completion(
             model="ollama/llama3.2:3b",
             api_base=API_BASES["ollama/llama3.2:3b"],
@@ -87,75 +223,92 @@ Analiza el prompt del usuario y responde estrictamente en formato JSON según el
             response_format={"type": "json_object"} 
         )
         
-        contenido_router = response_router.choices[0].message.content
-        decision_dict = json.loads(contenido_router)
-        decision = ClasificacionEnrutador(**decision_dict)
-        print(f"-> Decisión del Router: {decision.complejidad} | Razón: {decision.razonamiento}")
+        decision = ClasificacionEnrutador(**json.loads(response_router.choices[0].message.content))
+        print(f"-> Decisión Router (User {peticion.usuario_id} - {tipo_consumidor_db}): {decision.complejidad} | Razón: {decision.razonamiento}")
         
-        # --- PASO 2: MOTOR DE DECISIÓN (COMPLEJIDAD + PRESUPUESTO) ---
-        
-        # --- PRESUPUESTOS POR EQUIPO (CONECTAR A BBDD) ---
         presupuestos_por_equipo = {
-            "equipo-vip": 0.05,        # Presupuesto alto
-            "equipo-default": 0.0001,  # Presupuesto normal
-            "equipo-lowcost": 0.00002  # Presupuesto muy estricto
+            "equipo-vip": 0.05,        
+            "backend": 0.01,           
+            "frontend": 0.01,
+            "marketing": 0.005,
+            "produccion": 0.0001,      
         }
-        # LIMITE DE GASTO SEGÚN EL EQUIPO DEL USUARIO (DEFAULT: 0.0001 USD)
-        limite_gasto_usd = presupuestos_por_equipo.get(peticion.consumidor, 0.0001)
+        limite_gasto_usd = presupuestos_por_equipo.get(tipo_consumidor_db, 0.0001)
 
-        # JERARQUÍA DE MODELOS (DE ALTO A BAJO COSTE)
+        hoy_str = date.today().isoformat()
+        with sqlite3.connect(DB_FILE) as conn:
+            cursor = conn.cursor()
+            cursor.execute('SELECT SUM(coste_peticion) FROM peticiones WHERE usuario_id = ? AND dia = ?', (peticion.usuario_id, hoy_str))
+            resultado_suma = cursor.fetchone()
+            coste_acumulado_hoy = resultado_suma[0] if resultado_suma[0] is not None else 0.0
+
         jerarquia_modelos = [
-            "groq/llama-3.1-8b-instant",  # Nivel 0: Alta
-            "ollama/mistral:7b",          # Nivel 1: Media
+            "gemini/gemini-2.5-flash",    # Nivel 0: Alta
+            "groq/llama-3.1-8b-instant",  # Nivel 1: Media
             "ollama/llama3.2:3b"          # Nivel 2: Baja
         ]
 
-        # MODELO IDEAL SEGÚN LA COMPLEJIDAD DETECTADA
-        if decision.complejidad == "alta":
-            idx_deseado = 0
-        elif decision.complejidad == "media":
-            idx_deseado = 1
-        else:
-            idx_deseado = 2
+        if decision.complejidad == "alta": idx_deseado = 0
+        elif decision.complejidad == "media": idx_deseado = 1
+        else: idx_deseado = 2
 
-        tokens_estimados = litellm.token_counter(model="gpt-3.5-turbo", text=peticion.prompt)
+        ESTIMACION_OUTPUT_TOKENS = {"baja": 150, "media": 600, "alta": 1500}
+        tokens_output_estimados = ESTIMACION_OUTPUT_TOKENS[decision.complejidad]
         
         modelo_final = None
         coste_estimado = 0
+        tokens_input_estimados = 0
+        tokens_totales_estimados = 0
         razon_sobreescritura = None
+
+        mensajes_para_api = [{"role": "user", "content": peticion.prompt}]
 
         idx = idx_deseado
         while idx < len(jerarquia_modelos) and modelo_final is None:
             modelo_candidato = jerarquia_modelos[idx]
-            coste_candidato = (tokens_estimados / 1_000_000) * PRECIOS_FINOPS[modelo_candidato]["input"]
             
-            # Si entra en presupuesto, lo asignamos (lo que también hará que la condición del while falle en el siguiente ciclo)
-            if coste_candidato <= limite_gasto_usd:
+            tokens_input_candidato = contar_tokens_input(modelo_candidato, mensajes_para_api, peticion.prompt)
+                
+            coste_input_est = (tokens_input_candidato / 1_000_000) * PRECIOS_FINOPS[modelo_candidato]["input"]
+            coste_output_est = (tokens_output_estimados / 1_000_000) * PRECIOS_FINOPS[modelo_candidato]["output"]
+            coste_candidato = coste_input_est + coste_output_est
+            
+            if (coste_acumulado_hoy + coste_candidato) <= limite_gasto_usd:
                 modelo_final = modelo_candidato
                 coste_estimado = coste_candidato
+                tokens_input_estimados = tokens_input_candidato
+                if(idx == 2): 
+                    tokens_input_estimados += 25
+                tokens_totales_estimados = tokens_input_candidato + tokens_output_estimados
                 
-                # Si tuvimos que bajar de nivel, guardamos el motivo
                 if idx > idx_deseado:
-                    razon_sobreescritura = f"Downgrade a {modelo_final}. El modelo ideal ({jerarquia_modelos[idx_deseado]}) superaba el límite de {limite_gasto_usd}$ del {peticion.consumidor}."
-            
-            idx += 1
+                    razon_sobreescritura = f"Downgrade a {modelo_final}. El gasto de hoy ({coste_acumulado_hoy:.5f}$) + estimación de esta petición ({coste_candidato:.5f}$) superaba el límite diario de {limite_gasto_usd}$."
+            idx += 1  
         
-        # E) Failsafe: Si el prompt es tan gigantesco que supera el presupuesto incluso en el modelo más barato
         if modelo_final is None:
-            modelo_final = jerarquia_modelos[-1] # Forzamos el nivel más bajo (Llama 3.2 3B)
-            coste_estimado = (tokens_estimados / 1_000_000) * PRECIOS_FINOPS[modelo_final]["input"]
-            razon_sobreescritura = f"ALERTA CRÍTICA: Presupuesto excedido en todos los modelos. Forzando ejecución en el modelo más económico ({modelo_final})."
+            modelo_final = jerarquia_modelos[-1]
+            tokens_input_estimados = contar_tokens_input(modelo_final, mensajes_para_api, peticion.prompt)
+
+            tokens_totales_estimados = tokens_input_estimados + tokens_output_estimados
+            coste_input_est = (tokens_input_estimados / 1_000_000) * PRECIOS_FINOPS[modelo_final]["input"]
+            coste_output_est = (tokens_output_estimados / 1_000_000) * PRECIOS_FINOPS[modelo_final]["output"]
+            coste_estimado = coste_input_est + coste_output_est
+            
+            razon_sobreescritura = f"ALERTA CRÍTICA: Límite diario superado (Gasto previo: {coste_acumulado_hoy:.5f}$ / Límite: {limite_gasto_usd}$). Forzando modelo económico ({modelo_final})."
 
         # --- PASO 3: EJECUCIÓN FINAL ---
         completion_kwargs = {
             "model": modelo_final,
-            "messages": [{"role": "user", "content": peticion.prompt}]
+            "messages": mensajes_para_api,
+            "max_tokens": tokens_output_estimados 
         }
         
         if "ollama" in modelo_final:
             completion_kwargs["api_base"] = API_BASES[modelo_final]
+        elif "gemini" in modelo_final:
+            completion_kwargs["api_key"] = os.getenv("GEMINI_API_KEY", "TU_API_KEY_DE_GEMINI_AQUI")
         else:
-            completion_kwargs["api_key"] = os.getenv("GROQ_API_KEY", "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")
+            completion_kwargs["api_key"] = os.getenv("GROQ_API_KEY", "TU_API_KEY_DE_GROQ_AQUI")
 
         print(f"-> Ejecutando en modelo: {modelo_final}")
         response_final = litellm.completion(**completion_kwargs)
@@ -175,23 +328,42 @@ Analiza el prompt del usuario y responde estrictamente en formato JSON según el
         ahorro_vs_alternativas = {}
         for modelo_alt, precios_alt in PRECIOS_FINOPS.items():
             if modelo_alt != modelo_final:
-                coste_hipotetico = ((tokens_input / 1_000_000) * precios_alt["input"]) + \
-                                   ((tokens_output / 1_000_000) * precios_alt["output"])
-                ahorro = coste_hipotetico - coste_total_usd
-                ahorro_vs_alternativas[modelo_alt] = round(ahorro, 8)
+                coste_hipotetico = ((tokens_input / 1_000_000) * precios_alt["input"]) + ((tokens_output / 1_000_000) * precios_alt["output"])
+                ahorro_vs_alternativas[modelo_alt] = round(coste_hipotetico/coste_total_usd, 2) if coste_total_usd > 0 else None
 
-        # --- PASO 5: RETORNAR LA RESPUESTA ---
+        # --- PASO 5: REGISTRO EN SQLITE ---
+        hoy = date.today().isoformat()
+        try:
+            with sqlite3.connect(DB_FILE) as conn:
+                cursor = conn.cursor()
+                cursor.execute('''
+                    INSERT INTO peticiones (usuario_id, tipo_consumidor, coste_peticion, tokens_peticion, dia)
+                    VALUES (?, ?, ?, ?, ?)
+                ''', (peticion.usuario_id, tipo_consumidor_db, coste_total_usd, tokens_totales, hoy))
+                conn.commit()
+            estado_db = "registrado_ok"
+        except Exception as e:
+            estado_db = f"error_db: {e}"
+
+        # --- PASO 6: RETORNAR LA RESPUESTA ---
         respuesta_json = {
             "respuesta_ia": response_final.choices[0].message.content,
             "finops_metadata": {
-                "consumidor": peticion.consumidor,
+                "usuario": {
+                    "id": peticion.usuario_id,
+                    "departamento": tipo_consumidor_db,
+                    "gasto_diario_acumulado_previo_usd": round(coste_acumulado_hoy, 8)
+                },
+                "estado_registro_db": estado_db,
                 "limite_presupuesto_aplicado": limite_gasto_usd,
                 "enrutamiento": {
                     "complejidad_detectada": decision.complejidad,
                     "razonamiento_router": decision.razonamiento
                 },
                 "estimacion_coste": {
-                    "tokens_input_estimados": tokens_estimados,
+                    "tokens_input_estimados": tokens_input_estimados,
+                    "tokens_output_estimados": tokens_output_estimados,
+                    "tokens_totales_estimados": tokens_totales_estimados,
                     "coste_estimado_usd": round(coste_estimado, 8)
                 },
                 "coste_real_usd": {
@@ -215,6 +387,8 @@ Analiza el prompt del usuario y responde estrictamente en formato JSON según el
 
         return respuesta_json
 
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error en el servidor: {str(e)}")
 
