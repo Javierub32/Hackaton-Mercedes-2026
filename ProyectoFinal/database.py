@@ -1,6 +1,7 @@
 import sqlite3
 from datetime import date
-from config import DB_FILE
+import calendar
+from config import DB_FILE, PRESUPUESTOS_POR_EQUIPO
 
 def init_db():
     with sqlite3.connect(DB_FILE) as conn:
@@ -115,3 +116,45 @@ def registrar_peticion(usuario_id: int, tipo_consumidor: str, coste_total_usd: f
         return "registrado_ok"
     except Exception as e:
         return f"error_db: {e}"
+
+def obtenerGatosMensuales() -> list[dict]:
+    # 1. Obtenemos el mes actual y la cantidad de días del mes
+    hoy = date.today()
+    mes_actual = hoy.strftime("%Y-%m")
+    dias_mes = calendar.monthrange(hoy.year, hoy.month)[1]
+    
+    with sqlite3.connect(DB_FILE) as conn:
+        cursor = conn.cursor()
+        
+        # 2. Hacemos un LEFT JOIN filtrando las peticiones sólo al mes actual
+        # COALESCE convierte los nulls en 0.0 para usuarios sin gasto este mes
+        cursor.execute('''
+            SELECT u.id, u.tipo_consumidor, COALESCE(SUM(p.coste_peticion), 0) AS gasto_mensual
+            FROM usuarios u
+            LEFT JOIN peticiones p ON u.id = p.usuario_id AND substr(p.dia, 1, 7) = ?
+            GROUP BY u.id, u.tipo_consumidor
+            ORDER BY u.id ASC
+        ''', (mes_actual,))
+        
+        filas = cursor.fetchall()
+        
+        resultado = []
+        for fila in filas:
+            usuario_id = fila[0]
+            tipo_consumidor = fila[1]
+            gasto_mensual = round(fila[2], 10)
+            
+            # 3. Calculamos el límite mensual basado en el presupuesto diario
+            limite_diario = PRESUPUESTOS_POR_EQUIPO.get(tipo_consumidor, 0.0001)
+            limite_mensual = round(limite_diario * dias_mes, 4)
+            
+            # 4. Agregamos el resultado con la estructura solicitada
+            resultado.append({
+                "id": usuario_id,
+                "tipo_consumidor": tipo_consumidor,
+                "gasto_mensual_actual": gasto_mensual,
+                "limite_de_gasto": limite_mensual,
+                "porcentaje_gasto": round((gasto_mensual / limite_mensual) * 100, 2) if limite_mensual > 0 else 0.0
+            })
+            
+        return resultado
