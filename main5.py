@@ -238,7 +238,7 @@ Analiza el prompt del usuario y responde estrictamente en formato JSON según el
         elif decision.complejidad == "media": idx_deseado = 1
         else: idx_deseado = 2
 
-        tokens_estimados = litellm.token_counter(model="gpt-3.5-turbo", text=peticion.prompt)
+        tokens_estimados = litellm.token_counter(model=jerarquia_modelos[idx_deseado], text=peticion.prompt)
         
         modelo_final = None
         coste_estimado = 0
