@@ -8,12 +8,12 @@ function GraficaGasto() {
   const [cargando, setCargando] = useState(true);
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/gasto-mensual`)
+    fetch(`http://127.0.0.1:8000/gasto-diario`)
       .then(res => res.json())
       .then(data => {
         // SEGURIDAD 1: Forzamos estrictamente que sea un Array
-        if (data && Array.isArray(data.gasto_mensual)) {
-          setDatos(data.gasto_mensual);
+        if (data && Array.isArray(data.gasto_diario)) {
+          setDatos(data.gasto_diario);
         } else if (Array.isArray(data)) {
           setDatos(data);
         } else {
@@ -42,7 +42,7 @@ function GraficaGasto() {
     <div className="w-full bg-neutral-900 border border-neutral-800 rounded-md p-6 shadow-sm">
       <div className="border-b border-neutral-800 pb-3 mb-8 flex justify-between items-center">
         <h3 className="text-sm font-semibold uppercase tracking-[0.15em] text-neutral-100">
-          Gasto mensual por usuario
+          Gasto diario por usuario
         </h3>
       </div>
 
