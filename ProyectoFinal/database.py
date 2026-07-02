@@ -38,7 +38,7 @@ def init_db():
                 ("produccion",),
                 ("frontend",),
                 ("backend",),
-                ("equipo-vip",) # Agregado para probar presupuestos altos
+                ("backend",) # Agregado para probar presupuestos altos
             ]
             cursor.executemany("INSERT INTO usuarios (tipo_consumidor) VALUES (?)", usuarios_demo)
             
