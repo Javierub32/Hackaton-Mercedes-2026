@@ -134,9 +134,16 @@ def generar_respuesta(peticion: PeticionUsuario):
 
     try:
         # --- PASO 1: ENRUTADO ---
-        decision = clasificar_complejidad(peticion.prompt)
+        decision, router_t_in, router_t_out = clasificar_complejidad(peticion.prompt)
         print(f"-> Decisión Router (User {peticion.usuario_id} - {tipo_consumidor_db}): {decision.complejidad} | Razón: {decision.razonamiento}")
         
+        # Cálculo del coste del router
+        modelo_router = "ollama/llama3.2:3b"
+        coste_router_usd = (
+            (router_t_in / 1_000_000) * PRECIOS_FINOPS[modelo_router]["input"] +
+            (router_t_out / 1_000_000) * PRECIOS_FINOPS[modelo_router]["output"]
+        )
+
         # --- PASO 2: MOTOR DE DECISIÓN (COMPLEJIDAD + PRESUPUESTO) ---
         modelo_final, coste_estimado, tokens_input_est, tokens_output_est, tokens_totales_est, razon_sobreescritura = seleccionar_modelo(
             prompt=peticion.prompt,
@@ -159,18 +166,23 @@ def generar_respuesta(peticion: PeticionUsuario):
         tokens_output = response_final.usage.completion_tokens
         tokens_totales = response_final.usage.total_tokens
         
+        # Le pasamos el coste extra del router para que el coste total lo contenga
         coste_input_usd, coste_output_usd, coste_total_usd, ahorro_vs_alternativas, coste_maximo, porcentaje_ahorro = calcular_costes_reales_y_ahorros(
             modelo_final=modelo_final,
             tokens_input=tokens_input,
-            tokens_output=tokens_output
+            tokens_output=tokens_output,
+            coste_adicional_router=coste_router_usd
         )
 
         # --- PASO 5: REGISTRO EN SQLITE ---
+        # Sumamos también los tokens del router para ser exactos en el consumo total
+        tokens_totales_con_router = tokens_totales + router_t_in + router_t_out
+
         estado_db = registrar_peticion(
             usuario_id=peticion.usuario_id,
             tipo_consumidor=tipo_consumidor_db,
             coste_total_usd=coste_total_usd,
-            tokens_totales=tokens_totales,
+            tokens_totales=tokens_totales_con_router,
             coste_maximo=coste_maximo,  
             porcentaje_ahorro=porcentaje_ahorro,
             hoy_str=hoy_str
@@ -189,7 +201,8 @@ def generar_respuesta(peticion: PeticionUsuario):
                 "limite_presupuesto_aplicado": limite_gasto_usd,
                 "enrutamiento": {
                     "complejidad_detectada": decision.complejidad,
-                    "razonamiento_router": decision.razonamiento
+                    "razonamiento_router": decision.razonamiento,
+                    "tokens_gastados_en_prediccion": router_t_in + router_t_out
                 },
                 "estimacion_coste": {
                     "tokens_input_estimados": tokens_input_est,
@@ -198,9 +211,10 @@ def generar_respuesta(peticion: PeticionUsuario):
                     "coste_estimado_usd": round(coste_estimado, 8)
                 },
                 "coste_real_usd": {
-                    "coste_input": round(coste_input_usd, 8),
-                    "coste_output": round(coste_output_usd, 8),
-                    "coste_total": round(coste_total_usd, 8)
+                    "coste_router_prediccion": round(coste_router_usd, 8),
+                    "coste_input_generacion": round(coste_input_usd, 8),
+                    "coste_output_generacion": round(coste_output_usd, 8),
+                    "coste_total_incluido_prediccion": round(coste_total_usd, 8)
                 },
                 "ahorro_usd": ahorro_vs_alternativas,
                 "ejecucion": {

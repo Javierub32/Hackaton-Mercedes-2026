@@ -14,7 +14,7 @@ from schemas import ClasificacionEnrutador
 from helpers import contar_tokens_input
 from database import obtener_coste_diario_usuario
 
-def clasificar_complejidad(prompt: str) -> ClasificacionEnrutador:
+def clasificar_complejidad(prompt: str) -> tuple[ClasificacionEnrutador, int, int]:
     response_router = litellm.completion(
         model="ollama/llama3.2:3b",
         api_base=API_BASES["ollama/llama3.2:3b"],
@@ -24,7 +24,13 @@ def clasificar_complejidad(prompt: str) -> ClasificacionEnrutador:
         ],
         response_format={"type": "json_object"}
     )
-    return ClasificacionEnrutador(**json.loads(response_router.choices[0].message.content))
+    decision = ClasificacionEnrutador(**json.loads(response_router.choices[0].message.content))
+    
+    # Extraemos también los tokens usados en esta predicción
+    tokens_input = response_router.usage.prompt_tokens
+    tokens_output = response_router.usage.completion_tokens
+    
+    return decision, tokens_input, tokens_output
 
 def calcular_coste_estimado(modelo: str, prompt: str, mensajes: list, tokens_output_estimados: int) -> tuple[float, int]:
     tokens_input_est = contar_tokens_input(modelo, mensajes, prompt)
@@ -135,33 +141,41 @@ def ejecutar_peticion(modelo: str, prompt: str):
             messages=mensajes_para_api
         )
 
-def calcular_costes_reales_y_ahorros(modelo_final: str, tokens_input: int, tokens_output: int) -> tuple[float, float, float, dict, float, float]:
+def calcular_costes_reales_y_ahorros(
+    modelo_final: str, 
+    tokens_input: int, 
+    tokens_output: int, 
+    coste_adicional_router: float = 0.0
+) -> tuple[float, float, float, dict, float, float]:
+    
     precio_input = PRECIOS_FINOPS[modelo_final]["input"]
     precio_output = PRECIOS_FINOPS[modelo_final]["output"]
     
     coste_input_usd = (tokens_input / 1_000_000) * precio_input
     coste_output_usd = (tokens_output / 1_000_000) * precio_output
-    coste_total_usd = coste_input_usd + coste_output_usd
+    
+    # Coste final incluye la ejecución del modelo final + el coste previo del router
+    coste_total_usd = coste_input_usd + coste_output_usd + coste_adicional_router
 
     ahorro_vs_alternativas = {}
     
-    # Añadimos el coste real actual a la lista de posibles costes máximos
     costes_hipoteticos = [coste_total_usd] 
 
     for modelo_alt, precios_alt in PRECIOS_FINOPS.items():
         if modelo_alt != modelo_final:
-            coste_hipotetico = (
+            coste_hipotetico_ejecucion = (
                 ((tokens_input / 1_000_000) * precios_alt["input"]) + 
                 ((tokens_output / 1_000_000) * precios_alt["output"])
             )
-            costes_hipoteticos.append(coste_hipotetico)
+            # El coste del router es un coste fijo que ocurre sea cual sea la alternativa
+            coste_hipotetico_total = coste_hipotetico_ejecucion + coste_adicional_router
+            costes_hipoteticos.append(coste_hipotetico_total)
             
             ahorro_vs_alternativas[modelo_alt] = (
-                round(coste_hipotetico / coste_total_usd, 2) if coste_total_usd > 0 else 0.0
+                round(coste_hipotetico_total / coste_total_usd, 2) if coste_total_usd > 0 else 0.0
             )
 
-    # El coste máximo es simplemente el valor más alto posible para esta petición
     coste_maximo = max(costes_hipoteticos)
-    porcentaje_ahorro = 100 -(coste_total_usd*100 / coste_maximo) if coste_maximo > 0 else 0.0
+    porcentaje_ahorro = 100 - (coste_total_usd * 100 / coste_maximo) if coste_maximo > 0 else 0.0
     
     return coste_input_usd, coste_output_usd, coste_total_usd, ahorro_vs_alternativas, coste_maximo, porcentaje_ahorro
