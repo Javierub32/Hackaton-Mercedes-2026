@@ -151,6 +151,17 @@ export default function Peticion() {
               <p className="text-md font-bold text-neutral-100 mt-1">{resultado.finops_metadata.ejecucion.tokens_totales} totales</p>
               <p className="text-md text-neutral-400">In: {resultado.finops_metadata.ejecucion.tokens_input} | Out: {resultado.finops_metadata.ejecucion.tokens_output}</p>
             </div>
+            {/*Latencia final*/}
+            <div className="border-t-4 border-teal-400 bg-neutral-900 p-4 border-x border-b">
+              <p className="text-md text-neutral-500 uppercase tracking-wider">Latencia (elección modelo)</p>
+              <p className="text-md font-bold text-neutral-100 mt-1">{resultado.finops_metadata.latencia_ms.eleccion_de_modelo} ms</p>
+            </div>
+            {/* Latencia prediccion */}
+            <div className="border-t-4 border-teal-400 bg-neutral-900 p-4 border-x border-b">
+              <p className="text-md text-neutral-500 uppercase tracking-wider">Latencia (petición final)</p>
+              <p className="text-md font-bold text-neutral-100 mt-1">{resultado.finops_metadata.latencia_ms.ejecucion_ia_y_db} ms</p>
+            </div>
+            {/* Ahorro estimado */}
             {resultado.finops_metadata.enrutamiento.complejidad_detectada === 'baja' ? (
               <div className="border-t-4 border-teal-400 bg-neutral-900 p-4 border-x border-b">
                 <p className="text-md text-neutral-500 uppercase tracking-wider">Ahorro (Modelo Medio)</p>
