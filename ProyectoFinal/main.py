@@ -19,7 +19,7 @@ from database import (
     obtener_historial_usuario_lista,
     obtenerAhorrosMensuales,
     registrar_peticion,
-    obtenerGatosMensuales
+    obtenerGatosDiarios
 )
 from finops_service import (
     clasificar_complejidad,
@@ -62,11 +62,11 @@ def obtener_ahorro(usuario_id: int):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error en BD: {str(e)}")
 
-@app.get("/gasto-mensual")
-def obtener_gasto_mensual():
+@app.get("/gasto-diario")
+def obtener_gasto_diario():
     try:
-        datos = obtenerGatosMensuales()
-        return {"gasto_mensual": datos}
+        datos = obtenerGatosDiarios()
+        return {"gasto_diario": datos}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error en BD: {str(e)}")
 

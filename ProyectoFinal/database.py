@@ -119,24 +119,22 @@ def registrar_peticion(usuario_id: int, tipo_consumidor: str, coste_total_usd: f
     except Exception as e:
         return f"error_db: {e}"
 
-def obtenerGatosMensuales() -> list[dict]:
-    # 1. Obtenemos el mes actual y la cantidad de días del mes
-    hoy = date.today()
-    mes_actual = hoy.strftime("%Y-%m")
-    dias_mes = calendar.monthrange(hoy.year, hoy.month)[1]
+def obtenerGatosDiarios() -> list[dict]:
+    # 1. Obtenemos la fecha actual
+    hoy_str = date.today().isoformat()
     
     with sqlite3.connect(DB_FILE) as conn:
         cursor = conn.cursor()
         
-        # 2. Hacemos un LEFT JOIN filtrando las peticiones sólo al mes actual
-        # COALESCE convierte los nulls en 0.0 para usuarios sin gasto este mes
+        # 2. Hacemos un LEFT JOIN filtrando las peticiones sólo al día actual
+        # COALESCE convierte los nulls en 0.0 para usuarios sin gasto hoy
         cursor.execute('''
-            SELECT u.id, u.tipo_consumidor, COALESCE(SUM(p.coste_peticion), 0) AS gasto_mensual
+            SELECT u.id, u.tipo_consumidor, COALESCE(SUM(p.coste_peticion), 0) AS gasto_diario
             FROM usuarios u
-            LEFT JOIN peticiones p ON u.id = p.usuario_id AND substr(p.dia, 1, 7) = ?
+            LEFT JOIN peticiones p ON u.id = p.usuario_id AND p.dia = ?
             GROUP BY u.id, u.tipo_consumidor
             ORDER BY u.id ASC
-        ''', (mes_actual,))
+        ''', (hoy_str,))
         
         filas = cursor.fetchall()
         
@@ -144,23 +142,23 @@ def obtenerGatosMensuales() -> list[dict]:
         for fila in filas:
             usuario_id = fila[0]
             tipo_consumidor = fila[1]
-            gasto_mensual = round(fila[2], 10)
+            gasto_diario = round(fila[2], 10)
             
-            # 3. Calculamos el límite mensual basado en el presupuesto diario
+            # 3. Obtenemos el límite diario directamente del presupuesto por equipo
             limite_diario = PRESUPUESTOS_POR_EQUIPO.get(tipo_consumidor, 0.0001)
-            limite_mensual = round(limite_diario * dias_mes, 4)
             
-            # 4. Agregamos el resultado con la estructura solicitada
+            # 4. Agregamos el resultado calculando el porcentaje del día
             resultado.append({
                 "id": usuario_id,
                 "tipo_consumidor": tipo_consumidor,
-                "gasto_mensual_actual": gasto_mensual,
-                "limite_de_gasto": limite_mensual,
-                "porcentaje_gasto": round((gasto_mensual / limite_mensual) * 100, 2) if limite_mensual > 0 else 0.0
+                "gasto_diario_actual": gasto_diario,
+                "limite_de_gasto": limite_diario,
+                "porcentaje_gasto": round((gasto_diario / limite_diario) * 100, 2) if limite_diario > 0 else 0.0
             })
             
         return resultado
     
+
 def obtenerAhorrosMensuales(usuario_id: int) -> list[dict]:
     # Obtenemos el mes actual
     hoy = date.today()
