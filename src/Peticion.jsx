@@ -122,62 +122,72 @@ export default function Peticion() {
         <div className="space-y-6">
           <div className="bg-neutral-900 p-6 rounded-md border border-neutral-800">
             <h2 className="text-md font-semibold uppercase tracking-[0.15em] text-neutral-100 border-b border-neutral-800 pb-3 mb-4">Respuesta de la IA</h2>
-            <div className="text-neutral-300 text-md whitespace-pre-wrap">{renderTextWithBold(resultado.respuesta_ia)}</div>
+            <div className="text-neutral-300 text-md whitespace-pre-wrap">{renderTextWithBold(resultado?.respuesta_ia)}</div>
           </div>
 
           <h3 className="text-md font-semibold uppercase tracking-[0.15em] text-neutral-100 border-b border-neutral-800 pb-3 mt-6">FinOps Dashboard · Metadata</h3>
+          
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Card Modelo */}
             <div className="border-t-4 border-teal-400 bg-neutral-900 p-4 border-x border-b">
               <p className="text-md text-neutral-500 uppercase tracking-wider">Modelo y Proveedor</p>
-              <p className="text-md font-bold text-neutral-100 mt-1">{resultado.finops_metadata.ejecucion.modelo_usado}</p>
-              <p className="text-md text-neutral-400">{resultado.finops_metadata.ejecucion.proveedor}</p>
+              <p className="text-md font-bold text-neutral-100 mt-1">{resultado.finops_metadata?.ejecucion?.modelo_usado ?? 'N/A'}</p>
+              <p className="text-md text-neutral-400">{resultado.finops_metadata?.ejecucion?.proveedor ?? 'N/A'}</p>
             </div>
+            
             {/* Card Enrutamiento */}
             <div className="border-t-4 border-teal-400 bg-neutral-900 p-4 border-x border-b">
               <p className="text-md text-neutral-500 uppercase tracking-wider">Enrutamiento (Complejidad)</p>
-              <p className="text-md font-bold text-neutral-100 mt-1">{resultado.finops_metadata.enrutamiento.complejidad_detectada}</p>
-              <p className="text-md text-neutral-400">{resultado.finops_metadata.enrutamiento.razonamiento_router}</p>
+              <p className="text-md font-bold text-neutral-100 mt-1">{resultado.finops_metadata?.enrutamiento?.complejidad_detectada ?? 'N/A'}</p>
+              <p className="text-md text-neutral-400">{resultado.finops_metadata?.enrutamiento?.razonamiento_router ?? 'N/A'}</p>
             </div>
+            
             {/* Card Coste */}
             <div className="border-t-4 border-teal-400 bg-neutral-900 p-4 border-x border-b">
               <p className="text-md text-neutral-500 uppercase tracking-wider">Coste y Presupuesto</p>
-              <p className="text-md font-bold text-neutral-100 mt-1">${resultado.finops_metadata.coste_real_usd.coste_total.toFixed(8)}</p>
-              <p className="text-md text-neutral-400">Límite Depto: ${resultado.finops_metadata.limite_presupuesto_aplicado}</p>
+              <p className="text-md font-bold text-neutral-100 mt-1">
+                ${Number(resultado.finops_metadata?.coste_real_usd?.coste_total_incluido_prediccion ?? resultado.finops_metadata?.coste_real_usd?.coste_total ?? 0).toFixed(8)}
+              </p>
+              <p className="text-md text-neutral-400">Límite Depto: ${resultado.finops_metadata?.limite_presupuesto_aplicado ?? 0}</p>
             </div>
+            
             {/* Card Consumo */}
             <div className="border-t-4 border-teal-400 bg-neutral-900 p-4 border-x border-b">
               <p className="text-md text-neutral-500 uppercase tracking-wider">Consumo (Tokens)</p>
-              <p className="text-md font-bold text-neutral-100 mt-1">{resultado.finops_metadata.ejecucion.tokens_totales} totales</p>
-              <p className="text-md text-neutral-400">In: {resultado.finops_metadata.ejecucion.tokens_input} | Out: {resultado.finops_metadata.ejecucion.tokens_output}</p>
+              <p className="text-md font-bold text-neutral-100 mt-1">{resultado.finops_metadata?.ejecucion?.tokens_totales ?? 0} totales</p>
+              <p className="text-md text-neutral-400">In: {resultado.finops_metadata?.ejecucion?.tokens_input ?? 0} | Out: {resultado.finops_metadata?.ejecucion?.tokens_output ?? 0}</p>
             </div>
-            {/*Latencia final*/}
+            
+            {/* Latencia final */}
             <div className="border-t-4 border-teal-400 bg-neutral-900 p-4 border-x border-b">
               <p className="text-md text-neutral-500 uppercase tracking-wider">Latencia (elección modelo)</p>
-              <p className="text-md font-bold text-neutral-100 mt-1">{resultado.finops_metadata.latencia_ms.eleccion_de_modelo} ms</p>
+              <p className="text-md font-bold text-neutral-100 mt-1">{resultado.finops_metadata?.latencia_ms?.eleccion_de_modelo ?? 'N/A'} ms</p>
             </div>
+            
             {/* Latencia prediccion */}
             <div className="border-t-4 border-teal-400 bg-neutral-900 p-4 border-x border-b">
               <p className="text-md text-neutral-500 uppercase tracking-wider">Latencia (petición final)</p>
-              <p className="text-md font-bold text-neutral-100 mt-1">{resultado.finops_metadata.latencia_ms.ejecucion_ia_y_db} ms</p>
+              <p className="text-md font-bold text-neutral-100 mt-1">{resultado.finops_metadata?.latencia_ms?.ejecucion_ia_y_db ?? 'N/A'} ms</p>
             </div>
+            
             {/* Ahorro estimado */}
-            {resultado.finops_metadata.enrutamiento.complejidad_detectada === 'baja' ? (
+            {resultado.finops_metadata?.enrutamiento?.complejidad_detectada === 'baja' && (
               <div className="border-t-4 border-teal-400 bg-neutral-900 p-4 border-x border-b">
                 <p className="text-md text-neutral-500 uppercase tracking-wider">Ahorro (Modelo Medio)</p>
-                <p className="text-md font-bold text-neutral-100 mt-1">{resultado.finops_metadata.ahorro_usd["groq/llama-3.1-8b-instant"]}x más barato</p>
+                <p className="text-md font-bold text-neutral-100 mt-1">{resultado.finops_metadata?.ahorro_usd?.["groq/llama-3.1-8b-instant"] ?? 0}x más barato</p>
               </div>
-            ) : null}
-            {resultado.finops_metadata.enrutamiento.complejidad_detectada === 'baja' || resultado.finops_metadata.enrutamiento.complejidad_detectada === 'media' ? (
+            )}
+            
+            {(resultado.finops_metadata?.enrutamiento?.complejidad_detectada === 'baja' || resultado.finops_metadata?.enrutamiento?.complejidad_detectada === 'media') && (
               <div className="border-t-4 border-teal-400 bg-neutral-900 p-4 border-x border-b">
                 <p className="text-md text-neutral-500 uppercase tracking-wider">Ahorro (Modelo Alto)</p>
-                <p className="text-md font-bold text-neutral-100 mt-1">{resultado.finops_metadata.ahorro_usd["groq/llama-3.3-70b-versatile"]}x más barato</p>
+                <p className="text-md font-bold text-neutral-100 mt-1">{resultado.finops_metadata?.ahorro_usd?.["groq/llama-3.3-70b-versatile"] ?? 0}x más barato</p>
               </div>
-            ) : null}
+            )}
           </div>
 
           {/* Intervención */}
-          {resultado.finops_metadata.enrutamiento.intervencion_finops && (
+          {resultado.finops_metadata?.enrutamiento?.intervencion_finops && (
             <div className="border-l-4 border-red-500 bg-neutral-900 p-4 border-y border-r mt-4">
               <p className="text-md text-red-500 uppercase font-bold tracking-wider">Intervención FinOps Activa</p>
               <p className="text-md text-neutral-200 mt-1">{resultado.finops_metadata.enrutamiento.intervencion_finops}</p>
