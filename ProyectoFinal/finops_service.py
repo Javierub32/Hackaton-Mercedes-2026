@@ -141,12 +141,10 @@ def ejecutar_peticion(modelo: str, prompt: str):
         completion_kwargs["api_key"] = os.getenv("GEMINI_API_KEY", "TU_GEMINI_API_KEY_AQUI")
     else:
         completion_kwargs["api_key"] = os.getenv("GROQ_API_KEY", "TU_GROQ_API_KEY_AQUI")
+        
     try:
-        return litellm.completion(
-            model=modelo,
-            messages=mensajes_para_api,
-            **completion_kwargs
-        )
+        # Solucionado: Solo pasamos **completion_kwargs porque ya contiene el model y los messages
+        return litellm.completion(**completion_kwargs)
     except Exception as e:
         print(f"Error en proveedor principal ({e}). Activando FALLBACK a Ollama...")
         return litellm.completion(
@@ -168,8 +166,9 @@ def calcular_costes_reales_y_ahorros(
     coste_input_usd = (tokens_input / 1_000_000) * precio_input
     coste_output_usd = (tokens_output / 1_000_000) * precio_output
     
-    # Coste final incluye la ejecución del modelo final + el coste previo del router
-    coste_total_usd = coste_input_usd + coste_output_usd + coste_adicional_router
+    # Separamos el coste puro de ejecución del modelo del coste total de la aplicación
+    coste_ejecucion_real = coste_input_usd + coste_output_usd
+    coste_total_usd = coste_ejecucion_real + coste_adicional_router
 
     ahorro_vs_alternativas = {}
     
@@ -181,12 +180,13 @@ def calcular_costes_reales_y_ahorros(
                 ((tokens_input / 1_000_000) * precios_alt["input"]) + 
                 ((tokens_output / 1_000_000) * precios_alt["output"])
             )
-            # El coste del router es un coste fijo que ocurre sea cual sea la alternativa
+            
+            # El coste total hipotético sirve para calcular el % de ahorro en base de datos
             coste_hipotetico_total = coste_hipotetico_ejecucion + coste_adicional_router
             costes_hipoteticos.append(coste_hipotetico_total)
             
             ahorro_vs_alternativas[modelo_alt] = (
-                round(coste_hipotetico_total / coste_total_usd, 2) if coste_total_usd > 0 else 0.0
+                round(coste_hipotetico_ejecucion / coste_ejecucion_real, 2) if coste_ejecucion_real > 0 else 0.0
             )
 
     coste_maximo = max(costes_hipoteticos)
