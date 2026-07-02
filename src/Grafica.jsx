@@ -59,7 +59,7 @@ function GraficaGasto() {
               
               <div className="w-full h-60 bg-neutral-950 rounded-t-md relative overflow-hidden border border-neutral-800 border-b-0">
                 <div
-                  className="absolute bottom-0 w-full bg-gradient-to-t from-sky-500 to-teal-400 transition-all duration-1000 ease-out rounded-t-sm"
+                  className="absolute bottom-0 w-full bg-gradient-to-t from-sky-500 to-emerald-400 transition-all duration-1000 ease-out rounded-t-sm"
                   style={{ height: altoBarra + '%' }}
                 />
               </div>
@@ -129,7 +129,7 @@ function AhorroYPrediccion() {
   const alertaPrediccion = datosPrediccion?.alerta || 'Sin datos';
 
   // Cálculos de la gráfica de anillo (Ahora representa el porcentaje de AHORRO)
-  const radius = 60;
+  const radius = 80;
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference - (porcentajeAhorro / 100) * circumference;
 
@@ -157,15 +157,15 @@ function AhorroYPrediccion() {
         </select>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-7">
         
         {/* LADO IZQUIERDO: Gráfico Circular de AHORRO */}
         <div className="flex flex-col items-center justify-center gap-6 border-b md:border-b-0 md:border-r border-neutral-800 pb-8 md:pb-0">
           <div className="relative flex items-center justify-center">
-            <svg width="160" height="160" className="transform -rotate-90">
-              <circle cx="80" cy="80" r={radius} stroke="currentColor" strokeWidth="20" fill="transparent" className="text-neutral-800" />
+            <svg width="200" height="200" className="transform -rotate-90">
+              <circle cx="100" cy="100" r={radius} stroke="currentColor" strokeWidth="20" fill="transparent" className="text-neutral-800" />
               <circle
-                cx="80" cy="80" r={radius} stroke="currentColor" strokeWidth="20" fill="transparent"
+                cx="100" cy="100" r={radius} stroke="currentColor" strokeWidth="20" fill="transparent"
                 strokeDasharray={circumference} strokeDashoffset={strokeDashoffset}
                 className="text-emerald-500 transition-all duration-1000 ease-in-out"
               />
@@ -173,23 +173,6 @@ function AhorroYPrediccion() {
             <div className="absolute flex flex-col items-center justify-center">
               <span className="text-2xl font-bold text-white">{porcentajeAhorro.toFixed(0)}%</span>
               <span className="text-[10px] text-neutral-400 uppercase tracking-widest mt-1">Ahorrado</span>
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-3 w-full max-w-xs">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-sm bg-emerald-500" />
-                <span className="text-neutral-300 text-sm">Dinero ahorrado</span>
-              </div>
-              <span className="font-mono text-emerald-400">${ahorroMensual.toFixed(4)}</span>
-            </div>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-sm bg-neutral-800 border border-neutral-600" />
-                <span className="text-neutral-300 text-sm">Gasto realizado</span>
-              </div>
-              <span className="font-mono text-neutral-400">{(100 - porcentajeAhorro).toFixed(0)}%</span>
             </div>
           </div>
         </div>
