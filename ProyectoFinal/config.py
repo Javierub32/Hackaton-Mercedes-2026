@@ -18,10 +18,10 @@ JERARQUIA_MODELOS = [
 
 PRESUPUESTOS_POR_EQUIPO = {
     "equipo-vip": 0.05,
-    "backend": 0.01,
-    "frontend": 0.0001,
-    "marketing": 0.005,
-    "produccion": 0.0001,
+    "backend": 0.01151402,
+    "frontend": 0.0082243,
+    "marketing": 0.00164486,
+    "produccion": 0.00328972,
 }
 
 ESTIMACION_OUTPUT_TOKENS = {"baja": 150, "media": 600, "alta": 1500}
