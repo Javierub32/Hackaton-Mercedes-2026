@@ -34,7 +34,7 @@ export default function Header({ vista, setVista }) {
           <p className="text-neutral-100 text-md">Historial</p>
         </TabButton>
         <TabButton active={vista === 'grafica'} onClick={() => setVista('grafica')}>
-          <p className="text-neutral-100 text-md">Grafica</p>
+          <p className="text-neutral-100 text-md">Gráfica</p>
         </TabButton>
       </div>
     </header>
