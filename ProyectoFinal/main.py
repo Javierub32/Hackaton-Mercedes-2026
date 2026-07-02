@@ -3,6 +3,7 @@ from datetime import date
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import litellm
+import time
 
 # Configuración global de LiteLLM
 litellm.drop_params = True
@@ -122,6 +123,9 @@ def obtener_historial_usuario(usuario_id: int):
 
 @app.post("/generar")
 def generar_respuesta(peticion: PeticionUsuario):
+    # INICIO TIMER: PROCESO COMPLETO
+    inicio_proceso_completo = time.perf_counter()
+
     # --- PASO 0: VERIFICAR IDENTIDAD DEL USUARIO EN BD ---
     try:
         tipo_consumidor_db = obtener_tipo_consumidor(peticion.usuario_id)
@@ -133,17 +137,13 @@ def generar_respuesta(peticion: PeticionUsuario):
         raise HTTPException(status_code=500, detail=f"Error al verificar usuario: {str(e)}")
 
     try:
+        # INICIO TIMER: ELECCIÓN DE MODELO
+        inicio_eleccion_modelo = time.perf_counter()
+
         # --- PASO 1: ENRUTADO ---
-        decision, router_t_in, router_t_out = clasificar_complejidad(peticion.prompt)
+        decision = clasificar_complejidad(peticion.prompt)
         print(f"-> Decisión Router (User {peticion.usuario_id} - {tipo_consumidor_db}): {decision.complejidad} | Razón: {decision.razonamiento}")
         
-        # Cálculo del coste del router
-        modelo_router = "ollama/llama3.2:3b"
-        coste_router_usd = (
-            (router_t_in / 1_000_000) * PRECIOS_FINOPS[modelo_router]["input"] +
-            (router_t_out / 1_000_000) * PRECIOS_FINOPS[modelo_router]["output"]
-        )
-
         # --- PASO 2: MOTOR DE DECISIÓN (COMPLEJIDAD + PRESUPUESTO) ---
         modelo_final, coste_estimado, tokens_input_est, tokens_output_est, tokens_totales_est, razon_sobreescritura = seleccionar_modelo(
             prompt=peticion.prompt,
@@ -152,6 +152,10 @@ def generar_respuesta(peticion: PeticionUsuario):
             tipo_consumidor=tipo_consumidor_db
         )
         
+        # FIN TIMER: ELECCIÓN DE MODELO
+        fin_eleccion_modelo = time.perf_counter()
+        latencia_eleccion_ms = (fin_eleccion_modelo - inicio_eleccion_modelo) * 1000
+
         # Obtener el gasto diario acumulado previo para los metadatos finales
         hoy_str = date.today().isoformat()
         coste_acumulado_previo, _, _ = obtener_coste_diario_usuario(peticion.usuario_id, hoy_str)
@@ -166,32 +170,36 @@ def generar_respuesta(peticion: PeticionUsuario):
         tokens_output = response_final.usage.completion_tokens
         tokens_totales = response_final.usage.total_tokens
         
-        # Le pasamos el coste extra del router para que el coste total lo contenga
         coste_input_usd, coste_output_usd, coste_total_usd, ahorro_vs_alternativas, coste_maximo, porcentaje_ahorro = calcular_costes_reales_y_ahorros(
             modelo_final=modelo_final,
             tokens_input=tokens_input,
-            tokens_output=tokens_output,
-            coste_adicional_router=coste_router_usd
+            tokens_output=tokens_output
         )
 
         # --- PASO 5: REGISTRO EN SQLITE ---
-        # Sumamos también los tokens del router para ser exactos en el consumo total
-        tokens_totales_con_router = tokens_totales + router_t_in + router_t_out
-
         estado_db = registrar_peticion(
             usuario_id=peticion.usuario_id,
             tipo_consumidor=tipo_consumidor_db,
             coste_total_usd=coste_total_usd,
-            tokens_totales=tokens_totales_con_router,
+            tokens_totales=tokens_totales,
             coste_maximo=coste_maximo,  
             porcentaje_ahorro=porcentaje_ahorro,
             hoy_str=hoy_str
         )
 
+        # FIN TIMER: PROCESO COMPLETO
+        fin_proceso_completo = time.perf_counter()
+        latencia_total_ms = (fin_proceso_completo - inicio_proceso_completo) * 1000
+
         # --- PASO 6: RETORNAR LA RESPUESTA ---
         respuesta_json = {
             "respuesta_ia": response_final.choices[0].message.content,
             "finops_metadata": {
+                "latencia_ms": {
+                    "eleccion_de_modelo": round(latencia_eleccion_ms, 2),
+                    "proceso_completo": round(latencia_total_ms, 2),
+                    "ejecucion_ia_y_db": round(latencia_total_ms - latencia_eleccion_ms, 2)
+                },
                 "usuario": {
                     "id": peticion.usuario_id,
                     "departamento": tipo_consumidor_db,
@@ -201,8 +209,7 @@ def generar_respuesta(peticion: PeticionUsuario):
                 "limite_presupuesto_aplicado": limite_gasto_usd,
                 "enrutamiento": {
                     "complejidad_detectada": decision.complejidad,
-                    "razonamiento_router": decision.razonamiento,
-                    "tokens_gastados_en_prediccion": router_t_in + router_t_out
+                    "razonamiento_router": decision.razonamiento
                 },
                 "estimacion_coste": {
                     "tokens_input_estimados": tokens_input_est,
@@ -211,10 +218,9 @@ def generar_respuesta(peticion: PeticionUsuario):
                     "coste_estimado_usd": round(coste_estimado, 8)
                 },
                 "coste_real_usd": {
-                    "coste_router_prediccion": round(coste_router_usd, 8),
-                    "coste_input_generacion": round(coste_input_usd, 8),
-                    "coste_output_generacion": round(coste_output_usd, 8),
-                    "coste_total_incluido_prediccion": round(coste_total_usd, 8)
+                    "coste_input": round(coste_input_usd, 8),
+                    "coste_output": round(coste_output_usd, 8),
+                    "coste_total": round(coste_total_usd, 8)
                 },
                 "ahorro_usd": ahorro_vs_alternativas,
                 "ejecucion": {
